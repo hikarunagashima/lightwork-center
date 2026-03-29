@@ -14,8 +14,8 @@ export default function SplashOverlay() {
       Math.sqrt(
         Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)
       ) * 0.8;
-    const startDelay = 600;
-    const expandDuration = 1600;
+    const startDelay = 1200;
+    const expandDuration = 3000;
     let startTime: number | null = null;
     let animationId: number;
 
@@ -29,8 +29,8 @@ export default function SplashOverlay() {
       }
 
       const progress = Math.min((elapsed - startDelay) / expandDuration, 1);
-      // Ease out cubic for smooth deceleration
-      const eased = 1 - Math.pow(1 - progress, 3);
+      // Ease out quart for slower, more dramatic deceleration
+      const eased = 1 - Math.pow(1 - progress, 4);
       const r = eased * maxRadius;
 
       // Radial gradient: transparent center -> white glow edge -> dark outside
@@ -46,7 +46,7 @@ export default function SplashOverlay() {
 
       if (progress >= 1) {
         el.style.opacity = "0";
-        setTimeout(() => setDone(true), 600);
+        setTimeout(() => setDone(true), 800);
         return;
       }
 
@@ -67,14 +67,8 @@ export default function SplashOverlay() {
         inset: 0,
         zIndex: 9999,
         pointerEvents: "none",
-        background: `radial-gradient(
-          circle at 50% 50%,
-          rgba(180, 180, 180, 0.25) 0%,
-          rgba(60, 60, 60, 0.9) 15%,
-          rgba(25, 25, 25, 0.97) 40%,
-          rgba(17, 17, 17, 1) 100%
-        )`,
-        transition: "opacity 0.6s ease-out",
+        background: "rgba(17, 17, 17, 1)",
+        transition: "opacity 0.8s ease-out",
       }}
     />
   );
