@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import Header from "@/components/Header";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,44 +32,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
-
-function Header() {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
-      <nav className="flex items-center justify-between px-6 py-5 max-w-[1400px] mx-auto">
-        <Link href="/" className="text-sm tracking-[0.2em] font-medium">
-          LIGHTWORK CENTER
-        </Link>
-        <div className="flex items-center gap-8">
-          <Link
-            href="/services"
-            className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block"
-          >
-            Services
-          </Link>
-          <Link
-            href="/events"
-            className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block"
-          >
-            Events
-          </Link>
-          <Link
-            href="/about"
-            className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block"
-          >
-            About
-          </Link>
-          <Link
-            href="/contact"
-            className="text-sm border border-foreground px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
-          >
-            Contact
-          </Link>
-        </div>
-      </nav>
-    </header>
-  );
-}
 
 function MedicineWheelBanner() {
   return (
