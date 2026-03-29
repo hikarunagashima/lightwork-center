@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import Header from "@/components/Header";
+import SplashOverlay from "@/components/SplashOverlay";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -135,6 +136,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <SplashOverlay />
         <Header />
         <main className="flex-1 pt-16">{children}</main>
         <MedicineWheelBanner />
