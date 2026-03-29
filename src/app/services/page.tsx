@@ -4,6 +4,26 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Services",
   description: "ライトワークセンターが提供するサービス一覧",
+  openGraph: {
+    title: "言霊学 × シャーマニズム | LIGHTWORK CENTER",
+    description: "ライトワークセンターが提供するサービス一覧",
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent("言霊学 × シャーマニズム")}`,
+        width: 1200,
+        height: 630,
+        alt: "LIGHTWORK CENTER - Services",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "言霊学 × シャーマニズム | LIGHTWORK CENTER",
+    description: "ライトワークセンターが提供するサービス一覧",
+    images: [
+      `/api/og?title=${encodeURIComponent("言霊学 × シャーマニズム")}`,
+    ],
+  },
 };
 
 const services = [

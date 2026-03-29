@@ -4,6 +4,24 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Events",
   description: "ライトワークセンターのリトリート・セレモニー情報",
+  openGraph: {
+    title: "Events | LIGHTWORK CENTER",
+    description: "ライトワークセンターのリトリート・セレモニー情報",
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent("Events")}`,
+        width: 1200,
+        height: 630,
+        alt: "LIGHTWORK CENTER - Events",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Events | LIGHTWORK CENTER",
+    description: "ライトワークセンターのリトリート・セレモニー情報",
+    images: [`/api/og?title=${encodeURIComponent("Events")}`],
+  },
 };
 
 const events = [

@@ -15,6 +15,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lightwork-center.com";
+
 export const metadata: Metadata = {
   title: {
     default: "LIGHTWORK CENTER",
@@ -25,6 +27,32 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: "/favicon.ico",
+  },
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "LIGHTWORK CENTER",
+    description:
+      "Write × Light — 言霊学とシャーマニズムで、あなたの本質を言葉にする",
+    siteName: "LIGHTWORK CENTER",
+    locale: "ja_JP",
+    type: "website",
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent("言霊は、あなたの人生を輝かせる。")}`,
+        width: 1200,
+        height: 630,
+        alt: "LIGHTWORK CENTER",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LIGHTWORK CENTER",
+    description:
+      "Write × Light — 言霊学とシャーマニズムで、あなたの本質を言葉にする",
+    images: [
+      `/api/og?title=${encodeURIComponent("言霊は、あなたの人生を輝かせる。")}`,
+    ],
   },
 };
 

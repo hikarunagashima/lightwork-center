@@ -4,6 +4,24 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About",
   description: "ライトワークセンター主宰・光について",
+  openGraph: {
+    title: "About | LIGHTWORK CENTER",
+    description: "ライトワークセンター主宰・光について",
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent("About")}`,
+        width: 1200,
+        height: 630,
+        alt: "LIGHTWORK CENTER - About",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About | LIGHTWORK CENTER",
+    description: "ライトワークセンター主宰・光について",
+    images: [`/api/og?title=${encodeURIComponent("About")}`],
+  },
 };
 
 export default function AboutPage() {

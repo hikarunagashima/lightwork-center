@@ -3,6 +3,24 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact",
   description: "ライトワークセンターへの面談申し込み",
+  openGraph: {
+    title: "面談を申し込む | LIGHTWORK CENTER",
+    description: "ライトワークセンターへの面談申し込み",
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent("面談を申し込む")}`,
+        width: 1200,
+        height: 630,
+        alt: "LIGHTWORK CENTER - Contact",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "面談を申し込む | LIGHTWORK CENTER",
+    description: "ライトワークセンターへの面談申し込み",
+    images: [`/api/og?title=${encodeURIComponent("面談を申し込む")}`],
+  },
 };
 
 export default function ContactPage() {
