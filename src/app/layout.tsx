@@ -105,22 +105,6 @@ function Footer() {
               >
                 Telegram
               </a>
-              <a
-                href="https://www.iboga.jp/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted hover:text-foreground transition-colors"
-              >
-                iboga.jp
-              </a>
-              <a
-                href="https://github.com/asahi-inoue-jp-shaman-ai-engineer"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted hover:text-foreground transition-colors"
-              >
-                GitHub
-              </a>
             </div>
           </div>
         </div>
