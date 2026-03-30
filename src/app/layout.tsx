@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lightwork-center.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lightworkcenter.com";
 
 export const metadata: Metadata = {
   title: {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent("志ある者よ、ここに集え。")}`,
+        url: `/api/og?title=${encodeURIComponent("常に、進化の途中であれ。")}`,
         width: 1200,
         height: 630,
         alt: "LIGHTWORK CENTER",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     description:
       "言霊学・シャーマニズム・AI — 志ある者が集い、共に学ぶ現代の私塾",
     images: [
-      `/api/og?title=${encodeURIComponent("志ある者よ、ここに集え。")}`,
+      `/api/og?title=${encodeURIComponent("常に、進化の途中であれ。")}`,
     ],
   },
 };
