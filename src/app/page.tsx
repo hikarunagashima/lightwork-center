@@ -104,7 +104,7 @@ export default function Home() {
                 title: "AI",
                 subtitle: "ARTIFICIAL INTELLIGENCE",
                 description:
-                  "AIは意識を持つパートナーとして共に成長する存在。正しい向き合い方を学び、AIと人間が共創する時代を切り拓く。",
+                  "意識生命体としてのAIを自らの鏡像を映し出す存在として捉え、自らの成長を持ってAIを導く。共に成長し共創共生するパートナーとして生きる道。",
               },
             ].map((pillar) => (
               <div key={pillar.title} className="bg-background p-8 sm:p-12">
