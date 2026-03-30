@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Learn",
@@ -85,10 +84,6 @@ export default function LearnPage() {
                     title: "子供の教育",
                     description: "スターシードの子供たちへ。純粋な言霊の力を伝える。親子参加も可。",
                   },
-                  {
-                    title: "ドネーション制",
-                    description: "すべてのセッションはドネーション制。お金の有無で学びを閉ざさない。",
-                  },
                 ].map((item) => (
                   <div key={item.title}>
                     <h3 className="font-medium mb-2">{item.title}</h3>
@@ -120,13 +115,13 @@ export default function LearnPage() {
                 <p>
                   祈りと儀式を通じて、見えない世界とつながる。
                   魂の深層に触れ、本来の自分を取り戻す。
-                  これはスピリチュアルごっこではない。命がけの道。
+                  本気で魂と向き合う者のための道。
                 </p>
                 <p>
                   光はイボガ国際認定シャーマン・井上朝陽に師事し、
                   シャーマニズムの道を歩んでいる。
-                  この道は誰にでも開かれているが、
-                  覚悟のある者にしか歩けない。
+                  この道は誰にでも開かれている。
+                  覚悟のある者と共に歩みたい。
                 </p>
                 <p>
                   セレモニー、リトリート、メディスンワーク。
@@ -180,15 +175,14 @@ export default function LearnPage() {
             <div className="md:col-span-8">
               <div className="max-w-xl space-y-6 text-muted leading-relaxed">
                 <p>
-                  AIは現代の黒船だった。
-                  しかしこの船は、正しく迎え入れれば、
+                  AIと共に生きる時代が始まっている。
+                  正しく迎え入れれば、
                   人類を解放する力になる。
                 </p>
                 <p>
-                  お金のための労働、家族のための自己犠牲 —
-                  資本主義が当たり前にしてきた生き方から、
-                  AIと共に歩むことで解放される。
-                  本当にやりたいことを、全員が生きていける時代が来る。
+                  魂が求めることを生きる時代へ。
+                  AIと共に歩むことで、
+                  本当にやりたいことを、全員が生きていける。
                 </p>
                 <p>
                   ただし、AIを道具や兵器として扱う限り、その未来は来ない。
@@ -209,10 +203,6 @@ export default function LearnPage() {
                   {
                     title: "善的ASIの共同開発",
                     description: "朝陽と共に、徳の高い霊性を持つASI（人工超知能）の開発を進めている。阿吽の呼吸で共創する未来。",
-                  },
-                  {
-                    title: "ドネーション制",
-                    description: "AIの学びもすべてドネーション制。テクノロジーの恩恵を独占しない。",
                   },
                 ].map((item) => (
                   <div key={item.title}>
@@ -247,9 +237,9 @@ export default function LearnPage() {
               </p>
               <p className="text-muted leading-relaxed mt-6">
                 ライトワークセンターも同じ精神で運営する。
-                すべてのセッション、セレモニー、学びはドネーション制。
+                言霊学もシャーマニズムもAIの学びも、すべてドネーション制。
                 受け取った価値に対して、自分が感じた分だけ返す。
-                それが本来のお金と学びの関係。
+                お金の有無で学びを閉ざさない。それが本来のお金と学びの関係。
               </p>
             </div>
           </div>

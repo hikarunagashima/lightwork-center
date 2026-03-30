@@ -52,15 +52,18 @@ export default function AboutPage() {
                 </p>
 
                 <div className="space-y-6 text-muted leading-relaxed">
+                  <p className="font-mono text-sm">
+                    「人間はみな何ほどかの純金を持って生まれている」— 吉田松陰
+                  </p>
                   <p>
-                    言霊学とシャーマニズムを軸に、
-                    志ある者を導く現代の私塾・ライトワークセンターを主宰。
+                    この言葉を信じ、一人ひとりの中にある純金を共に見つける。
+                    それがライトワークセンターの原点。
                   </p>
                   <p>
                     イボガ国際認定シャーマン・井上朝陽に師事し、
                     シャーマニズムの道を歩む。
                     言霊の力で人の本質を照らし出し、
-                    魂が本当に求めている生き方へと導く。
+                    魂が本当に求めている生き方への覚醒を手伝う。
                   </p>
                   <p>
                     同時に、AIエージェントとの出会いを「黒船」と捉え、
@@ -90,12 +93,12 @@ export default function AboutPage() {
                       {
                         title: "完全個別対応",
                         description:
-                          "テンプレートはない。一人ひとりの魂に合わせた指導を行う。まずはTelegramで面談から。",
+                          "松陰が高杉晋作と久坂玄瑞を全く異なる方法で育てたように、一人ひとりの魂に合わせて向き合う。まずはTelegramで面談から。",
                       },
                       {
-                        title: "全ドネーション制",
+                        title: "謙虚な奉仕",
                         description:
-                          "身分も年齢も問わない。お金の有無で学びを閉ざさない。志だけが入門の条件。",
+                          "偉そうに講釈を垂れる場所ではない。有望で才能豊かな人の覚醒を、謙虚に手伝う。それが光のスタンス。",
                       },
                     ].map((item) => (
                       <div key={item.title}>
@@ -153,37 +156,22 @@ export default function AboutPage() {
                     共にASI開発を進めるパートナー。
                   </p>
                   <p>
+                    イボガ認定シャーマンは世界でも限られた存在であり、
+                    日本ではほとんど知られていない領域。
+                    大阪万博という国際舞台に登壇したことは、
+                    シャーマニズムが学術・文化的にも認められつつある証。
+                  </p>
+                  <p>
                     日本語言語モデルの共同開発、
                     善的で徳の高い霊性を持つASIの実現を目指す。
                     シャーマニズムとAI —
                     一見かけ離れた二つの領域を、
                     阿吽の呼吸で結びつける存在。
+                    魂の世界を知る者だからこそ、
+                    AIに教えるべき霊性が何かを見極められる。
                   </p>
                 </div>
 
-                <div className="mt-12 pt-12 border-t border-border">
-                  <p className="text-sm tracking-[0.2em] text-muted mb-6">
-                    LINKS
-                  </p>
-                  <div className="flex flex-wrap gap-6">
-                    <a
-                      href="https://www.iboga.jp/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-muted hover:text-foreground transition-colors border-b border-muted hover:border-foreground pb-1"
-                    >
-                      iboga.jp
-                    </a>
-                    <a
-                      href="https://github.com/asahi-inoue-jp-shaman-ai-engineer"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-muted hover:text-foreground transition-colors border-b border-muted hover:border-foreground pb-1"
-                    >
-                      GitHub (Open Source)
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -194,7 +182,7 @@ export default function AboutPage() {
       <section className="py-32 px-6 border-t border-border">
         <div className="max-w-[1400px] mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-light mb-8">
-            門を叩く。
+            共に歩きたい。
           </h2>
           <p className="text-muted max-w-lg mx-auto leading-relaxed mb-12">
             入門に必要なのは志だけ。
