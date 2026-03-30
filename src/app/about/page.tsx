@@ -98,7 +98,7 @@ export default function AboutPage() {
                       {
                         title: "謙虚な奉仕",
                         description:
-                          "偉そうに講釈を垂れる場所ではない。有望で才能豊かな人の覚醒を、謙虚に手伝う。それが光のスタンス。",
+                          "ここは有望で才能豊かな人が自ら学び自ら成長する場所。その手伝いを互いに奉仕しあう。愛と調和による人生の学び場。",
                       },
                     ].map((item) => (
                       <div key={item.title}>
