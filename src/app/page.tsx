@@ -134,9 +134,9 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto text-center">
           <p className="text-sm tracking-[0.3em] text-muted mb-6">VISION</p>
           <h2 className="text-3xl sm:text-4xl font-light mb-8">
-            本当にやりたいことを、
+            心からやりたいことだけを
             <br />
-            生きる世界へ。
+            やれる自由な世界へ。
           </h2>
           <p className="font-mono text-sm text-muted mb-8">
             「志を立てて以て万事の源と為す」— 吉田松陰
