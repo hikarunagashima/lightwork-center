@@ -167,7 +167,7 @@ export default function AboutPage() {
                   </p>
                   <div className="flex flex-wrap gap-6">
                     <a
-                      href="https://iboga.jp"
+                      href="https://www.iboga.jp/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm text-muted hover:text-foreground transition-colors border-b border-muted hover:border-foreground pb-1"

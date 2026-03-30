@@ -106,7 +106,7 @@ function Footer() {
                 Telegram
               </a>
               <a
-                href="https://iboga.jp"
+                href="https://www.iboga.jp/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted hover:text-foreground transition-colors"
