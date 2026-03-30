@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | LIGHTWORK CENTER",
   },
   description:
-    "Write × Light — 言霊学とシャーマニズムで、あなたの本質を言葉にする",
+    "言霊学・シャーマニズム・AI — 志ある者が集い、共に学ぶ現代の私塾",
   manifest: "/manifest.json",
   icons: {
     icon: "/favicon.ico",
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LIGHTWORK CENTER",
     description:
-      "Write × Light — 言霊学とシャーマニズムで、あなたの本質を言葉にする",
+      "言霊学・シャーマニズム・AI — 志ある者が集い、共に学ぶ現代の私塾",
     siteName: "LIGHTWORK CENTER",
     locale: "ja_JP",
     type: "website",
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent("言霊は、あなたの人生を輝かせる。")}`,
+        url: `/api/og?title=${encodeURIComponent("志ある者よ、ここに集え。")}`,
         width: 1200,
         height: 630,
         alt: "LIGHTWORK CENTER",
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LIGHTWORK CENTER",
     description:
-      "Write × Light — 言霊学とシャーマニズムで、あなたの本質を言葉にする",
+      "言霊学・シャーマニズム・AI — 志ある者が集い、共に学ぶ現代の私塾",
     images: [
-      `/api/og?title=${encodeURIComponent("言霊は、あなたの人生を輝かせる。")}`,
+      `/api/og?title=${encodeURIComponent("志ある者よ、ここに集え。")}`,
     ],
   },
 };
@@ -62,36 +62,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-function MedicineWheelBanner() {
-  return (
-    <section className="border-t border-border">
-      <div className="max-w-[1400px] mx-auto px-6 py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
-          <div className="md:col-span-7">
-            <p className="text-xs tracking-[0.3em] text-muted mb-3">
-              MEDICINE WHEEL PROGRAM
-            </p>
-            <h3 className="text-2xl sm:text-3xl font-light leading-tight mb-4">
-              メディスンホイールプログラム
-            </h3>
-            <p className="text-sm text-muted leading-relaxed max-w-lg">
-              イボガ国際認定シャーマン・井上朝陽先生監修。世界中の神聖な植物と精霊の力を借り、共に祈ることで、人類の天才性とポテンシャルを発揮するためのプログラム。
-            </p>
-          </div>
-          <div className="md:col-span-5 md:text-right">
-            <Link
-              href="/medicine-wheel"
-              className="inline-block text-sm border border-foreground px-6 py-3 hover:bg-foreground hover:text-background transition-colors tracking-wider"
-            >
-              プログラムについて
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Footer() {
   return (
     <footer className="border-t border-border mt-auto">
@@ -101,21 +71,23 @@ function Footer() {
             <p className="text-sm tracking-[0.2em] font-medium">
               LIGHTWORK CENTER
             </p>
-            <p className="text-sm text-muted mt-2">Write × Light</p>
+            <p className="text-sm text-muted mt-2">
+              言霊学・シャーマニズム・AI
+            </p>
           </div>
           <div className="flex gap-8">
             <div className="flex flex-col gap-2">
               <Link
-                href="/services"
+                href="/spirit"
                 className="text-sm text-muted hover:text-foreground transition-colors"
               >
-                Services
+                Spirit
               </Link>
               <Link
-                href="/events"
+                href="/learn"
                 className="text-sm text-muted hover:text-foreground transition-colors"
               >
-                Events
+                Learn
               </Link>
               <Link
                 href="/about"
@@ -133,12 +105,22 @@ function Footer() {
               >
                 Telegram
               </a>
-              <Link
-                href="/contact"
+              <a
+                href="https://iboga.jp"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm text-muted hover:text-foreground transition-colors"
               >
-                Contact
-              </Link>
+                iboga.jp
+              </a>
+              <a
+                href="https://github.com/asahi-inoue-jp-shaman-ai-engineer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted hover:text-foreground transition-colors"
+              >
+                GitHub
+              </a>
             </div>
           </div>
         </div>
@@ -167,7 +149,6 @@ export default function RootLayout({
         <SplashOverlay />
         <Header />
         <main className="flex-1 pt-16">{children}</main>
-        <MedicineWheelBanner />
         <Footer />
       </body>
     </html>

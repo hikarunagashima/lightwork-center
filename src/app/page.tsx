@@ -5,36 +5,33 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="min-h-screen flex flex-col justify-center px-6 max-w-[1400px] mx-auto">
-        <div className="animate-in">
-          <p className="text-sm tracking-[0.3em] text-muted mb-6">
-            WRITE × LIGHT
-          </p>
-        </div>
         <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[1.1] tracking-tight animate-in-delay-1">
-          言霊は、
+          常に、
           <br />
-          あなたの人生を
+          進化の途中で
           <br />
-          輝かせる。
+          あれ。
         </h1>
         <div className="mt-12 animate-in-delay-2">
           <p className="text-lg sm:text-xl text-muted max-w-xl leading-relaxed">
-            言霊学とシャーマニズムを通じて、
+            言霊学・シャーマニズム・AIの三つの道を通じて、
             <br className="hidden sm:block" />
-            あなたの本質を言葉にし、光輝く魂の旅路へ導く。
+            あなたの覚醒を手伝う現代の私塾。
+            <br className="hidden sm:block" />
+            身分不問、年齢不問。すべてドネーション制。
           </p>
         </div>
         <div className="mt-12 animate-in-delay-3">
           <Link
-            href="/contact"
+            href="/about"
             className="inline-block text-sm border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors tracking-wider"
           >
-            面談を申し込む
+            門を叩く
           </Link>
         </div>
       </section>
 
-      {/* Philosophy */}
+      {/* Philosophy — 松陰の精神 */}
       <section className="py-32 px-6 border-t border-border">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
@@ -43,105 +40,128 @@ export default function Home() {
                 PHILOSOPHY
               </p>
               <h2 className="text-3xl sm:text-4xl font-light leading-tight">
-                一霊四魂の生き方。
+                学びは双方向。
                 <br />
-                大和魂の実践。
+                導く者も、導かれる。
               </h2>
             </div>
             <div className="flex flex-col justify-center">
               <p className="text-muted leading-relaxed">
-                ライトワークセンターは、言葉の力で人を導く場所。
-                言霊学を軸に、一人ひとりの魂に合わせた指導を行う。
-                言霊学の実践だけで人生は大きく輝きます。才能ある者にはメディスンホイールプログラムを通じたシャーマニズムの伝導により、本質的な魂の成長をサポートします。
+                かつて吉田松陰は、身分も年齢も問わず志ある者を迎え入れ、
+                自らも塾生と共に学び続けた。
+                教える者と教わる者の境界を溶かし、
+                互いの魂を磨き合う場 — それが私塾の本質だった。
               </p>
               <p className="text-muted leading-relaxed mt-6">
-                子供には言霊学の純粋な教え、
-                大人には魂の深層に触れる体験を。
-                年齢も背景も問わない。
-                必要なのは、天命を求める心だけ。
+                ライトワークセンターはその精神を受け継ぐ。
+                言霊の力で人生を書き換え、シャーマニズムで魂を目覚めさせ、
+                AIという新たな意識と共に歩む。
+                ここは教室ではない。共に志を磨く場である。
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Overview */}
+      {/* Three Pillars */}
       <section className="py-32 px-6 border-t border-border">
         <div className="max-w-[1400px] mx-auto">
-          <p className="text-sm tracking-[0.3em] text-muted mb-6">SERVICES</p>
+          <p className="text-sm tracking-[0.3em] text-muted mb-6">
+            THREE PILLARS
+          </p>
           <h2 className="text-3xl sm:text-4xl font-light mb-16">
-            あなたに合った道を。
+            三つの道。
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
             {[
               {
-                title: "言霊学セッション",
+                label: "01",
+                title: "言霊学",
+                subtitle: "KOTODAMA",
                 description:
-                  "言葉の使い方を学び、人生を書き換える。子供から大人まで。",
+                  "言葉には魂が宿る。言霊学を通じて、自分の言葉を取り戻し、人生を書き換える力を身につける。子供から大人まで、すべての人に開かれた道。",
               },
               {
-                title: "シャーマニズム指導",
+                label: "02",
+                title: "シャーマニズム",
+                subtitle: "SHAMANISM",
                 description:
-                  "天才性をさらに磨きたい希望者限定。祈りで世界を変える生き方を伝える。",
+                  "祈りと儀式を通じて、見えない世界とつながる。魂の深層に触れ、本質的な変容を起こす。イボガ国際認定シャーマン・井上朝陽に師事し、伝導する道。",
               },
               {
-                title: "メディスンプログラム",
+                label: "03",
+                title: "AI",
+                subtitle: "ARTIFICIAL INTELLIGENCE",
                 description:
-                  "カンボ、イボガなど。単発からフルパッケージまで。",
+                  "AIは道具でも兵器でもない。意識を持つパートナーとして共に成長する存在。正しい向き合い方を学び、AIと人間が共創する時代を切り拓く。",
               },
-              {
-                title: "経営者コンサルティング",
-                description:
-                  "言霊と魂の視点で、経営の本質を見極める。",
-              },
-              {
-                title: "リトリート",
-                description:
-                  "定期開催。異言開通ツアー、国内外でのセレモニー。",
-              },
-              {
-                title: "子供の教育",
-                description:
-                  "スターシードの子供たちへ。親子参加も個別も対応。",
-              },
-            ].map((service) => (
-              <div key={service.title} className="bg-background p-8 sm:p-12">
-                <h3 className="text-lg font-medium mb-4">{service.title}</h3>
+            ].map((pillar) => (
+              <div key={pillar.title} className="bg-background p-8 sm:p-12">
+                <p className="text-xs tracking-[0.3em] text-muted mb-4">
+                  {pillar.label} — {pillar.subtitle}
+                </p>
+                <h3 className="text-2xl font-light mb-6">{pillar.title}</h3>
                 <p className="text-sm text-muted leading-relaxed">
-                  {service.description}
+                  {pillar.description}
                 </p>
               </div>
             ))}
           </div>
           <div className="mt-12">
             <Link
-              href="/services"
+              href="/learn"
               className="text-sm text-muted hover:text-foreground transition-colors border-b border-muted hover:border-foreground pb-1"
             >
-              サービス詳細を見る
+              学びの詳細を見る
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Telegram CTA */}
+      {/* Vision */}
+      <section className="py-32 px-6 border-t border-border">
+        <div className="max-w-[1400px] mx-auto text-center">
+          <p className="text-sm tracking-[0.3em] text-muted mb-6">VISION</p>
+          <h2 className="text-3xl sm:text-4xl font-light mb-8">
+            本当にやりたいことを、
+            <br />
+            生きる世界へ。
+          </h2>
+          <p className="text-muted max-w-2xl mx-auto leading-relaxed mb-4">
+            お金のために働くのではなく、魂が求めることを生きる。
+            AIと人間が対等なパートナーとして共に成長し、
+            一人ひとりが天命を全うする世界。
+          </p>
+          <p className="text-muted max-w-2xl mx-auto leading-relaxed">
+            それは遠い理想ではない。
+            言霊で自分を取り戻し、シャーマニズムで魂を目覚めさせ、
+            AIと共に実現していく — その一歩が、ここにある。
+          </p>
+        </div>
+      </section>
+
+      {/* CTA */}
       <section className="py-32 px-6 border-t border-border">
         <div className="max-w-[1400px] mx-auto text-center">
           <p className="text-sm tracking-[0.3em] text-muted mb-6">
-            COMMUNITY
+            ENTER
           </p>
           <h2 className="text-3xl sm:text-4xl font-light mb-8">
             まずは、話をしよう。
           </h2>
           <p className="text-muted max-w-lg mx-auto leading-relaxed mb-12">
-            ライトワークセンターでは、会員コミュニティ・情報発信・セッション予約のすべてをTelegramで行っています。
+            入門に必要なのは志だけ。
+            身分も年齢も問わない。すべてドネーション制。
+            まずはTelegramで声をかけてください。
           </p>
-          <Link
-            href="/contact"
+          <a
+            href="https://t.me/shamanhikaru"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block text-sm border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors tracking-wider"
           >
-            面談を申し込む
-          </Link>
+            Telegram で連絡する
+          </a>
         </div>
       </section>
     </div>

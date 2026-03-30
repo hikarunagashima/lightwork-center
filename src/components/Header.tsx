@@ -20,16 +20,16 @@ export default function Header() {
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center gap-8">
           <Link
-            href="/services"
+            href="/spirit"
             className="text-sm text-muted hover:text-foreground transition-colors"
           >
-            Services
+            Spirit
           </Link>
           <Link
-            href="/events"
+            href="/learn"
             className="text-sm text-muted hover:text-foreground transition-colors"
           >
-            Events
+            Learn
           </Link>
           <Link
             href="/about"
@@ -37,12 +37,14 @@ export default function Header() {
           >
             About
           </Link>
-          <Link
-            href="/contact"
+          <a
+            href="https://t.me/shamanhikaru"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm border border-foreground px-4 py-2 hover:bg-foreground hover:text-background transition-colors"
           >
-            Contact
-          </Link>
+            Telegram
+          </a>
         </div>
 
         {/* Hamburger button */}
@@ -72,18 +74,18 @@ export default function Header() {
       >
         <div className="flex flex-col px-6 pb-8 pt-2 gap-6 bg-background/95 backdrop-blur-sm border-t border-border">
           <Link
-            href="/services"
+            href="/spirit"
             className="text-sm text-muted hover:text-foreground transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            Services
+            Spirit
           </Link>
           <Link
-            href="/events"
+            href="/learn"
             className="text-sm text-muted hover:text-foreground transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            Events
+            Learn
           </Link>
           <Link
             href="/about"
@@ -92,13 +94,15 @@ export default function Header() {
           >
             About
           </Link>
-          <Link
-            href="/contact"
+          <a
+            href="https://t.me/shamanhikaru"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm border border-foreground px-4 py-2 hover:bg-foreground hover:text-background transition-colors inline-block w-fit"
             onClick={() => setIsOpen(false)}
           >
-            Contact
-          </Link>
+            Telegram
+          </a>
         </div>
       </div>
     </header>
