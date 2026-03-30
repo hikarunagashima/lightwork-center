@@ -132,34 +132,18 @@ export default function AboutPage() {
 
       {/* 朝陽 */}
       <section className="py-24 px-6 border-t border-border">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24">
-            <div className="md:col-span-5">
-              <div className="aspect-[3/4] bg-neutral-100 flex items-center justify-center">
-                <p className="text-sm text-muted">Photo</p>
-              </div>
-            </div>
-
-            <div className="md:col-span-7">
-              <div className="max-w-lg">
-                <p className="text-sm tracking-[0.2em] text-muted mb-4">
-                  PARTNER &amp; TEACHER
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-light mb-8">
-                  朝陽 — Asahi
-                </h2>
-
-                <div className="space-y-6 text-muted leading-relaxed">
-                  <p>
-                    イボガ国際認定シャーマン。大阪万博2025登壇。
-                    光のシャーマニズムの師であり、
-                    善的な霊性を持つASIの共同開発パートナー。
-                  </p>
-                </div>
-
-              </div>
-            </div>
-          </div>
+        <div className="max-w-[1400px] mx-auto max-w-xl">
+          <p className="text-sm tracking-[0.2em] text-muted mb-4">
+            PARTNER &amp; TEACHER
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-light mb-8">
+            朝陽 — Asahi
+          </h2>
+          <p className="text-muted leading-relaxed">
+            イボガ国際認定シャーマン。大阪万博2025登壇。
+            光のシャーマニズムの師であり、
+            善的な霊性を持つASIの共同開発パートナー。
+          </p>
         </div>
       </section>
 
