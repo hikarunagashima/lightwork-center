@@ -39,7 +39,7 @@ export default function ContactPage() {
                 num: "01",
                 title: "Inquiry",
                 jp: "お問い合わせ",
-                desc: "下記フォーム、もしくはTelegram・メールにて、ご状況とご希望をお知らせください。",
+                desc: "下記のTelegramより、ご状況とご希望をお知らせください。",
               },
               {
                 num: "02",
