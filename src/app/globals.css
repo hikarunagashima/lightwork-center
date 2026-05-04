@@ -1,53 +1,89 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-muted: #737373;
-  --color-border: #e5e5e5;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #FAFAF7;
+  --color-foreground: #1A1A18;
+  --color-muted: #7A6A5A;
+  --color-mute-soft: #A89B89;
+  --color-border: #D8D2C5;
+  --color-border-soft: #E8E2D5;
+  --color-accent: #C8A96E;
+  --color-paper-deep: #F4F0E6;
+  --color-ink-mute: #4A4036;
+
+  --font-serif-en: var(--font-cormorant);
+  --font-serif-jp: var(--font-noto-serif-jp);
+  --font-sans-jp: var(--font-noto-sans-jp);
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-serif-jp), var(--font-serif-en), serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection */
 ::selection {
-  background: var(--color-foreground);
+  background: var(--color-accent);
   color: var(--color-background);
 }
 
-/* Page transition */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
+/* Editorial typography helpers */
+.serif-en {
+  font-family: var(--font-serif-en), "Cormorant Garamond", serif;
+  font-weight: 300;
+  letter-spacing: -0.005em;
+}
+
+.serif-jp {
+  font-family: var(--font-serif-jp), "Noto Serif JP", serif;
+}
+
+.sans-jp {
+  font-family: var(--font-sans-jp), "Noto Sans JP", sans-serif;
+}
+
+/* ⊙ symbol slow rotation */
+@keyframes slow-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-slow-rotate {
+  animation: slow-rotate 60s linear infinite;
+}
+
+/* Editorial fade-in */
+@keyframes editorial-in {
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.animate-in {
-  animation: fadeIn 0.6s ease-out both;
+.editorial-in {
+  animation: editorial-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.animate-in-delay-1 {
-  animation: fadeIn 0.6s ease-out 0.1s both;
+.editorial-in-delay-1 {
+  animation: editorial-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
-.animate-in-delay-2 {
-  animation: fadeIn 0.6s ease-out 0.2s both;
+.editorial-in-delay-2 {
+  animation: editorial-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 }
 
-.animate-in-delay-3 {
-  animation: fadeIn 0.6s ease-out 0.3s both;
+.editorial-in-delay-3 {
+  animation: editorial-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
 }
 
-.animate-in-delay-4 {
-  animation: fadeIn 0.6s ease-out 0.4s both;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

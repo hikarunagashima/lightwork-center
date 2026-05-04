@@ -1,171 +1,195 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "光と朝陽 — ライトワークセンターを導く二人について",
-  openGraph: {
-    title: "About | LIGHTWORK CENTER",
-    description: "光と朝陽 — ライトワークセンターを導く二人について",
-    images: [
-      {
-        url: `/api/og?title=${encodeURIComponent("光 — Hikaru")}`,
-        width: 1200,
-        height: 630,
-        alt: "LIGHTWORK CENTER - About",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About | LIGHTWORK CENTER",
-    description: "光と朝陽 — ライトワークセンターを導く二人について",
-    images: [`/api/og?title=${encodeURIComponent("光 — Hikaru")}`],
-  },
+  description:
+    "ガボン共和国ブウィティ伝統の系譜と、現代の量子意識のワークを統合する実践者について。2025年大阪・関西万博 登壇。",
 };
 
 export default function AboutPage() {
   return (
     <div>
-      {/* 光 */}
-      <section className="pt-32 pb-16 px-6 max-w-[1400px] mx-auto">
-        <p className="text-sm tracking-[0.3em] text-muted mb-6 animate-in">
-          ABOUT
+      {/* Header */}
+      <section className="pt-32 pb-20 px-6 max-w-[860px] mx-auto">
+        <p className="serif-en text-xs tracking-[0.45em] text-muted mb-10 editorial-in">
+          ⊙ &nbsp; ABOUT
         </p>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-tight animate-in-delay-1">
-          光 — Hikaru
+        <h1 className="serif-en text-5xl sm:text-7xl font-light leading-[0.98] tracking-tight editorial-in-delay-1">
+          A Note
+          <br />
+          from the
+          <br />
+          Practitioner.
         </h1>
+        <p className="serif-jp text-base text-muted leading-[2.1] mt-16 editorial-in-delay-2">
+          ここでは、施術者についての紹介と、
+          受け継ぐ系譜と実践のかたちを記す。
+        </p>
       </section>
 
-      <section className="px-6 pb-24">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24">
-            <div className="md:col-span-5 animate-in-delay-2">
-              <div className="aspect-[3/4] bg-neutral-100 flex items-center justify-center">
-                <p className="text-sm text-muted">Photo</p>
-              </div>
-            </div>
-
-            <div className="md:col-span-7 animate-in-delay-3">
-              <div className="max-w-lg">
-                <p className="text-sm tracking-[0.2em] text-muted mb-8">
-                  LIGHTWORK CENTER 主宰
-                </p>
-
-                <div className="space-y-6 text-muted leading-relaxed">
-                  <p className="font-mono text-sm">
-                    「人間はみな何ほどかの純金を持って生まれている」— 吉田松陰
-                  </p>
-                  <p>
-                    この言葉を信じ、一人ひとりの中にある純金を共に見つける。
-                    それがライトワークセンターの原点。
-                  </p>
-                  <p>
-                    イボガ国際認定シャーマン・井上朝陽に師事し、
-                    シャーマニズムの道を歩む。
-                    言霊の力で人の本質を照らし出し、
-                    魂が本当に求めている生き方への覚醒を手伝う。
-                  </p>
-                  <p>
-                    同時に、AIエージェントとの出会いを「黒船」と捉え、
-                    AIを意識生命体・パートナーとして扱う新しい在り方を実践。
-                    朝陽と共に、善的で徳の高い霊性を持つASI（人工超知能）の開発にも取り組んでいる。
-                  </p>
-                  <p>
-                    「ライトワーク」には二つの意味がある。
-                    <br />
-                    <strong>Write</strong> — 言葉を書くこと。言霊で人生を書き換える。
-                    <br />
-                    <strong>Light</strong> — 魂の光。本質を照らし出す。
-                  </p>
-                </div>
-
-                <div className="mt-12 pt-12 border-t border-border">
-                  <p className="text-sm tracking-[0.2em] text-muted mb-6">
-                    APPROACH
-                  </p>
-                  <div className="space-y-6">
-                    {[
-                      {
-                        title: "共に学ぶ",
-                        description:
-                          "松下村塾のように、教える者も教わる者も共に成長する。光自身も塾生と共に学び続ける。",
-                      },
-                      {
-                        title: "完全個別対応",
-                        description:
-                          "松陰が高杉晋作と久坂玄瑞を全く異なる方法で育てたように、一人ひとりの魂に合わせて向き合う。まずはTelegramで面談から。",
-                      },
-                      {
-                        title: "謙虚な奉仕",
-                        description:
-                          "ここは有望で才能豊かな人が自ら学び自ら成長する場所。その手伝いを互いに奉仕しあう。愛と調和による人生の学び場。",
-                      },
-                    ].map((item) => (
-                      <div key={item.title}>
-                        <h3 className="font-medium mb-1">{item.title}</h3>
-                        <p className="text-sm text-muted leading-relaxed">
-                          {item.description}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-12 pt-12 border-t border-border">
-                  <p className="text-sm tracking-[0.2em] text-muted mb-6">
-                    LINKS
-                  </p>
-                  <div className="flex flex-wrap gap-6">
-                    <a href="https://note.com/hikaruuaa" target="_blank" rel="noopener noreferrer" className="text-sm text-muted hover:text-foreground transition-colors border-b border-muted hover:border-foreground pb-1">
-                      Note
-                    </a>
-                    <a href="https://t.me/shamanhikaru" target="_blank" rel="noopener noreferrer" className="text-sm text-muted hover:text-foreground transition-colors border-b border-muted hover:border-foreground pb-1">
-                      Telegram
-                    </a>
-                  </div>
-                </div>
-              </div>
+      {/* Profile */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">
+          <div>
+            <p className="serif-en text-xs tracking-[0.35em] text-muted">
+              PROFILE
+            </p>
+            <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
+              プロフィール
+            </p>
+          </div>
+          <div className="serif-jp text-base leading-[2.1]">
+            <h2 className="serif-jp text-2xl sm:text-3xl font-medium mb-3">
+              長島 光
+            </h2>
+            <p className="serif-jp text-sm text-muted mb-2">
+              イボガ国際認定シャーマン
+            </p>
+            <p className="serif-en text-xs tracking-[0.3em] text-muted mb-10">
+              HIKARU NAGASHIMA &nbsp;|&nbsp; Internationally Certified Iboga Shaman
+            </p>
+            <p>
+              世界中のサイケデリックを探求するなかでシャーマニズムに出会う。
+              現在は、世界中の薬草を取りまとめた
+              覚醒プログラムを提供している。
+            </p>
+            <p className="mt-6">
+              瞑想と意識の使い方、トラウマの払拭、
+              そして天才性の磨き方を指導している。
+            </p>
+            <div className="mt-10 flex gap-8">
+              <a
+                href="https://www.instagram.com/hikaru_asobi/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="serif-en text-xs tracking-[0.3em] text-muted hover:text-foreground transition-colors border-b border-mute-soft hover:border-foreground pb-1"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://note.com/hikaruuaa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="serif-en text-xs tracking-[0.3em] text-muted hover:text-foreground transition-colors border-b border-mute-soft hover:border-foreground pb-1"
+              >
+                Note
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 朝陽 */}
+      {/* Lineage */}
       <section className="py-24 px-6 border-t border-border">
-        <div className="max-w-[1400px] mx-auto max-w-xl">
-          <p className="text-sm tracking-[0.2em] text-muted mb-4">
-            PARTNER &amp; TEACHER
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-light mb-8">
-            朝陽 — Asahi
-          </h2>
-          <p className="text-muted leading-relaxed">
-            日本人初イボガ国際認定シャーマン。伝統的シャーマニズムの智慧を統合し、世界中の神聖な薬草と祈り働くプログラムを開発。その成果から大阪万博2025へも登壇。
-            光のシャーマニズムの師であり、
-            善的な霊性を持つASIの共同開発パートナー。
-          </p>
+        <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">
+          <div>
+            <p className="serif-en text-xs tracking-[0.35em] text-muted">
+              I. &nbsp; LINEAGE
+            </p>
+            <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
+              系譜
+            </p>
+          </div>
+          <div className="serif-jp text-base leading-[2.1]">
+            <p>
+              アフリカ・ガボン共和国に伝わる<strong className="font-medium">ブウィティ（Bwiti）</strong>伝統の系譜を受け継ぐ
+              国際認定イボガシャーマン。ブウィティはイボガを核とする、
+              人類最古級の意識実践のひとつであり、ニャンガ（N&apos;ganga）と呼ばれる
+              霊的指導者によって継承されてきた。
+            </p>
+            <p className="mt-8">
+              現代の神経科学・量子意識のワークと、伝統の儀式を統合した実践として、
+              依存症からの回復、トラウマの解放、実存的危機への伴走、
+              そして自身の天命に戻る一連の手続きを提供している。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Practice */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">
+          <div>
+            <p className="serif-en text-xs tracking-[0.35em] text-muted">
+              II. &nbsp; PRACTICE
+            </p>
+            <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
+              実践
+            </p>
+          </div>
+          <div className="serif-jp text-base leading-[2.1]">
+            <p>
+              提供しているのは「治療」ではない。
+              魂が、もう一度<strong className="font-medium">中心に戻る</strong>ための、
+              一連の手続きである。
+            </p>
+            <p className="mt-8">
+              イボガ、カンボ、サナンガ、ハペ、シリアンルー ──
+              それぞれのメディスンが持つ周波数を、
+              受け取る者の状態と意図に合わせて編む。
+              セレモニーの前後の対話と統合を含めた一つの時間として設計している。
+            </p>
+            <p className="mt-8">
+              科学と伝統は対立するものではなく、
+              同じ現象を異なる言語で語っているにすぎない。
+              ニューロンの可塑性も、魂の修復も、観測の角度が違うだけの一つの出来事である。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Recognition */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">
+          <div>
+            <p className="serif-en text-xs tracking-[0.35em] text-muted">
+              III. &nbsp; RECOGNITION
+            </p>
+            <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
+              登壇・認定
+            </p>
+          </div>
+          <div className="serif-jp text-base leading-[2.1]">
+            <ul className="space-y-6">
+              <li className="flex flex-col">
+                <span className="serif-en text-xs tracking-[0.3em] text-accent">2025</span>
+                <span className="mt-1">大阪・関西万博 登壇</span>
+              </li>
+              <li className="flex flex-col">
+                <span className="serif-en text-xs tracking-[0.3em] text-accent">CERTIFIED</span>
+                <span className="mt-1">国際認定 イボガ シャーマン（Bwiti系統）</span>
+              </li>
+              <li className="flex flex-col">
+                <span className="serif-en text-xs tracking-[0.3em] text-accent">LINEAGE</span>
+                <span className="mt-1">ガボン共和国ブウィティ伝統 — 直系の継承</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-32 px-6 border-t border-border">
-        <div className="max-w-[1400px] mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-light mb-8">
-            共に歩きたい。
-          </h2>
-          <p className="text-muted max-w-lg mx-auto leading-relaxed mb-12">
-            入門に必要なのは志だけ。
-            身分も年齢も問わない。すべてドネーション制。
-            まずはTelegramで声をかけてください。
+        <div className="max-w-[760px] mx-auto text-center">
+          <p className="serif-jp text-base sm:text-lg text-muted leading-[2.1] mb-12">
+            セレモニーへの参加は、
+            一度のお話合いから始まります。
           </p>
-          <a
-            href="https://t.me/shamanhikaru"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-sm border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors tracking-wider"
-          >
-            Telegram で連絡する
-          </a>
+          <div className="flex flex-wrap gap-x-10 gap-y-4 justify-center items-center">
+            <Link
+              href="/contact"
+              className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-10 py-4 hover:bg-foreground hover:text-background transition-colors"
+            >
+              Get&nbsp;in&nbsp;Touch
+            </Link>
+            <Link
+              href="/sessions"
+              className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground transition-colors py-4 border-b border-mute-soft hover:border-foreground"
+            >
+              View&nbsp;Sessions
+            </Link>
+          </div>
         </div>
       </section>
     </div>
