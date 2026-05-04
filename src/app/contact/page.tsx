@@ -104,17 +104,6 @@ export default function ContactPage() {
                 @shamanhikaru
               </a>
             </div>
-            <div className="text-center pt-10 border-t border-border-soft">
-              <p className="serif-en text-xs tracking-[0.3em] text-muted mb-3">
-                EMAIL
-              </p>
-              <a
-                href="mailto:hikaruuaa@gmail.com?subject=Medicine%20Wheel%20Inquiry"
-                className="serif-en text-2xl sm:text-3xl font-light hover:text-accent transition-colors break-all"
-              >
-                hikaruuaa@gmail.com
-              </a>
-            </div>
           </div>
 
           <p className="serif-jp text-xs text-muted mt-16 leading-relaxed text-center">
