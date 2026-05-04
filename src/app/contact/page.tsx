@@ -45,7 +45,7 @@ export default function ContactPage() {
                 num: "02",
                 title: "Conversation",
                 jp: "事前のお話合い",
-                desc: "オンラインまたはお電話にて、状況・動機・健康状態・過去のスピリチュアル体験などをお伺いします。",
+                desc: "ZOOMによるオンライン面談にて、状況・動機・健康状態・過去のスピリチュアル体験などをお伺いします。",
               },
               {
                 num: "03",
