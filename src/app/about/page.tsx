@@ -169,6 +169,31 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Continuity — 永続的関与の約束 */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">
+          <div>
+            <p className="serif-en text-xs tracking-[0.35em] text-muted">
+              IV. &nbsp; CONTINUITY
+            </p>
+            <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
+              続いてゆくもの
+            </p>
+          </div>
+          <div className="serif-jp text-base leading-[2.1]">
+            <p>
+              セレモニーは、一度の出来事ではない。
+              受け取ったものが日常のなかで形をなすまで、
+              数日、数週間、ときに数ヶ月の<strong className="font-medium">統合</strong>の時間が続く。
+            </p>
+            <p className="mt-8">
+              その間、必要な時にいつでも声をかけてくださってよい。
+              関係に期限を設けていない。
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-32 px-6 border-t border-border">
         <div className="max-w-[760px] mx-auto text-center">
@@ -181,7 +206,7 @@ export default function AboutPage() {
               href="/contact"
               className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-10 py-4 hover:bg-foreground hover:text-background transition-colors"
             >
-              Get&nbsp;in&nbsp;Touch
+              Apply
             </Link>
             <Link
               href="/sessions"

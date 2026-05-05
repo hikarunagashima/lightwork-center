@@ -63,6 +63,7 @@ const RESEARCH = [
       "Ibogaine Administration Modifies GDNF and BDNF Expression in Brain Regions",
     author: "Martínez-Orozco et al.",
     journal: "Frontiers in Pharmacology",
+    institution: "Universidad Nacional Autónoma de México",
     year: 2019,
     url: "https://pubmed.ncbi.nlm.nih.gov/30890941/",
   },
@@ -72,6 +73,7 @@ const RESEARCH = [
       "A Systematic Literature Review of Clinical Trials and Therapeutic Applications of Ibogaine",
     author: "Schenberg EE et al.",
     journal: "Journal of Substance Abuse Treatment",
+    institution: "ICEERS / Hospital das Clínicas, São Paulo",
     year: 2021,
     url: "https://pubmed.ncbi.nlm.nih.gov/35012793/",
   },
@@ -81,6 +83,7 @@ const RESEARCH = [
       "Ibogaine Treatment Outcomes for Opioid Dependence — Twelve-month Follow-up",
     author: "Brown TK et al.",
     journal: "Am J Drug Alcohol Abuse",
+    institution: "Pomona Valley Hospital Medical Center",
     year: 2017,
     url: "https://pubmed.ncbi.nlm.nih.gov/28402682/",
   },
@@ -88,8 +91,9 @@ const RESEARCH = [
     medicine: "Iboga",
     title:
       "Significant Lesion Reduction and Neural Structural Changes Following Ibogaine Treatments for Multiple Sclerosis",
-    author: "Frontiers in Immunology",
-    journal: "PMC",
+    author: "Case report",
+    journal: "Frontiers in Immunology",
+    institution: "PMC (NIH National Library of Medicine)",
     year: 2025,
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11839422/",
   },
@@ -99,8 +103,9 @@ const RESEARCH = [
     medicine: "Kambô",
     title:
       "Acute and Subacute Psychoactive Effects of Kambô — the Secretion of the Amazonian Giant Maki Frog",
-    author: "Scientific Reports",
-    journal: "Nature",
+    author: "ICEERS / Bouso JC et al.",
+    journal: "Scientific Reports (Nature)",
+    institution: "Universitat Autònoma de Barcelona",
     year: 2020,
     url: "https://www.nature.com/articles/s41598-020-78527-4",
   },
@@ -108,8 +113,9 @@ const RESEARCH = [
     medicine: "Kambô",
     title:
       "The Amazonian Kambô Frog Phyllomedusa bicolor — Biology, Toxinology, Ethnopharmacology",
-    author: "Toxicon Review",
-    journal: "PubMed",
+    author: "Multi-institution review",
+    journal: "Toxicon",
+    institution: "PubMed Indexed",
     year: 2022,
     url: "https://pubmed.ncbi.nlm.nih.gov/36278168/",
   },
@@ -121,6 +127,7 @@ const RESEARCH = [
       "Potent Anti-amoebic Effects of Ibogaine, Voacangine and the Root Bark Alkaloid Fraction of Tabernaemontana arborea",
     author: "Carrero JC, Krengel F et al.",
     journal: "Planta Medica",
+    institution: "Universidad Nacional Autónoma de México (UNAM)",
     year: 2023,
     url: "https://pubmed.ncbi.nlm.nih.gov/35338475/",
   },
@@ -130,6 +137,7 @@ const RESEARCH = [
       "Coronaridine, an Iboga-type Alkaloid from Tabernaemontana divaricata, Inhibits the Wnt Signaling Pathway",
     author: "Ohishi K, Toume K, Ishibashi M et al.",
     journal: "Bioorganic & Medicinal Chemistry Letters",
+    institution: "Chiba University, Japan",
     year: 2015,
     url: "https://pubmed.ncbi.nlm.nih.gov/26231157/",
   },
@@ -141,6 +149,7 @@ const RESEARCH = [
       "Peganum harmala Seed Extract Attenuates Anxiety and Depression by Restoring the BDNF/TrkB Signaling Pathway",
     author: "Tekşen Y, Koldemir Gündüz M et al.",
     journal: "Metabolic Brain Disease",
+    institution: "Kütahya Health Sciences University",
     year: 2024,
     url: "https://pubmed.ncbi.nlm.nih.gov/39172328/",
   },
@@ -150,6 +159,7 @@ const RESEARCH = [
       "Harmine Stimulates Proliferation of Human Neural Progenitors",
     author: "Dakic V, Rehen SK et al.",
     journal: "PeerJ",
+    institution: "Federal University of Rio de Janeiro / D'Or Institute",
     year: 2016,
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5144684/",
   },
@@ -159,6 +169,7 @@ const RESEARCH = [
       "Pharmacological and Therapeutic Effects of Peganum harmala and Its Main Alkaloids",
     author: "Moloudizargari M et al.",
     journal: "Pharmacognosy Reviews",
+    institution: "Urmia University of Medical Sciences",
     year: 2013,
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3841998/",
   },
@@ -255,6 +266,9 @@ export default function MedicinesPage() {
                   <p className="serif-en text-xs italic text-muted mt-2">
                     {r.author}
                   </p>
+                  <p className="serif-en text-[11px] tracking-[0.15em] text-mute-soft mt-1">
+                    {r.institution}
+                  </p>
                 </a>
               </li>
             ))}
@@ -274,7 +288,7 @@ export default function MedicinesPage() {
             href="/contact"
             className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-10 py-4 hover:bg-foreground hover:text-background transition-colors"
           >
-            Get&nbsp;in&nbsp;Touch
+            Apply
           </Link>
         </div>
       </section>

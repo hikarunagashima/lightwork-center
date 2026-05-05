@@ -42,7 +42,7 @@ export default function Header() {
             href="/contact"
             className="serif-en text-xs tracking-[0.25em] border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors"
           >
-            Inquire
+            Apply
           </Link>
         </div>
 
@@ -87,7 +87,7 @@ export default function Header() {
             className="serif-en text-sm tracking-[0.25em] border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors inline-block w-fit"
             onClick={() => setIsOpen(false)}
           >
-            Inquire
+            Apply
           </Link>
         </div>
       </div>

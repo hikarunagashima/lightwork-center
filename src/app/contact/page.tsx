@@ -84,30 +84,45 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact methods */}
+      {/* Apply via Telegram */}
       <section className="py-32 px-6 border-t border-border bg-paper-deep/30">
-        <div className="max-w-[760px] mx-auto">
-          <p className="serif-en text-xs tracking-[0.45em] text-muted mb-12 text-center">
-            ⊙ &nbsp; CHANNELS
+        <div className="max-w-[760px] mx-auto text-center">
+          <p className="serif-en text-xs tracking-[0.45em] text-muted mb-10">
+            ⊙ &nbsp; APPLY
           </p>
-          <div className="space-y-10">
-            <div className="text-center">
-              <p className="serif-en text-xs tracking-[0.3em] text-muted mb-3">
-                TELEGRAM
-              </p>
-              <a
-                href="https://t.me/shamanhikaru"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="serif-en text-2xl sm:text-3xl font-light hover:text-accent transition-colors"
-              >
-                @shamanhikaru
-              </a>
-            </div>
-          </div>
+          <p className="serif-jp text-base text-muted leading-[2] mb-10 max-w-md mx-auto">
+            お申し込み・ご相談は Telegram にて承ります。
+          </p>
+          <a
+            href="https://t.me/shamanhikaru"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-12 py-4 hover:bg-foreground hover:text-background transition-colors"
+          >
+            Apply&nbsp;via&nbsp;Telegram
+          </a>
+          <p className="serif-en text-xs tracking-[0.3em] text-muted mt-6">
+            @shamanhikaru
+          </p>
 
-          <p className="serif-jp text-xs text-muted mt-16 leading-relaxed text-center">
-            お問い合わせの際は、ご希望のプログラム、現在のご状況、
+          <p className="serif-jp text-xs text-muted mt-10 leading-[2]">
+            Telegram は、世界中で使われている
+            セキュアなメッセージングアプリです。
+            <br className="hidden sm:block" />
+            まだお持ちでない方は{" "}
+            <a
+              href="https://telegram.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="serif-en text-foreground border-b border-mute-soft hover:border-foreground transition-colors pb-0.5"
+            >
+              telegram.org
+            </a>
+            {" "}から無料でダウンロードいただけます（iOS / Android / PC）。
+          </p>
+
+          <p className="serif-jp text-xs text-muted mt-16 leading-relaxed">
+            お申し込みの際は、ご希望のプログラム、現在のご状況、
             <br className="hidden sm:block" />
             ご希望の連絡方法・時間帯などを併せてお知らせください。
             <br className="hidden sm:block" />

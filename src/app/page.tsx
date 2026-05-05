@@ -149,7 +149,7 @@ export default function Home() {
             href="/contact"
             className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-12 py-4 hover:bg-foreground hover:text-background transition-colors"
           >
-            Get&nbsp;in&nbsp;Touch
+            Apply
           </Link>
         </div>
       </section>

@@ -82,6 +82,9 @@ function Footer() {
             <p className="serif-jp text-xs tracking-[0.2em] text-muted mt-8">
               国際認定 イボガ シャーマン
             </p>
+            <p className="serif-en text-[10px] tracking-[0.35em] text-muted mt-2">
+              2025&nbsp;OSAKA-KANSAI&nbsp;EXPO &nbsp;·&nbsp; SPEAKER
+            </p>
             <div className="mt-10 flex gap-8">
               <a
                 href="https://www.instagram.com/hikaru_asobi/"
