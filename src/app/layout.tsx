@@ -35,7 +35,6 @@ export const metadata: Metadata = {
   description:
     "国際認定イボガシャーマンによる、伝統と量子意識のセレモニー。ガボン共和国ブウィティの系譜と現代の神経科学的知見を統合した、魂のためのメディスン。",
   manifest: "/manifest.json",
-  icons: { icon: "/favicon.ico" },
   metadataBase: new URL(siteUrl),
   openGraph: {
     title: "LIGHTWORK CENTER — ライトワークセンター",
