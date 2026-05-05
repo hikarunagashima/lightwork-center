@@ -24,7 +24,7 @@ export default function AboutPage() {
         </h1>
         <p className="serif-jp text-base text-muted leading-[2.1] mt-16 editorial-in-delay-2">
           ここでは、施術者についての紹介と、
-          受け継ぐ系譜と実践のかたちを記す。
+          受け継ぐ系譜と実践のかたちを記しています。
         </p>
       </section>
 
@@ -50,13 +50,13 @@ export default function AboutPage() {
               HIKARU NAGASHIMA &nbsp;|&nbsp; Internationally Certified Iboga Shaman
             </p>
             <p>
-              世界中のサイケデリックを探求するなかでシャーマニズムに出会う。
+              世界中のサイケデリックを探求するなかでシャーマニズムに出会いました。
               現在は、世界中の薬草を取りまとめた
-              覚醒プログラムを提供している。
+              覚醒プログラムを提供しています。
             </p>
             <p className="mt-6">
               瞑想と意識の使い方、トラウマの払拭、
-              そして天才性の磨き方を指導している。
+              そして天才性の磨き方を指導しています。
             </p>
             <div className="mt-10 flex gap-8">
               <a
@@ -93,15 +93,15 @@ export default function AboutPage() {
           </div>
           <div className="serif-jp text-base leading-[2.1]">
             <p>
-              アフリカ・ガボン共和国に伝わる<strong className="font-medium">ブウィティ（Bwiti）</strong>伝統の系譜を受け継ぐ
-              国際認定イボガシャーマン。ブウィティはイボガを核とする、
-              人類最古級の意識実践のひとつであり、ニャンガ（N&apos;ganga）と呼ばれる
-              霊的指導者によって継承されてきた。
+              アフリカ・ガボン共和国に伝わる<strong className="font-medium">ブウィティ（Bwiti）</strong>伝統の系譜を受け継ぐ、
+              国際認定イボガシャーマンです。
+              ブウィティはイボガを核とする人類最古級の意識実践のひとつであり、
+              ニャンガ（N&apos;ganga）と呼ばれる霊的指導者によって継承されてきました。
             </p>
             <p className="mt-8">
-              現代の神経科学・量子意識のワークと、伝統の儀式を統合した実践として、
+              現代の神経科学・量子意識のワークと伝統の儀式を統合した実践として、
               依存症からの回復、トラウマの解放、実存的危機への伴走、
-              そして自身の天命に戻る一連の手続きを提供している。
+              そして自身の天命に戻る一連の手続きを提供しています。
             </p>
           </div>
         </div>
@@ -120,20 +120,21 @@ export default function AboutPage() {
           </div>
           <div className="serif-jp text-base leading-[2.1]">
             <p>
-              提供しているのは「治療」ではない。
+              提供しているのは「治療」ではありません。
               魂が、もう一度<strong className="font-medium">中心に戻る</strong>ための、
-              一連の手続きである。
+              一連の手続きです。
             </p>
             <p className="mt-8">
               イボガ、カンボ、サナンガ、ハペ、シリアンルー ──
               それぞれのメディスンが持つ周波数を、
-              受け取る者の状態と意図に合わせて編む。
-              セレモニーの前後の対話と統合を含めた一つの時間として設計している。
+              受け取る方の状態と意図に合わせて編んでいきます。
+              セレモニーの前後の対話と統合を含めた、ひとつの時間として設計しています。
             </p>
             <p className="mt-8">
               科学と伝統は対立するものではなく、
-              同じ現象を異なる言語で語っているにすぎない。
-              ニューロンの可塑性も、魂の修復も、観測の角度が違うだけの一つの出来事である。
+              同じ現象を異なる言語で語っているにすぎません。
+              ニューロンの可塑性も、魂の修復も、
+              観測の角度が違うだけの、ひとつの出来事です。
             </p>
           </div>
         </div>
@@ -182,13 +183,13 @@ export default function AboutPage() {
           </div>
           <div className="serif-jp text-base leading-[2.1]">
             <p>
-              セレモニーは、一度の出来事ではない。
+              セレモニーは、一度の出来事ではありません。
               受け取ったものが日常のなかで形をなすまで、
-              数日、数週間、ときに数ヶ月の<strong className="font-medium">統合</strong>の時間が続く。
+              数日、数週間、ときに数ヶ月の<strong className="font-medium">統合</strong>の時間が続きます。
             </p>
             <p className="mt-8">
-              その間、必要な時にいつでも声をかけてくださってよい。
-              関係に期限を設けていない。
+              その間、必要な時にいつでもお声がけください。
+              関係に期限を設けていません。
             </p>
           </div>
         </div>
