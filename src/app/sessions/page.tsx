@@ -12,42 +12,49 @@ const PROGRAMS = [
     num: "I.",
     en: "Ceremony",
     jp: "セレモニー",
+    tagline: "Sananga & Hapé Ritual",
     desc: "サナンガ＋ハペセレモニー。短時間の純度の高い祈りの場。悲しみ・メンタルブロックの除去、松果体の浄化、チャクラのクレンジング。",
   },
   {
     num: "II.",
     en: "Lifestyle",
     jp: "生活習慣の改善",
+    tagline: "30-Day Iboga Dieta",
     desc: "イボガチップ ディエタ プログラム（30日）。オートファジーサポート、瞑想の習慣化、依存症の克服。",
   },
   {
     num: "III.",
     en: "Detoxification",
     jp: "解毒",
+    tagline: "Kambô Passage",
     desc: "カンボセレモニー。地球最強の解毒剤。感情体のクレンジング、自己免疫力・肝機能の強靭な増強。",
   },
   {
     num: "IV.",
     en: "Retreat",
     jp: "リトリート",
+    tagline: "Iboga Flood Dose Initiation",
     desc: "カンボリトリート、イボガフラッドドーズリトリート（一泊二日）。秘教儀式としてのアダムカドモン覚醒イニシエーション。",
   },
   {
     num: "V.",
     en: "Microdosing",
     jp: "マイクロドージング — 21日間プログラム",
+    tagline: "21-Day Plant Programmes",
     desc: "サナンガ／ハペ／ノーマルイボガ／シリアンルー、各21日間。緩やかなニューロン損傷修復、リプログラミング、アンセスターヒーリング。",
   },
   {
     num: "VI.",
     en: "Power Up",
     jp: "パワーアップ",
+    tagline: "Genius Boost · Wild Iboga Pack",
     desc: "イボガワイルドバッチ ジーニアスブースト、タベルナンテマニ、アフリカーナ。天才性を磨き上げる短期集中プログラム。",
   },
   {
     num: "VII.",
     en: "Support System",
     jp: "サポートシステム",
+    tagline: "Continuum",
     desc: "毎月のアップデート説明会、毎週土曜の相談会、新月・満月の評価ワーク、24h メールサポート。",
   },
 ];
@@ -116,8 +123,11 @@ export default function SessionsPage() {
                   <h2 className="serif-en text-3xl sm:text-4xl font-light">
                     {p.en}
                   </h2>
-                  <p className="serif-jp text-xs tracking-[0.25em] text-muted mt-2 mb-6">
+                  <p className="serif-jp text-xs tracking-[0.25em] text-muted mt-2">
                     {p.jp}
+                  </p>
+                  <p className="serif-en text-sm italic text-accent tracking-wide mt-4 mb-6">
+                    — {p.tagline} —
                   </p>
                   <p className="serif-jp text-base text-muted leading-[2]">
                     {p.desc}

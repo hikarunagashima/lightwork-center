@@ -135,6 +135,38 @@ export default function FirstVisitPage() {
         </div>
       </section>
 
+      {/* Selection — 受け入れの基準 */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">
+          <div>
+            <p className="serif-en text-xs tracking-[0.35em] text-muted">
+              IV. &nbsp; SELECTION
+            </p>
+            <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
+              受け入れの基準
+            </p>
+          </div>
+          <div className="serif-jp text-base leading-[2.1]">
+            <p>
+              すべての方を受け入れているわけではない。
+              健康状態、動機、現在のサポート体制、
+              そして場と人の相性を、
+              事前のお話合いの中で丁寧に確認している。
+            </p>
+            <p className="mt-8">
+              状況によっては、率直にお断りすることがある。
+              それはあなたを守るためであり、
+              この実践そのものを守るためでもある。
+            </p>
+            <p className="mt-8">
+              全申請を、私自身が個別に拝読する。
+              形式的な受付フォームではなく、
+              ひとつの対話の入口として書いてくださってよい。
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Cautions */}
       <section className="py-24 px-6 border-t border-border bg-paper-deep/30">
         <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">

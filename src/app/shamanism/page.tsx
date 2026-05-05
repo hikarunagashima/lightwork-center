@@ -70,11 +70,21 @@ export default function ShamanismPage() {
           </div>
           <div className="serif-jp text-base leading-[2.1]">
             <p>
-              ガボン共和国を中心に伝わる
               <strong className="font-medium">ブウィティ（Bwiti）</strong>
-              は、イボガを核とする精神伝統である。
-              ピグミー族から受け継がれたとされる起源を持ち、
-              現代では複数の系統（Missoko、Disumba、Fang）に分岐している。
+              ── ファング語で「死から戻ったもの」を意味する。
+              ガボン共和国を中心に伝わる、
+              イボガを核とした精神伝統である。
+            </p>
+            <p className="mt-8">
+              起源は中央アフリカの森に暮らすピグミー族（Babongo）にあるとされ、
+              数千年にわたり世代を超えて口頭で継承されてきた。
+              現代では Missoko、Disumba、Fang の三系統に分岐し、
+              それぞれが独自の儀式作法と楽器、歌、舞を保持している。
+            </p>
+            <p className="mt-8">
+              儀式を司る者は <strong className="font-medium">N&apos;ganga</strong>（霊的指導者）と呼ばれる。
+              長年の修行と先代からの直接の伝授を経て、
+              森の知恵と人の魂のあいだを取り次ぐ役割を担う。
             </p>
             <p className="mt-8">
               中心となるイニシエーション儀式では、
