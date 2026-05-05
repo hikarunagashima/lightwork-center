@@ -15,7 +15,7 @@ const MEDICINES = [
     jp: "イボガ",
     region: "Gabon, Central Africa",
     summary:
-      "ガボン共和国に自生するアポシナケア科の根。ブウィティ伝統の中心メディスン。アルカロイドのイボガインがBDNFの発現を促し、神経の修復・依存症治療への応用が現代の研究で進む。",
+      "ガボン共和国に自生するアポシナケア科の根。ブウィティ伝統の中心メディスン。アルカロイドのイボガインがBDNFの発現を促し、神経の修復・依存症治療への応用が現代の研究で進んでいます。",
   },
   {
     num: "II.",
@@ -24,7 +24,7 @@ const MEDICINES = [
     jp: "カンボ",
     region: "Amazon Basin",
     summary:
-      "アマゾンに生息するフィロメデューサ・バイカラー（ツリーフロッグ）の皮膚分泌物。dermorphin、deltorphinなどのbioactive peptidesを含む。地球最強の解毒剤と呼ばれ、感情体・肝機能の浄化に伝統的に用いられる。",
+      "アマゾンに生息するフィロメデューサ・バイカラー（ツリーフロッグ）の皮膚分泌物。dermorphin、deltorphinなどのbioactive peptidesを含みます。地球最強の解毒剤と呼ばれ、感情体・肝機能の浄化に伝統的に用いられています。",
   },
   {
     num: "III.",
@@ -33,7 +33,7 @@ const MEDICINES = [
     jp: "サナンガ",
     region: "Amazon",
     summary:
-      "アマゾン先住民の眼薬。イボガインを含む同じくアポシナケア科の植物由来。視力回復、眼精疲労、メンタルブロックの除去、松果体の浄化に伝統的に用いられる。",
+      "アマゾン先住民の眼薬。イボガインを含む、同じくアポシナケア科の植物に由来します。視力回復、眼精疲労、メンタルブロックの除去、松果体の浄化に伝統的に用いられています。",
   },
   {
     num: "IV.",
@@ -42,7 +42,7 @@ const MEDICINES = [
     jp: "ハペ",
     region: "Amazon",
     summary:
-      "アマゾン先住民の鼻薬。神聖タバコ（Nicotiana rusticaなど）と多種の薬草・木の灰のブレンド。意識を研ぎ澄ませ、瞑想・祈りの場を整える。",
+      "アマゾン先住民の鼻薬。神聖タバコ（Nicotiana rusticaなど）と多種の薬草・木の灰のブレンドです。意識を研ぎ澄ませ、瞑想・祈りの場を整えます。",
   },
   {
     num: "V.",
@@ -189,10 +189,10 @@ export default function MedicinesPage() {
           Medicines.
         </h1>
         <p className="serif-jp text-base text-muted leading-[2.1] mt-14 max-w-2xl editorial-in-delay-2">
-          それぞれのメディスンには、固有の周波数と文化的文脈がある。
+          それぞれのメディスンには、固有の周波数と文化的文脈があります。
           ブウィティ、アマゾン、地中海 ──
           地球の異なる場所で人類が育ててきた知恵を、
-          現代の意識の課題に向かって編み直す。
+          現代の意識の課題に向かって編み直しています。
         </p>
       </section>
 
@@ -244,8 +244,8 @@ export default function MedicinesPage() {
           </h2>
           <p className="serif-jp text-sm text-muted mb-16 max-w-2xl leading-[2]">
             伝統の中で受け継がれてきた知恵が、
-            神経科学・薬理学の言語でも検証されつつある。
-            主要な査読論文を以下に列挙する。
+            神経科学・薬理学の言語でも検証されつつあります。
+            主要な査読論文を以下にご紹介します。
           </p>
 
           <ul className="divide-y divide-border-soft">

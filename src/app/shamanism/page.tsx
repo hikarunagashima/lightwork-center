@@ -22,7 +22,7 @@ export default function ShamanismPage() {
         </h1>
         <p className="serif-jp text-base text-muted leading-[2.1] mt-14 editorial-in-delay-2">
           シャーマニズムは、人類が一万年以上にわたって受け継いできた、
-          意識を扱う最古の体系である。
+          意識を扱う最古の体系です。
         </p>
       </section>
 
@@ -39,16 +39,16 @@ export default function ShamanismPage() {
           </div>
           <div className="serif-jp text-base leading-[2.1]">
             <p>
-              シャーマニズムは、特定の宗教ではない。
+              シャーマニズムは、特定の宗教ではありません。
               シベリアからアマゾン、アフリカ、北極圏、日本列島まで、
               地球上の独立した文化の中で並行的に発生し、
-              共通する技法を持っていた人類最古の意識実践である。
+              共通する技法を持っていた、人類最古の意識実践です。
             </p>
             <p className="mt-8">
               シャーマンとは、変性意識状態を意図的に扱い、
-              個人と共同体の癒し・予言・調停を担う者の総称である。
+              個人と共同体の癒し・予言・調停を担う者の総称です。
               太鼓、植物、断食、儀式 ──
-              手段は文化ごとに違うが、目指すものはひとつ。
+              手段は文化ごとに違いますが、目指すものはひとつ。
               <strong className="font-medium">
                 目に見える世界と、目に見えない世界の境界に立つこと。
               </strong>
@@ -71,33 +71,33 @@ export default function ShamanismPage() {
           <div className="serif-jp text-base leading-[2.1]">
             <p>
               <strong className="font-medium">ブウィティ（Bwiti）</strong>
-              ── ファング語で「死から戻ったもの」を意味する。
+              ── ファング語で「死から戻ったもの」を意味します。
               ガボン共和国を中心に伝わる、
-              イボガを核とした精神伝統である。
+              イボガを核とした精神伝統です。
             </p>
             <p className="mt-8">
               起源は中央アフリカの森に暮らすピグミー族（Babongo）にあるとされ、
-              数千年にわたり世代を超えて口頭で継承されてきた。
+              数千年にわたり世代を超えて口頭で継承されてきました。
               現代では Missoko、Disumba、Fang の三系統に分岐し、
-              それぞれが独自の儀式作法と楽器、歌、舞を保持している。
+              それぞれが独自の儀式作法と楽器、歌、舞を保持しています。
             </p>
             <p className="mt-8">
-              儀式を司る者は <strong className="font-medium">N&apos;ganga</strong>（霊的指導者）と呼ばれる。
+              儀式を司る者は <strong className="font-medium">N&apos;ganga</strong>（霊的指導者）と呼ばれます。
               長年の修行と先代からの直接の伝授を経て、
-              森の知恵と人の魂のあいだを取り次ぐ役割を担う。
+              森の知恵と人の魂のあいだを取り次ぐ役割を担います。
             </p>
             <p className="mt-8">
               中心となるイニシエーション儀式では、
-              受ける者は「死と再生」を疑似的に体験する。
+              受ける者は「死と再生」を疑似的に体験します。
               数十時間にわたるイボガの効果のなかで、
               先祖との対話、自己の影との直面、
-              そして自身の天命の確認が行われる。
+              そして自身の天命の確認が行われます。
             </p>
             <p className="mt-8">
               ブウィティは「治療」ではなく
               <strong className="font-medium">「人になる」</strong>
-              ための儀式と位置づけられている。
-              本来あるべき自己への帰還 ── それがイボガの本義である。
+              ための儀式と位置づけられています。
+              本来あるべき自己への帰還 ── それがイボガの本義です。
             </p>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function ShamanismPage() {
             <p>
               現代の神経科学は、
               シャーマンが何千年も前から知っていたことを、
-              ようやく自分たちの言語で語り始めている。
+              ようやく自分たちの言語で語り始めています。
               意識とは脳の出力ではなく、
               脳が観測する「場」そのものであるという仮説。
               物質と意識は地続きであり、
@@ -127,13 +127,14 @@ export default function ShamanismPage() {
             <p className="mt-8">
               本実践では、ブウィティ伝統の儀式と、
               量子意識・神経可塑性のフレームワークを統合し、
-              受け取る者の状態と意図に合わせて、
-              メディスンと祈りを編んでいる。
+              受け取る方の状態と意図に合わせて、
+              メディスンと祈りを編んでいます。
             </p>
             <p className="mt-8">
               科学と伝統は対立するものではなく、
-              同じ現象を異なる言語で語っているにすぎない。
-              ニューロンの可塑性も、魂の修復も、観測の角度が違うだけの一つの出来事である。
+              同じ現象を異なる言語で語っているにすぎません。
+              ニューロンの可塑性も、魂の修復も、
+              観測の角度が違うだけの、ひとつの出来事です。
             </p>
           </div>
         </div>
@@ -143,7 +144,7 @@ export default function ShamanismPage() {
       <section className="py-32 px-6 border-t border-border">
         <div className="max-w-[760px] mx-auto text-center">
           <p className="serif-jp text-base text-muted leading-[2.1] mb-12">
-            体験することは、読むことよりも雄弁である。
+            体験することは、読むことよりも雄弁です。
           </p>
           <div className="flex flex-wrap gap-x-10 gap-y-4 justify-center items-center">
             <Link
