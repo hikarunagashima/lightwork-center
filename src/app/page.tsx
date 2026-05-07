@@ -129,6 +129,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* VOICES — pull quote */}
+      <section className="py-32 sm:py-40 px-6 border-t border-border bg-paper-deep/40">
+        <div className="max-w-[860px] mx-auto text-center">
+          <p className="serif-en text-xs tracking-[0.45em] text-muted mb-12">
+            ⊙ &nbsp; VOICES
+          </p>
+          <div className="text-accent text-3xl serif-en mb-6 leading-none" aria-hidden>
+            &ldquo;
+          </div>
+          <blockquote>
+            <p className="serif-jp text-2xl sm:text-3xl md:text-4xl font-light leading-[1.7] mb-12">
+              全てと和解できたとき、
+              <br />
+              自分を本当の意味で愛せるようになった。
+            </p>
+            <p className="serif-jp text-base sm:text-lg text-muted leading-[1.9] mb-10 max-w-xl mx-auto">
+              3ヶ月以上進まなかったのに、1日でできた。
+              <br />
+              自分の人生が音を立てて動いていくのがわかった。
+            </p>
+            <footer className="serif-en text-xs tracking-[0.3em] text-muted">
+              20代 &nbsp;·&nbsp; アーティスト・経営者
+              <br className="sm:hidden" />
+              <span className="hidden sm:inline"> &nbsp;|&nbsp; </span>
+              <span className="sm:ml-2 italic">Adam Kadmon Initiation</span>
+            </footer>
+          </blockquote>
+          <div className="mt-14">
+            <Link
+              href="/voices"
+              className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground transition-colors border-b border-mute-soft hover:border-foreground pb-1"
+            >
+              Read&nbsp;All&nbsp;Voices →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* INQUIRE */}
       <section className="py-32 sm:py-40 px-6 border-t border-border">
         <div className="max-w-[760px] mx-auto text-center">
