@@ -196,6 +196,60 @@ export default function MedicinesPage() {
         </p>
       </section>
 
+      {/* Safety — 必ず最初に読まれるべき注意 */}
+      <section className="py-20 px-6 border-t border-border bg-paper-deep/30">
+        <div className="max-w-[860px] mx-auto">
+          <p className="serif-en text-xs tracking-[0.45em] text-accent mb-6">
+            ⊙ &nbsp; SAFETY
+          </p>
+          <h2 className="serif-en text-2xl sm:text-3xl font-light mb-2">
+            Before You Read.
+          </h2>
+          <p className="serif-jp text-xs tracking-[0.3em] text-muted mb-12">
+            読み進めるまえに
+          </p>
+
+          <div className="serif-jp text-base text-foreground leading-[2.1] space-y-8">
+            <p>
+              これらのメディスンは、長い伝統と現代の科学的検証に支えられた一方で、
+              固有の<strong className="font-medium">リスク</strong>を伴います。
+            </p>
+            <p>
+              とりわけ<strong className="font-medium">イボガ</strong>は、
+              心臓のQT間隔への影響により、
+              ごく稀ながら重篤な不整脈や突然死の症例が国内外で報告されています。
+              また、SSRI・MAOI・抗不整脈薬・抗精神病薬・血圧降下薬など、
+              一部の薬剤との併用で強い相互作用を生じることがあります。
+            </p>
+            <p>
+              本ページに記載されているメディスンは、
+              <strong className="font-medium">
+                必ず、資格を持つシャーマン、もしくは安全な体制が整えられた場のもとでのみ
+              </strong>
+              受け取られるべきものです。
+            </p>
+            <p className="serif-jp text-base text-foreground">
+              <strong className="font-medium">
+                ご自身で個人的に入手・調合・使用なさることは、
+                いかなる場合も絶対におやめください。
+              </strong>
+              事前のスクリーニング（健康状態・服薬歴・既往症の確認）は、
+              本セレモニーの安全性を担保する、最も重要な工程です。
+            </p>
+            <p className="text-sm text-muted pt-4 border-t border-border-soft">
+              詳しい禁忌・注意事項については、
+              <Link
+                href="/first-visit"
+                className="underline underline-offset-4 hover:text-foreground transition-colors"
+              >
+                First&nbsp;Visit
+              </Link>
+              のページをご一読ください。
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Medicine cards */}
       <section className="py-16 px-6 border-t border-border">
         <div className="max-w-[1100px] mx-auto space-y-20">
