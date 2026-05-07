@@ -106,6 +106,7 @@ function Footer() {
           </div>
           <nav className="flex flex-wrap gap-x-12 gap-y-4 md:justify-end content-start">
             <Link href="/about" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">About</Link>
+            <Link href="/voices" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Voices</Link>
             <Link href="/sessions" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Sessions</Link>
             <Link href="/medicines" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Medicines</Link>
             <Link href="/shamanism" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Shamanism</Link>
