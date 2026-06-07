@@ -28,6 +28,19 @@ const jsonOutput = args.has("--json");
 const topicId = getArg("--topic-id");
 const audience = getArg("--audience");
 const stage = getArg("--stage");
+const medicine = getArg("--medicine");
+
+const medicineIdPrefixes = {
+  "ハペ": "hape",
+  "hape": "hape",
+  "Hape": "hape",
+  "サナンガ": "sananga",
+  "sananga": "sananga",
+  "Sananga": "sananga",
+  "カンボ": "kambo",
+  "kambo": "kambo",
+  "Kambo": "kambo",
+};
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
@@ -107,6 +120,10 @@ function applyFilters(topics) {
     if (topicId && topic.id !== topicId) return false;
     if (audience && topic.audience !== audience) return false;
     if (stage && topic.funnelStage !== stage) return false;
+    if (medicine) {
+      const prefix = medicineIdPrefixes[medicine] || medicine;
+      if (!topic.id.startsWith(`${prefix}-`)) return false;
+    }
     return true;
   });
 }

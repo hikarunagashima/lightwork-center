@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "eslint",
     "check:compliance": "node scripts/check-compliance.mjs",
-    "content:select-topic": "node scripts/content-pipeline/select-topic.mjs"
+    "content:select-topic": "node scripts/content-pipeline/select-topic.mjs",
+    "content:make-brief": "node scripts/content-pipeline/make-brief.mjs",
+    "content:draft": "node scripts/content-pipeline/draft-article.mjs",
+    "content:check-article": "node scripts/content-pipeline/check-article.mjs",
+    "content:batch-briefs": "node scripts/content-pipeline/batch-briefs.mjs"
   },
   "dependencies": {
     "@vercel/og": "^0.11.1",
