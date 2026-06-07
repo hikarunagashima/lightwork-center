@@ -1,0 +1,238 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { TELEGRAM_URL, absoluteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Medicine Wheel",
+  description:
+    "メディスンホイールプログラム。サナンガ、ハペ、カンボ、イボガ系の伝統的実践を、事前対話と安全確認のもとで組み合わせる中核プログラム。",
+  alternates: {
+    canonical: "/medicine-wheel",
+  },
+  openGraph: {
+    title: "Medicine Wheel | LIGHTWORK CENTER",
+    description:
+      "記事で扱う思想を実践の場へ移すための中核プログラム。",
+    url: absoluteUrl("/medicine-wheel"),
+    type: "website",
+  },
+};
+
+const PROGRAMS = [
+  {
+    num: "I.",
+    en: "Ceremony",
+    jp: "セレモニー",
+    body: "サナンガとハペを中心に、短時間の祈りと集中の場を作る入口プログラム。",
+  },
+  {
+    num: "II.",
+    en: "Lifestyle",
+    jp: "生活習慣の見直し",
+    body: "イボガチップのディエタを含む30日間の実践。瞑想の習慣化と、日々の選択を見つめ直す時間。",
+  },
+  {
+    num: "III.",
+    en: "Cleansing",
+    jp: "伝統的な浄化",
+    body: "カンボを含むセレモニー。アマゾンの先住民の伝統では「地球最強の解毒剤」とも称されてきた。実施可否は事前確認を前提にする。",
+  },
+  {
+    num: "IV.",
+    en: "Retreat",
+    jp: "リトリート",
+    body: "カンボリトリート、イボガフラッドドーズを含む集中的な場。イボガ系の実践は海外合法法域でのみ扱う。",
+  },
+  {
+    num: "V.",
+    en: "Microdosing",
+    jp: "21日間プログラム",
+    body: "サナンガ、ハペ、ノーマルイボガ、シリアンルーなどを、意図と状態に合わせて21日単位で組み立てる。",
+  },
+  {
+    num: "VI.",
+    en: "Power Up",
+    jp: "パワーアップ",
+    body: "ワイルドバッチ等を含む短期集中プログラム。天才性・天職・表現の軸を見つめるための設計。",
+  },
+  {
+    num: "VII.",
+    en: "Support System",
+    jp: "継続サポート",
+    body: "毎月のアップデート説明会、毎週土曜の相談会、新月・満月の評価ワーク、24時間メールサポート。",
+  },
+];
+
+const PACKS = [
+  {
+    en: "Economy",
+    jp: "エコノミーパック",
+    body: "カンボリトリート、シリアンルーフラッドドーズ、21日プログラム3種を組み合わせる。",
+  },
+  {
+    en: "Adam Kadmon",
+    jp: "アダムカドモン覚醒 イニシエーションパック",
+    body: "ワイルドイボガフラッドドーズ、アダムカドモン覚醒ワーク、21日プログラム4種。四泊五日。",
+  },
+  {
+    en: "VIP",
+    jp: "VIPコース",
+    body: "Adam Kadmonに加えて、イボガTA、エリプティカ、三泊四日のリトリート3回を含む。",
+  },
+];
+
+export default function MedicineWheelPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Medicine Wheel",
+    description:
+      "シャーマニズムの伝統的実践を、事前対話と安全確認のもとで組み合わせる中核プログラム。",
+    provider: {
+      "@type": "Organization",
+      name: "LIGHTWORK CENTER",
+    },
+    areaServed: "Japan",
+    url: absoluteUrl("/medicine-wheel"),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <section className="px-6 pt-28 pb-20">
+        <div className="max-w-[1180px] mx-auto">
+          <p className="serif-en text-xs tracking-[0.45em] text-muted">
+            ⊙ &nbsp; PROGRAMME
+          </p>
+          <h1 className="serif-en text-6xl sm:text-8xl font-light leading-[0.98] mt-8">
+            Medicine
+            <br />
+            Wheel
+          </h1>
+          <p className="serif-jp text-xs tracking-[0.35em] text-muted mt-6">
+            メディスンホイール プログラム
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 mt-16">
+            <div>
+              <p className="serif-en text-xs tracking-[0.32em] text-accent">
+                SANANGA → HAPÉ → KAMBÔ → IBOGA
+              </p>
+            </div>
+            <div>
+              <p className="serif-jp text-base sm:text-lg leading-[2.15] text-muted">
+                メディスンホイールは、サナンガ、ハペ、カンボ、イボガ系の実践を、
+                受け取る方の意図と状態に合わせて編む中核プログラムです。
+                目的は効果の約束ではなく、魂の軸を見つめ直すための場を設計すること。
+              </p>
+              <p className="serif-jp text-sm leading-[2] text-muted mt-8">
+                イボガインは日本で麻薬指定されています。イボガ系の実践は、
+                イボガインが規制されていない海外合法法域でのみ扱います。
+                本プログラムは医療行為ではなく、診断・治療・処方は行いません。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-20 border-t border-border">
+        <div className="max-w-[1180px] mx-auto">
+          <p className="serif-en text-xs tracking-[0.45em] text-muted">
+            ⊙ &nbsp; SEVEN PROGRAMMES
+          </p>
+          <div className="mt-12 space-y-0 border-t border-border">
+            {PROGRAMS.map((program) => (
+              <article
+                key={program.en}
+                className="grid grid-cols-1 md:grid-cols-[120px_0.6fr_1fr] gap-6 md:gap-10 py-10 border-b border-border-soft"
+              >
+                <p className="serif-en text-sm tracking-[0.35em] text-accent">
+                  {program.num}
+                </p>
+                <div>
+                  <h2 className="serif-en text-3xl sm:text-4xl font-light">
+                    {program.en}
+                  </h2>
+                  <p className="serif-jp text-sm tracking-[0.16em] text-muted mt-2">
+                    {program.jp}
+                  </p>
+                </div>
+                <p className="serif-jp text-sm sm:text-base leading-[2] text-muted">
+                  {program.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-20 border-t border-border">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20">
+            <div>
+              <p className="serif-en text-xs tracking-[0.45em] text-muted">
+                ⊙ &nbsp; PACKS
+              </p>
+              <h2 className="serif-jp text-3xl font-light leading-[1.6] mt-8">
+                意図と段階に合わせて、組み合わせる。
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
+              {PACKS.map((pack) => (
+                <article key={pack.en} className="bg-background p-8 min-h-[280px]">
+                  <p className="serif-en text-xs tracking-[0.3em] text-accent">
+                    {pack.en}
+                  </p>
+                  <h3 className="serif-jp text-xl font-light leading-[1.7] mt-5">
+                    {pack.jp}
+                  </h3>
+                  <p className="serif-jp text-sm leading-[2] text-muted mt-8">
+                    {pack.body}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-20 border-t border-border">
+        <div className="max-w-[900px] mx-auto">
+          <div className="border border-border p-8 sm:p-12 bg-paper-deep">
+            <p className="serif-en text-xs tracking-[0.35em] text-accent">
+              APPLY
+            </p>
+            <h2 className="serif-jp text-3xl sm:text-4xl font-light leading-[1.55] mt-6">
+              まずは、意図と状態を聞かせてください。
+            </h2>
+            <p className="serif-jp text-sm sm:text-base leading-[2.1] text-muted mt-8">
+              料金・日程・実施可否は、事前の対話と安全確認を踏まえて個別にご案内します。
+              既往症、服薬、心身の状態によっては、参加をおすすめしない場合があります。
+            </p>
+            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
+              <a
+                href={TELEGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-event="outbound_click"
+                className="serif-en text-sm tracking-[0.25em] border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
+              >
+                Contact on Telegram
+              </a>
+              <Link
+                href="/articles"
+                className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground border-b border-mute-soft hover:border-foreground py-4 transition-colors"
+              >
+                Read Articles
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

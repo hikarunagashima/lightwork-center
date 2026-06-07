@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import Link from "next/link";
 import Header from "@/components/Header";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -25,22 +26,18 @@ const notoSansJp = Noto_Sans_JP({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lightworkcenter.com";
-
 export const metadata: Metadata = {
   title: {
-    default: "LIGHTWORK CENTER — ライトワークセンター",
+    default: SITE_TITLE,
     template: "%s | LIGHTWORK CENTER",
   },
-  description:
-    "国際認定イボガシャーマンによる、伝統と量子意識のセレモニー。ガボン共和国ブウィティの系譜と現代の神経科学的知見を統合した、魂のためのメディスン。",
+  description: SITE_DESCRIPTION,
   manifest: "/manifest.json",
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
-    title: "LIGHTWORK CENTER — ライトワークセンター",
-    description:
-      "国際認定イボガシャーマンによる、伝統と量子意識のセレモニー。",
-    siteName: "LIGHTWORK CENTER",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
     locale: "ja_JP",
     type: "website",
     images: [
@@ -48,15 +45,14 @@ export const metadata: Metadata = {
         url: `/api/og?title=${encodeURIComponent("LIGHTWORK CENTER")}`,
         width: 1200,
         height: 630,
-        alt: "LIGHTWORK CENTER — ライトワークセンター",
+        alt: SITE_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LIGHTWORK CENTER — ライトワークセンター",
-    description:
-      "国際認定イボガシャーマンによる、伝統と量子意識のセレモニー。",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [`/api/og?title=${encodeURIComponent("LIGHTWORK CENTER")}`],
   },
 };
@@ -74,13 +70,14 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <p className="serif-en text-2xl sm:text-3xl tracking-[0.15em] font-light">
-              LIGHTWORK&nbsp;CENTER
+              LIGHTWORK&nbsp;JOURNAL
             </p>
             <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
-              ライトワークセンター
+              ネオシャーマニズム編集室
             </p>
-            <p className="serif-jp text-xs tracking-[0.2em] text-muted mt-8">
-              国際認定 イボガ シャーマン
+            <p className="serif-jp text-xs tracking-[0.2em] text-muted mt-8 max-w-md leading-[2]">
+              国際認定イボガシャーマンの一次体験と専門編集で、
+              古代の祈りをAI時代の言葉へ翻訳するメディア。
             </p>
             <p className="serif-en text-[10px] tracking-[0.35em] text-muted mt-2">
               2025&nbsp;OSAKA-KANSAI&nbsp;EXPO &nbsp;·&nbsp; SPEAKER
@@ -105,12 +102,10 @@ function Footer() {
             </div>
           </div>
           <nav className="flex flex-wrap gap-x-12 gap-y-4 md:justify-end content-start">
+            <Link href="/articles" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Articles</Link>
+            <Link href="/category/neo-shamanism" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Shelves</Link>
+            <Link href="/medicine-wheel" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Medicine Wheel</Link>
             <Link href="/about" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">About</Link>
-            <Link href="/voices" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Voices</Link>
-            <Link href="/sessions" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Sessions</Link>
-            <Link href="/medicines" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Medicines</Link>
-            <Link href="/shamanism" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Shamanism</Link>
-            <Link href="/first-visit" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">First Visit</Link>
             <Link href="/contact" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Contact</Link>
           </nav>
         </div>

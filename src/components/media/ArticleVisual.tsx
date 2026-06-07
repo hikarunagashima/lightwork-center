@@ -1,0 +1,58 @@
+import type { Article, CategoryId } from "@/lib/content";
+import { getCategoryLabel } from "@/lib/content";
+
+// カテゴリごとに生成り×墨×金の範囲で微差をつけ、識別性とブランド統一を両立する
+const TINTS: Record<CategoryId, { base: string; glow: string }> = {
+  "neo-shamanism": { base: "#F1EBDD", glow: "#C8A96E" },
+  "quantum-consciousness": { base: "#E8EDEE", glow: "#8FA6AC" },
+  resonance: { base: "#F1E7E1", glow: "#C2907A" },
+  practice: { base: "#EBEFE5", glow: "#9DAE82" },
+  kotodama: { base: "#EEE8EE", glow: "#A98FB0" },
+  "self-transcendence": { base: "#F2EADC", glow: "#CBA85F" },
+};
+
+type ArticleVisualProps = {
+  article: Article;
+  variant?: "card" | "featured";
+};
+
+export default function ArticleVisual({ article, variant = "card" }: ArticleVisualProps) {
+  const tint = TINTS[article.category] ?? TINTS["neo-shamanism"];
+  // ⊙ の光の位置を volume でシードし、各記事で異なる表情にする
+  const gx = 26 + ((article.volume * 17) % 50);
+  const gy = 28 + ((article.volume * 13) % 38);
+  const big = variant === "featured";
+
+  return (
+    <div
+      aria-hidden
+      className={`relative w-full overflow-hidden flex flex-col justify-between border border-border-soft ${
+        big ? "aspect-[16/11] min-h-[320px]" : "aspect-[3/2]"
+      }`}
+      style={{
+        background: `radial-gradient(circle at ${gx}% ${gy}%, ${tint.glow}66, transparent 58%), linear-gradient(135deg, ${tint.base}, var(--color-background) 74%)`,
+      }}
+    >
+      <div className="flex justify-end p-4 sm:p-6">
+        <span
+          className={`serif-en text-accent leading-none select-none ${big ? "text-6xl" : "text-4xl"}`}
+          style={{ opacity: 0.72 }}
+        >
+          ⊙
+        </span>
+      </div>
+      <div className="p-4 sm:p-6">
+        <p
+          className={`serif-en tracking-[0.32em] text-foreground/75 ${big ? "text-sm" : "text-xs"}`}
+        >
+          VOL.{String(article.volume).padStart(2, "0")}
+        </p>
+        <p
+          className={`serif-jp tracking-[0.16em] text-muted mt-1.5 ${big ? "text-sm" : "text-[11px]"}`}
+        >
+          {getCategoryLabel(article.category)}
+        </p>
+      </div>
+    </div>
+  );
+}

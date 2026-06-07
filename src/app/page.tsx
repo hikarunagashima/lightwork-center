@@ -1,196 +1,204 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import ArticleCard from "@/components/media/ArticleCard";
+import { CATEGORIES, getAllArticles, getFeaturedArticle } from "@/lib/content";
+import { SITE_DESCRIPTION, SITE_TITLE, absoluteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: absoluteUrl("/"),
+    type: "website",
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent("NEO SHAMANISM JOURNAL")}`,
+        width: 1200,
+        height: 630,
+        alt: "LIGHTWORK CENTER — Neo Shamanism Journal",
+      },
+    ],
+  },
+};
 
 export default function Home() {
-  return (
-    <div>
-      {/* HERO */}
-      <section className="min-h-[88vh] flex flex-col justify-center px-6 max-w-[1200px] mx-auto">
-        <p className="serif-en text-xs sm:text-sm tracking-[0.4em] text-muted editorial-in">
-          The Quantum Apothecary
-        </p>
-        <h1 className="serif-en text-6xl sm:text-8xl md:text-9xl font-light leading-[0.95] tracking-tight mt-8 editorial-in-delay-1">
-          Medicine
-          <br />
-          Wheel
-        </h1>
-        <div className="serif-jp text-base sm:text-lg text-muted max-w-xl leading-[2] mt-14 editorial-in-delay-2">
-          <p>
-            ガボン共和国に伝わるブウィティの系譜と、
-            独自に統合する量子意識のワーク。
-          </p>
-          <p className="mt-6">
-            物質と意識、神経と魂、過去と未来 ──
-            その境界を一度ほどき、
-            自身の中心へと戻るための一連の手続き。
-          </p>
-        </div>
-        <div className="mt-16 flex flex-wrap gap-x-10 gap-y-4 items-center editorial-in-delay-3">
-          <Link
-            href="/sessions"
-            className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-10 py-4 hover:bg-foreground hover:text-background transition-colors"
-          >
-            View&nbsp;Sessions
-          </Link>
-          <Link
-            href="/about"
-            className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground transition-colors py-4 border-b border-mute-soft hover:border-foreground"
-          >
-            About&nbsp;the&nbsp;Practitioner
-          </Link>
-        </div>
-      </section>
+  const articles = getAllArticles();
+  const featured = getFeaturedArticle();
+  const latest = articles.filter((article) => article.slug !== featured.slug).slice(0, 4);
 
-      {/* LINEAGE */}
-      <section className="py-32 sm:py-40 px-6 border-t border-border">
-        <div className="max-w-[860px] mx-auto text-center">
-          <p className="serif-en text-xs tracking-[0.45em] text-muted mb-10">
-            ⊙ &nbsp; LINEAGE
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "LIGHTWORK CENTER",
+    url: absoluteUrl("/"),
+    description: SITE_DESCRIPTION,
+    inLanguage: "ja-JP",
+    publisher: {
+      "@type": "Organization",
+      name: "LIGHTWORK CENTER",
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Manifesto Hero — 魂の入口 */}
+      <section className="min-h-[90vh] flex flex-col justify-center px-6 border-b border-border">
+        <div className="max-w-[900px] mx-auto w-full">
+          <p className="serif-en text-xs tracking-[0.45em] text-muted editorial-in">
+            ⊙ &nbsp; LIGHTWORK JOURNAL
           </p>
-          <h2 className="serif-jp text-2xl sm:text-3xl md:text-4xl font-light leading-[1.7]">
-            一万年の伝統と、
-            <br />
-            現代の科学が交差する場所。
-          </h2>
-          <div className="serif-jp text-sm sm:text-base text-muted leading-[2.1] mt-14 max-w-xl mx-auto">
-            <p>
-              国際認定 イボガ シャーマン。
-              ガボン共和国ブウィティ伝統の正統な系譜を受け継ぎ、
-              現代の神経科学・量子意識のワークと統合する実践。
+          <div className="mt-12 space-y-7 sm:space-y-9">
+            <p className="serif-jp text-2xl sm:text-4xl font-light leading-[1.7] editorial-in-delay-1">
+              ここは、何かになるための場所じゃない。
+              <br />
+              すでに、そうだったことを、思い出す場所だ。
             </p>
-            <p className="mt-6 serif-en text-xs tracking-[0.3em]">
-              2025 OSAKA-KANSAI EXPO &nbsp;|&nbsp; SPEAKER
+            <p className="serif-jp text-lg sm:text-2xl font-light leading-[1.95] text-muted editorial-in-delay-2">
+              探していたものは、ずっと、あなたと一緒にいた。
+              <br />
+              その光に、もう一度、気づくために。
             </p>
+          </div>
+          <div className="mt-16 flex flex-wrap gap-x-10 gap-y-4 items-center editorial-in-delay-3">
+            <Link
+              href="/manifesto"
+              className="serif-en text-sm tracking-[0.25em] border border-foreground px-9 py-4 hover:bg-foreground hover:text-background transition-colors"
+            >
+              Read&nbsp;the&nbsp;Letter
+            </Link>
+            <Link
+              href="/articles"
+              className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground border-b border-mute-soft hover:border-foreground py-4 transition-colors"
+            >
+              Articles&nbsp;↓
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* MEDICINES */}
-      <section className="py-32 sm:py-40 px-6 border-t border-border">
-        <div className="max-w-[1200px] mx-auto">
-          <p className="serif-en text-xs tracking-[0.45em] text-muted mb-6">
-            ⊙ &nbsp; MEDICINES
-          </p>
-          <h2 className="serif-en text-3xl sm:text-5xl font-light mb-2">
-            The Plant Medicines.
-          </h2>
-          <p className="serif-jp text-xs tracking-[0.3em] text-muted mb-16">
-            プラント メディスン
-          </p>
+      <section className="px-6 pt-24 pb-20 sm:pt-32">
+        <div className="max-w-[1320px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-20 items-end">
+            <div>
+              <p className="serif-en text-xs sm:text-sm tracking-[0.42em] text-muted editorial-in">
+                NEO SHAMANISM JOURNAL
+              </p>
+              <h1 className="serif-jp text-5xl sm:text-7xl lg:text-8xl font-light leading-[1.18] mt-8 editorial-in-delay-1">
+                古代の祈りを、
+                <br />
+                AI時代の言葉へ。
+              </h1>
+            </div>
+            <div className="editorial-in-delay-2">
+              <p className="serif-jp text-base sm:text-lg leading-[2.15] text-muted">
+                シャーマニズム、植物メディスン、量子意識、AIを横断する編集メディア。
+                国際認定イボガシャーマンの一次体験と専門編集で、
+                「本物」を探す人が静かに深く読める場を作ります。
+              </p>
+              <div className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
+                <Link
+                  href="/articles"
+                  className="serif-en text-sm tracking-[0.25em] border border-foreground px-7 py-3 hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Read Articles
+                </Link>
+                <Link
+                  href="/medicine-wheel"
+                  className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground border-b border-mute-soft hover:border-foreground py-3 transition-colors"
+                >
+                  Medicine Wheel
+                </Link>
+              </div>
+            </div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
-            {[
-              {
-                num: "I.",
-                en: "Iboga",
-                jp: "イボガ",
-                desc: "ガボン共和国に自生する根の医学。BDNFの発現を促し、神経の修復と依存症治療への応用が現代の研究で進んでいます。Bwiti伝統の中心メディスン。",
-              },
-              {
-                num: "II.",
-                en: "Kambô",
-                jp: "カンボ",
-                desc: "アマゾンに棲むフィロメデューサ・バイカラーというカエルの皮膚分泌物。地球最強の解毒剤と呼ばれ、感情体・肝機能の浄化に用いられています。",
-              },
-              {
-                num: "III.",
-                en: "Sananga & Hapé",
-                jp: "サナンガ・ハペ",
-                desc: "アマゾン先住民の眼薬と鼻薬。松果体の浄化、視力回復、メンタルブロックの除去に伝統的に用いられてきました。",
-              },
-            ].map((m) => (
-              <article
-                key={m.en}
-                className="bg-background p-10 sm:p-14 flex flex-col"
+          <div className="mt-20 sm:mt-28">
+            <ArticleCard article={featured} featured />
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24 border-t border-border">
+        <div className="max-w-[1320px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20">
+            <div>
+              <p className="serif-en text-xs tracking-[0.45em] text-muted">
+                ⊙ &nbsp; LATEST
+              </p>
+              <h2 className="serif-jp text-3xl font-light leading-[1.6] mt-8">
+                連載を、読み物として編む。
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
+              {latest.map((article) => (
+                <ArticleCard key={article.slug} article={article} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24 border-t border-border">
+        <div className="max-w-[1320px] mx-auto">
+          <p className="serif-en text-xs tracking-[0.45em] text-muted">
+            ⊙ &nbsp; CURATION SHELVES
+          </p>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-border">
+            {CATEGORIES.map((category) => (
+              <Link
+                key={category.id}
+                href={`/category/${category.id}`}
+                className="bg-background p-8 sm:p-10 min-h-[260px] flex flex-col justify-between hover:bg-paper-deep transition-colors"
               >
-                <p className="serif-en text-sm tracking-[0.35em] text-accent mb-6">
-                  {m.num}
+                <div>
+                  <p className="serif-en text-xs tracking-[0.3em] text-accent">
+                    {category.en}
+                  </p>
+                  <h2 className="serif-jp text-2xl font-light mt-5">
+                    {category.label}
+                  </h2>
+                </div>
+                <p className="serif-jp text-sm leading-[2] text-muted mt-10">
+                  {category.description}
                 </p>
-                <h3 className="serif-en text-3xl sm:text-4xl font-light mb-2">
-                  {m.en}
-                </h3>
-                <p className="serif-jp text-xs tracking-[0.25em] text-muted mb-8">
-                  {m.jp}
-                </p>
-                <p className="serif-jp text-sm text-muted leading-[2]">
-                  {m.desc}
-                </p>
-              </article>
+              </Link>
             ))}
           </div>
-
-          <div className="mt-14">
-            <Link
-              href="/medicines"
-              className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground transition-colors border-b border-mute-soft hover:border-foreground pb-1"
-            >
-              All&nbsp;Medicines &amp; Research →
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* VOICES — pull quote */}
-      <section className="py-32 sm:py-40 px-6 border-t border-border bg-paper-deep/40">
-        <div className="max-w-[860px] mx-auto text-center">
-          <p className="serif-en text-xs tracking-[0.45em] text-muted mb-12">
-            ⊙ &nbsp; VOICES
+      <section className="px-6 py-24 border-t border-border">
+        <div className="max-w-[980px] mx-auto text-center">
+          <p className="serif-en text-xs tracking-[0.45em] text-muted">
+            ⊙ &nbsp; PROGRAMME
           </p>
-          <div className="text-accent text-3xl serif-en mb-6 leading-none" aria-hidden>
-            &ldquo;
-          </div>
-          <blockquote>
-            <p className="serif-jp text-2xl sm:text-3xl md:text-4xl font-light leading-[1.7] mb-12">
-              全てと和解できたとき、
-              <br />
-              自分を本当の意味で愛せるようになった。
-            </p>
-            <p className="serif-jp text-base sm:text-lg text-muted leading-[1.9] mb-10 max-w-xl mx-auto">
-              3ヶ月以上進まなかったのに、1日でできた。
-              <br />
-              自分の人生が音を立てて動いていくのがわかった。
-            </p>
-            <footer className="serif-en text-xs tracking-[0.3em] text-muted">
-              20代 &nbsp;·&nbsp; アーティスト・経営者
-              <br className="sm:hidden" />
-              <span className="hidden sm:inline"> &nbsp;|&nbsp; </span>
-              <span className="sm:ml-2 italic">Adam Kadmon Initiation</span>
-            </footer>
-          </blockquote>
-          <div className="mt-14">
-            <Link
-              href="/voices"
-              className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground transition-colors border-b border-mute-soft hover:border-foreground pb-1"
-            >
-              Read&nbsp;All&nbsp;Voices →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* INQUIRE */}
-      <section className="py-32 sm:py-40 px-6 border-t border-border">
-        <div className="max-w-[760px] mx-auto text-center">
-          <p className="serif-en text-xs tracking-[0.45em] text-muted mb-10">
-            ⊙ &nbsp; INQUIRE
-          </p>
-          <h2 className="serif-jp text-2xl sm:text-3xl font-light leading-[1.8] mb-10">
-            セレモニーへの参加は、
-            <br />
-            事前のお話合いから始まります。
+          <h2 className="serif-jp text-3xl sm:text-5xl font-light leading-[1.55] mt-8">
+            読むだけでは終わらない人へ。
           </h2>
-          <p className="serif-jp text-sm text-muted max-w-lg mx-auto leading-[2] mb-14">
-            お一人おひとりの状況に合わせた準備が必要なため、
-            一度ご状況を伺ったうえでご案内しています。
-            まずはお問い合わせください。
+          <p className="serif-jp text-base leading-[2.15] text-muted mt-10">
+            メディスンホイールは、記事で扱う思想を実践の場へ移すための中核プログラムです。
+            医療行為ではなく、シャーマニズムの伝統的実践として、
+            受け取る方の意図と状態を確認しながら進めます。
           </p>
           <Link
-            href="/contact"
-            className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-12 py-4 hover:bg-foreground hover:text-background transition-colors"
+            href="/medicine-wheel"
+            className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-8 py-4 mt-12 hover:bg-foreground hover:text-background transition-colors"
           >
-            Apply
+            View Medicine Wheel
           </Link>
         </div>
       </section>
-    </div>
+    </>
   );
 }

@@ -4,11 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 
 const NAV_ITEMS = [
+  { href: "/articles", label: "Articles" },
+  { href: "/category/neo-shamanism", label: "Shelves" },
+  { href: "/medicine-wheel", label: "Medicine Wheel" },
   { href: "/about", label: "About" },
-  { href: "/voices", label: "Voices" },
-  { href: "/sessions", label: "Sessions" },
-  { href: "/medicines", label: "Medicines" },
-  { href: "/shamanism", label: "Shamanism" },
 ];
 
 export default function Header() {
@@ -23,8 +22,8 @@ export default function Header() {
           onClick={() => setIsOpen(false)}
         >
           <span className="text-xl text-accent select-none" aria-hidden>⊙</span>
-          <span className="serif-en text-sm tracking-[0.25em] font-light">
-            LIGHTWORK&nbsp;CENTER
+          <span className="serif-en text-sm tracking-[0.2em] font-light">
+            LIGHTWORK&nbsp;JOURNAL
           </span>
         </Link>
 
@@ -40,7 +39,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/contact"
+            href="/medicine-wheel"
             className="serif-en text-xs tracking-[0.25em] border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors"
           >
             Apply
@@ -84,7 +83,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/contact"
+            href="/medicine-wheel"
             className="serif-en text-sm tracking-[0.25em] border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors inline-block w-fit"
             onClick={() => setIsOpen(false)}
           >
