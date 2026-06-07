@@ -70,7 +70,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <p className="serif-en text-2xl sm:text-3xl tracking-[0.15em] font-light">
-              LIGHTWORK&nbsp;JOURNAL
+              LIGHTWORK&nbsp;CENTER
             </p>
             <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
               ネオシャーマニズム編集室

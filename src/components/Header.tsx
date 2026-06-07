@@ -23,7 +23,7 @@ export default function Header() {
         >
           <span className="text-xl text-accent select-none" aria-hidden>⊙</span>
           <span className="serif-en text-sm tracking-[0.2em] font-light">
-            LIGHTWORK&nbsp;JOURNAL
+            LIGHTWORK&nbsp;CENTER
           </span>
         </Link>
 

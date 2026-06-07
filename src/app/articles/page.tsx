@@ -35,8 +35,8 @@ export default function ArticlesPage() {
             ネオシャーマニズム。
           </h1>
           <p className="serif-jp text-base sm:text-lg leading-[2.15] text-muted max-w-2xl mt-12">
-            朝陽の音声配信を光さんが解き、現代のポップカルチャーから
-            シャーマニズム、量子意識、AI、メディスンホイールへ橋を架ける連載です。
+            現代のポップカルチャーを入り口に、
+            シャーマニズム、量子意識、AI、メディスンホイールへ橋を架ける読み物です。
           </p>
         </div>
       </section>

@@ -56,7 +56,7 @@ export default function Home() {
       <section className="min-h-[90vh] flex flex-col justify-center px-6 border-b border-border">
         <div className="max-w-[900px] mx-auto w-full">
           <p className="serif-en text-xs tracking-[0.45em] text-muted editorial-in">
-            ⊙ &nbsp; LIGHTWORK JOURNAL
+            ⊙ &nbsp; LIGHTWORK CENTER
           </p>
           <div className="mt-12 space-y-7 sm:space-y-9">
             <p className="serif-jp text-2xl sm:text-4xl font-light leading-[1.7] editorial-in-delay-1">

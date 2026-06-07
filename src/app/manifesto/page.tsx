@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "何をしたら、よくなれるんだろう。── 探していたものは、ずっと、自分の中にいた。この場所をつくった理由。",
   alternates: { canonical: "/manifesto" },
   openGraph: {
-    title: "自分への手紙 — LIGHTWORK JOURNAL",
+    title: "自分への手紙 — LIGHTWORK CENTER",
     description: "ここに置く言葉は、情報じゃない。あなたへの手紙だ。",
     url: absoluteUrl("/manifesto"),
     type: "article",
