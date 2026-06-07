@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "ガボン共和国ブウィティ伝統の系譜と、現代の量子意識のワークを統合する実践者について。2025年大阪・関西万博 登壇。",
+    "ガボン共和国ブウィティ伝統の系譜と、現代の量子意識のワークを統合する実践者について。",
 };
 
 export default function AboutPage() {
@@ -148,15 +148,11 @@ export default function AboutPage() {
               III. &nbsp; RECOGNITION
             </p>
             <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
-              登壇・認定
+              認定・系譜
             </p>
           </div>
           <div className="serif-jp text-base leading-[2.1]">
             <ul className="space-y-6">
-              <li className="flex flex-col">
-                <span className="serif-en text-xs tracking-[0.3em] text-accent">2025</span>
-                <span className="mt-1">大阪・関西万博 登壇</span>
-              </li>
               <li className="flex flex-col">
                 <span className="serif-en text-xs tracking-[0.3em] text-accent">CERTIFIED</span>
                 <span className="mt-1">国際認定 イボガ シャーマン（Bwiti系統）</span>

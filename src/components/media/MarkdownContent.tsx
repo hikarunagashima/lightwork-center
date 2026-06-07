@@ -7,53 +7,70 @@ type Block =
   | { type: "quote"; lines: string[] }
   | { type: "list"; ordered: boolean; items: string[] }
   | { type: "table"; rows: string[][] }
+  | { type: "youtube"; id: string; caption: string }
   | { type: "rule" };
 
+function youtubeId(url: string): string | null {
+  const m = url.match(
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]+)/,
+  );
+  return m ? m[1] : null;
+}
+
+function renderLink(label: string, href: string, key: number): ReactNode {
+  const isExternal = href.startsWith("http://") || href.startsWith("https://");
+  const className =
+    "border-b border-accent text-foreground hover:text-accent transition-colors break-words";
+  if (isExternal) {
+    return (
+      <a
+        key={`l-${key}`}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {label}
+      </a>
+    );
+  }
+  return (
+    <Link key={`l-${key}`} href={href} className={className}>
+      {label}
+    </Link>
+  );
+}
+
+// 太字(中にリンク可) / Markdownリンク / 生URL を処理。**[label](url)** のネストもOK。
 function parseInline(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
-  const pattern = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
+  const pattern = /(\*\*.+?\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s)]+)/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
+  let key = 0;
 
   while ((match = pattern.exec(text)) !== null) {
     if (match.index > lastIndex) {
       nodes.push(text.slice(lastIndex, match.index));
     }
-
     const token = match[0];
-    if (token.startsWith("**")) {
+
+    if (token.startsWith("**") && token.endsWith("**")) {
       nodes.push(
-        <strong key={`${token}-${match.index}`} className="font-semibold text-foreground">
-          {token.slice(2, -2)}
+        <strong key={`b-${key++}`} className="font-semibold text-foreground">
+          {parseInline(token.slice(2, -2))}
         </strong>,
       );
-    } else {
+    } else if (token.startsWith("[")) {
       const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
       if (linkMatch) {
-        const [, label, href] = linkMatch;
-        const isExternal = href.startsWith("http://") || href.startsWith("https://");
-        nodes.push(
-          isExternal ? (
-            <a
-              key={`${href}-${match.index}`}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-b border-accent text-foreground hover:text-accent transition-colors"
-            >
-              {label}
-            </a>
-          ) : (
-            <Link
-              key={`${href}-${match.index}`}
-              href={href}
-              className="border-b border-accent text-foreground hover:text-accent transition-colors"
-            >
-              {label}
-            </Link>
-          ),
-        );
+        nodes.push(renderLink(linkMatch[1], linkMatch[2], key++));
+      } else {
+        nodes.push(token);
       }
+    } else {
+      // 生URL → 自動ハイパーリンク
+      nodes.push(renderLink(token, token, key++));
     }
 
     lastIndex = pattern.lastIndex;
@@ -79,6 +96,34 @@ function splitTableRow(line: string) {
     .map((cell) => cell.trim());
 }
 
+// 行から YouTube リンク/URL を検出（**[label](yt)** や 生URL も拾う）
+function detectYoutube(
+  line: string,
+): { id: string; caption: string; before: string } | null {
+  const linked = line.match(
+    /\[([^\]]+)\]\((https?:\/\/[^\s)]*(?:youtube\.com|youtu\.be)[^\s)]*)\)/,
+  );
+  if (linked) {
+    const id = youtubeId(linked[2]);
+    if (id) {
+      const before = line
+        .slice(0, linked.index)
+        .replace(/\*+$/g, "")
+        .replace(/[:：]\s*$/g, "")
+        .trim();
+      return { id, caption: linked[1], before };
+    }
+  }
+  const bare = line.match(
+    /^\*{0,2}(https?:\/\/[^\s)]*(?:youtube\.com|youtu\.be)[^\s)]*)\*{0,2}$/,
+  );
+  if (bare) {
+    const id = youtubeId(bare[1]);
+    if (id) return { id, caption: "", before: "" };
+  }
+  return null;
+}
+
 function parseMarkdown(markdown: string): Block[] {
   const lines = markdown.split(/\r?\n/);
   const blocks: Block[] = [];
@@ -94,6 +139,15 @@ function parseMarkdown(markdown: string): Block[] {
 
     if (line === "---") {
       blocks.push({ type: "rule" });
+      index += 1;
+      continue;
+    }
+
+    // YouTube 埋め込み（動画URLは埋め込み・それ以外のURLはハイパーリンク）
+    const yt = detectYoutube(line);
+    if (yt) {
+      if (yt.before) blocks.push({ type: "paragraph", text: yt.before });
+      blocks.push({ type: "youtube", id: yt.id, caption: yt.caption });
       index += 1;
       continue;
     }
@@ -159,7 +213,8 @@ function parseMarkdown(markdown: string): Block[] {
         current.startsWith(">") ||
         current.startsWith("|") ||
         current.match(/^[-*]\s+/) ||
-        current.match(/^\d+\.\s+/)
+        current.match(/^\d+\.\s+/) ||
+        detectYoutube(current)
       ) {
         break;
       }
@@ -235,6 +290,28 @@ export default function MarkdownContent({ markdown }: { markdown: string }) {
                 <li key={`${index}-${itemIndex}`}>{parseInline(item)}</li>
               ))}
             </List>
+          );
+        }
+
+        if (block.type === "youtube") {
+          return (
+            <figure key={index} className="my-12">
+              <div className="aspect-video w-full overflow-hidden border border-border-soft bg-paper-deep">
+                <iframe
+                  src={`https://www.youtube.com/embed/${block.id}`}
+                  title={block.caption || "YouTube video"}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+              {block.caption ? (
+                <figcaption className="serif-jp text-xs text-muted mt-3 text-center">
+                  {block.caption}
+                </figcaption>
+              ) : null}
+            </figure>
           );
         }
 
