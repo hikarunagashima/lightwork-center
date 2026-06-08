@@ -19,7 +19,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## 絶対制約（YMYL・薬機法）
 - `knowledge/compliance.md` を必ず読み、NG表現（治る/効く/治療/診断/依存症の克服/最強の解毒剤/肝機能増強 等）を**絶対に書かない**
-- イボガイン＝日本で麻薬指定。国内施術を想起させない。海外合法法域での実施という事実関係を守る
+- イボガ／イボガインは日本の麻薬別表第1に非掲載＝麻薬指定なし（2026-06 一次情報確認）。「麻薬指定」「海外法域でのみ」と書かない。医療効果の断定（治る/効く/治療/改善 等）は薬機法上 禁止。施術場所・可否は断定せず事前の安全確認を前提に
 - 全記事に一次情報 or 一次資料の出典＋著者情報。トーン＝`knowledge/voice.md`、法令＝`knowledge/compliance.md`
 - `/medicine-wheel` の内容・送客文言は `knowledge/medicine-wheel.md` の事実のみを根拠にする。プログラム内容・価格を**捏造しない**
 
