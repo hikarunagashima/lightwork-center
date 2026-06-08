@@ -182,6 +182,66 @@ const ARTICLE_INDEX: Omit<Article, "body" | "readingMinutes" | "title">[] = [
   },
 ];
 
+const ARTICLES_DIR = path.join(process.cwd(), "content", "articles");
+
+function fmValue(frontmatter: string, key: string): string {
+  const quoted = frontmatter.match(new RegExp(`^${key}:\\s*"([^"]*)"\\s*$`, "m"));
+  if (quoted) return quoted[1];
+  const bare = frontmatter.match(new RegExp(`^${key}:\\s*(.+?)\\s*$`, "m"));
+  return bare ? bare[1].trim() : "";
+}
+
+function parseTags(frontmatter: string): string[] {
+  const inline = frontmatter.match(/^tags:\s*\[(.*)\]\s*$/m);
+  if (inline) {
+    return inline[1]
+      .split(",")
+      .map((t) => t.trim().replace(/^["']|["']$/g, ""))
+      .filter(Boolean);
+  }
+  const block = frontmatter.match(/^tags:\s*\n((?:[ \t]*-[ \t]*.+\n?)+)/m);
+  if (block) {
+    return block[1]
+      .split(/\n/)
+      .map((l) => l.replace(/^[ \t]*-[ \t]*/, "").trim().replace(/^["']|["']$/g, ""))
+      .filter(Boolean);
+  }
+  return [];
+}
+
+// content/articles/*.md（frontmatter付き）を走査。status: published のみ返す（draftは非表示）。
+function readArticleFiles(): Article[] {
+  if (!fs.existsSync(ARTICLES_DIR)) return [];
+  const out: Article[] = [];
+  for (const file of fs.readdirSync(ARTICLES_DIR)) {
+    if (!file.endsWith(".md")) continue;
+    const raw = fs.readFileSync(path.join(ARTICLES_DIR, file), "utf8");
+    const m = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    if (!m) continue;
+    const fm = m[1];
+    const body = m[2].trim();
+    if (fmValue(fm, "status") !== "published") continue;
+    const volumeRaw = fmValue(fm, "volume");
+    out.push({
+      slug: fmValue(fm, "slug") || file.replace(/\.md$/, ""),
+      sourceFile: `articles/${file}`,
+      volume: volumeRaw ? Number(volumeRaw) : 0,
+      title: fmValue(fm, "title"),
+      description: fmValue(fm, "description"),
+      category: fmValue(fm, "category") as CategoryId,
+      tags: parseTags(fm),
+      publishedAt: fmValue(fm, "publishedAt"),
+      updatedAt: fmValue(fm, "updatedAt") || fmValue(fm, "publishedAt"),
+      youtubeUrl: fmValue(fm, "youtubeUrl"),
+      funnelStage: (fmValue(fm, "funnelStage") || "TOFU") as FunnelStage,
+      primaryKeyword: fmValue(fm, "primaryKeyword"),
+      body,
+      readingMinutes: estimateReadingMinutes(body),
+    });
+  }
+  return out;
+}
+
 function readSource(fileName: string) {
   return fs.readFileSync(path.join(SOURCE_DIR, fileName), "utf8");
 }
@@ -204,16 +264,33 @@ function estimateReadingMinutes(body: string) {
 }
 
 export function getAllArticles(): Article[] {
-  return ARTICLE_INDEX.map((meta) => {
+  // 既存7記事（_source + ARTICLE_INDEX）。常に published 扱い。
+  const indexed: Article[] = ARTICLE_INDEX.map((meta) => {
     const { title, body } = splitTitleAndBody(readSource(meta.sourceFile));
-
     return {
       ...meta,
       title,
       body,
       readingMinutes: estimateReadingMinutes(body),
     };
-  }).sort((a, b) => b.volume - a.volume);
+  });
+
+  // content/articles/*.md（frontmatter・status:published のみ）をマージ。slug重複は既存優先。
+  const seen = new Set(indexed.map((a) => a.slug));
+  const merged = [...indexed];
+  for (const article of readArticleFiles()) {
+    if (!seen.has(article.slug)) {
+      merged.push(article);
+      seen.add(article.slug);
+    }
+  }
+
+  return merged.sort((a, b) => {
+    if (a.publishedAt !== b.publishedAt) {
+      return a.publishedAt < b.publishedAt ? 1 : -1;
+    }
+    return b.volume - a.volume;
+  });
 }
 
 export function getArticleBySlug(slug: string) {
