@@ -172,7 +172,7 @@ export default function FirstVisitPage() {
         <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">
           <div>
             <p className="serif-en text-xs tracking-[0.35em] text-muted">
-              IV. &nbsp; CAUTIONS
+              V. &nbsp; CAUTIONS
             </p>
             <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
               ご注意
@@ -201,18 +201,56 @@ export default function FirstVisitPage() {
         </div>
       </section>
 
+      {/* Not yet is also an answer */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-[860px] mx-auto grid grid-cols-1 md:grid-cols-[180px_1fr] gap-12">
+          <div>
+            <p className="serif-en text-xs tracking-[0.35em] text-muted">
+              VI. &nbsp; NOT YET
+            </p>
+            <p className="serif-jp text-xs tracking-[0.3em] text-muted mt-3">
+              「まだ早い」も、正解
+            </p>
+          </div>
+          <div className="serif-jp text-base leading-[2.1]">
+            <p>
+              ここまで読んで、「自分にはまだ早い」と感じたなら——
+              それは、正しい判断かもしれません。
+              私たちは、「今は申し込まない」という静かな結論も、
+              申し込みと同じくらい大切な到達点だと考えています。
+            </p>
+            <p className="mt-8">
+              迷っているあいだは、
+              <Link href="/guide" className="border-b border-foreground hover:text-accent hover:border-accent transition-colors">
+                連載記事
+              </Link>
+              を読んでいてください。費用も登録も要りません。
+              何度でも来て、何も決めずに帰れる場所として、置いてあります。
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-32 px-6 border-t border-border">
         <div className="max-w-[760px] mx-auto text-center">
           <p className="serif-jp text-base text-muted leading-[2.1] mb-12">
             ご質問やご不安は、お話合いの場で何でもお聞きください。
           </p>
-          <Link
-            href="/contact"
-            className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-10 py-4 hover:bg-foreground hover:text-background transition-colors"
-          >
-            Apply
-          </Link>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+            <Link
+              href="/contact"
+              className="serif-en inline-block text-sm tracking-[0.25em] border border-foreground px-10 py-4 hover:bg-foreground hover:text-background transition-colors"
+            >
+              Apply
+            </Link>
+            <Link
+              href="/faq"
+              className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground border-b border-mute-soft hover:border-foreground py-4 transition-colors"
+            >
+              よくある質問
+            </Link>
+          </div>
         </div>
       </section>
     </div>

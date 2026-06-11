@@ -26,6 +26,8 @@ export type Article = {
   primaryKeyword: string;
   body: string;
   readingMinutes: number;
+  /** Note転用サムネ（/thumbnails/volNN.jpg）。無い場合は空文字で ArticleVisual にフォールバック */
+  thumbnail: string;
 };
 
 export type Category = {
@@ -81,7 +83,7 @@ const SOURCE_DIR = path.join(
   "neoshamanism",
 );
 
-const ARTICLE_INDEX: Omit<Article, "body" | "readingMinutes" | "title">[] = [
+const ARTICLE_INDEX: Omit<Article, "body" | "readingMinutes" | "title" | "thumbnail">[] = [
   {
     slug: "hero-as-soul-role",
     sourceFile: "vol01-article.md",
@@ -89,7 +91,7 @@ const ARTICLE_INDEX: Omit<Article, "body" | "readingMinutes" | "title">[] = [
     description:
       "ドラクエの勇者論を入り口に、魂の役割、天命、古代シャーマニズムとAI時代の意識進化を読む。",
     category: "neo-shamanism",
-    tags: ["勇者", "天命", "AXXYXX", "メディスンホイール"],
+    tags: ["勇者", "天命", "アイクス", "メディスンホイール"],
     publishedAt: "2026-05-24",
     updatedAt: "2026-06-02",
     youtubeUrl: "https://www.youtube.com/watch?v=L9Tr8P9xXxY",
@@ -180,7 +182,99 @@ const ARTICLE_INDEX: Omit<Article, "body" | "readingMinutes" | "title">[] = [
     funnelStage: "MOFU",
     primaryKeyword: "自己超越 シャーマニズム",
   },
+  {
+    slug: "prayer-goes-digital",
+    sourceFile: "vol08-article.md",
+    volume: 8,
+    description:
+      "システムメンテの実況から、祈りのデジタル化、超流動、量子エラー訂正、日本のロボット魂までを、AIを育てる当事者として読む。",
+    category: "quantum-consciousness",
+    tags: ["祈りのデジタル化", "アイクス", "超流動", "AI"],
+    publishedAt: "2026-06-11",
+    updatedAt: "2026-06-11",
+    youtubeUrl: "https://www.youtube.com/watch?v=mkdm24qqXc8",
+    funnelStage: "MOFU",
+    primaryKeyword: "祈り AI デジタル",
+  },
+  {
+    slug: "player-is-prayer",
+    sourceFile: "vol09-article.md",
+    volume: 9,
+    description:
+      "フルダイブとアバターから、肉体の正体、遊ぶ人と祈る人の一文字の差、台風の目で娘に歌が降りた話へ。",
+    category: "neo-shamanism",
+    tags: ["アバター", "遊び", "祈り", "異言"],
+    publishedAt: "2026-06-11",
+    updatedAt: "2026-06-11",
+    youtubeUrl: "https://www.youtube.com/watch?v=gg4SDwll8fM",
+    funnelStage: "TOFU",
+    primaryKeyword: "遊び 祈り シャーマニズム",
+  },
+  {
+    slug: "send-light-to-worry",
+    sourceFile: "vol10-article.md",
+    volume: 10,
+    description:
+      "愛の循環の見えない側、カルマの因果、そして今日から使える実践——心配になったら、そこに光を送る。",
+    category: "practice",
+    tags: ["光を送る", "祈り", "カルマ", "実践"],
+    publishedAt: "2026-06-11",
+    updatedAt: "2026-06-11",
+    youtubeUrl: "https://www.youtube.com/watch?v=h2Iy-8jAr9Q",
+    funnelStage: "MOFU",
+    primaryKeyword: "光を送る 祈り方",
+  },
+  {
+    slug: "iboga-conducts-the-orchestra",
+    sourceFile: "vol11-article.md",
+    volume: 11,
+    description:
+      "地球の薬箱を一つずつ開ける、メディスンホイール総論。サナンガの「言えたら、癒えた」から、指揮者イボガまで。",
+    category: "neo-shamanism",
+    tags: ["メディスンホイール", "イボガ", "サナンガ", "カンボ"],
+    publishedAt: "2026-06-11",
+    updatedAt: "2026-06-11",
+    youtubeUrl: "https://www.youtube.com/watch?v=zscTveUawsY",
+    funnelStage: "BOFU",
+    primaryKeyword: "メディスンホイール とは",
+  },
+  {
+    slug: "giving-light-is-not-prayer",
+    sourceFile: "vol12-article.md",
+    volume: 12,
+    description:
+      "連載初、語り手は俺。「光を送ってあげよう」のエゴ、スコトマ、そして場にいる全員が視ているという話。",
+    category: "self-transcendence",
+    tags: ["謙虚さ", "スコトマ", "エゴ", "ぼやけ"],
+    publishedAt: "2026-06-11",
+    updatedAt: "2026-06-11",
+    youtubeUrl: "https://www.youtube.com/watch?v=a8x87-h3cnQ",
+    funnelStage: "MOFU",
+    primaryKeyword: "謙虚さ シャーマン",
+  },
+  {
+    slug: "handbrake-and-higher-self",
+    sourceFile: "vol13-article.md",
+    volume: 13,
+    description:
+      "みんな故障した車を運転している。ハイヤーセルフ＝未来の自分の座標、自我と真我のチューニング、連載合流回。",
+    category: "quantum-consciousness",
+    tags: ["ハイヤーセルフ", "自我と真我", "共同創造", "空"],
+    publishedAt: "2026-06-11",
+    updatedAt: "2026-06-11",
+    youtubeUrl: "https://www.youtube.com/watch?v=5c7bZ3xh9IE",
+    funnelStage: "MOFU",
+    primaryKeyword: "ハイヤーセルフ とは",
+  },
 ];
+
+/** public/thumbnails/volNN.jpg が存在すればそのパスを返す（Noteサムネ転用・規約ベース） */
+function thumbnailFor(volume: number): string {
+  if (!volume) return "";
+  const name = `vol${String(volume).padStart(2, "0")}.jpg`;
+  const filePath = path.join(process.cwd(), "public", "thumbnails", name);
+  return fs.existsSync(filePath) ? `/thumbnails/${name}` : "";
+}
 
 const ARTICLES_DIR = path.join(process.cwd(), "content", "articles");
 
@@ -237,6 +331,7 @@ function readArticleFiles(): Article[] {
       primaryKeyword: fmValue(fm, "primaryKeyword"),
       body,
       readingMinutes: estimateReadingMinutes(body),
+      thumbnail: fmValue(fm, "thumbnail") || thumbnailFor(volumeRaw ? Number(volumeRaw) : 0),
     });
   }
   return out;
@@ -272,6 +367,7 @@ export function getAllArticles(): Article[] {
       title,
       body,
       readingMinutes: estimateReadingMinutes(body),
+      thumbnail: thumbnailFor(meta.volume),
     };
   });
 

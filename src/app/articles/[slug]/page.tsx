@@ -34,6 +34,8 @@ export async function generateMetadata({
     return {};
   }
 
+  const ogImage = article.thumbnail || `/api/og?title=${encodeURIComponent(article.title)}`;
+
   return {
     title: article.title,
     description: article.description,
@@ -51,7 +53,7 @@ export async function generateMetadata({
       tags: article.tags,
       images: [
         {
-          url: `/api/og?title=${encodeURIComponent(article.title)}`,
+          url: ogImage,
           width: 1200,
           height: 630,
           alt: article.title,
@@ -62,7 +64,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: article.title,
       description: article.description,
-      images: [`/api/og?title=${encodeURIComponent(article.title)}`],
+      images: [ogImage],
     },
   };
 }

@@ -200,6 +200,41 @@ export default function MedicineWheelPage() {
         </div>
       </section>
 
+      {/* 深く知る・不安に答える */}
+      <section className="px-6 py-20 border-t border-border">
+        <div className="max-w-[900px] mx-auto">
+          <p className="serif-en text-xs tracking-[0.35em] text-muted">
+            LEARN &amp; TRUST
+          </p>
+          <h2 className="serif-jp text-2xl sm:text-3xl font-light leading-[1.6] mt-6">
+            急いで決めなくていいように、読むものを置いています。
+          </h2>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
+            <Link href="/guide" className="group bg-background p-8 hover:bg-paper-deep/40 transition-colors">
+              <p className="serif-en text-xs tracking-[0.3em] text-accent">READING GUIDE</p>
+              <p className="serif-jp text-lg font-light mt-4 group-hover:text-accent transition-colors">連載の歩き方</p>
+              <p className="serif-jp text-sm leading-[2] text-muted mt-4">
+                全13回の解説連載を、いまの自分に合う入口から。読むだけで帰っていい場所です。
+              </p>
+            </Link>
+            <Link href="/first-visit" className="group bg-background p-8 hover:bg-paper-deep/40 transition-colors">
+              <p className="serif-en text-xs tracking-[0.3em] text-accent">SAFETY</p>
+              <p className="serif-jp text-lg font-light mt-4 group-hover:text-accent transition-colors">初めての方へ・安全について</p>
+              <p className="serif-jp text-sm leading-[2] text-muted mt-4">
+                当日の流れ、受け入れの基準、禁忌事項、統合。お断りすることがある理由も、ここに書いています。
+              </p>
+            </Link>
+            <Link href="/faq" className="group bg-background p-8 hover:bg-paper-deep/40 transition-colors">
+              <p className="serif-en text-xs tracking-[0.3em] text-accent">FAQ</p>
+              <p className="serif-jp text-lg font-light mt-4 group-hover:text-accent transition-colors">よくある質問</p>
+              <p className="serif-jp text-sm leading-[2] text-muted mt-4">
+                怖い、痛い、法律は、宗教なの、まだ早い——正直に答えます。
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="px-6 py-20 border-t border-border">
         <div className="max-w-[900px] mx-auto">
           <div className="border border-border p-8 sm:p-12 bg-paper-deep">
