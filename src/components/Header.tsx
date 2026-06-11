@@ -5,8 +5,9 @@ import Link from "next/link";
 
 const NAV_ITEMS = [
   { href: "/articles", label: "Articles" },
-  { href: "/category/neo-shamanism", label: "Shelves" },
+  { href: "/guide", label: "Guide" },
   { href: "/medicine-wheel", label: "Medicine Wheel" },
+  { href: "/faq", label: "FAQ" },
   { href: "/about", label: "About" },
 ];
 
