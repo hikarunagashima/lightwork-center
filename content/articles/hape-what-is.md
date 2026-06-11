@@ -13,7 +13,7 @@ publishedAt: "2026-06-11"
 updatedAt: "2026-06-11"
 funnelStage: "MOFU"
 primaryKeyword: "ハペとは"
-status: "draft"
+status: "published"
 ---
 
 ## 思考が、止まらない
