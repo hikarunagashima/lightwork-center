@@ -117,7 +117,9 @@ export default function MedicineWheelPage() {
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/<\/script>/gi, "<\\/script>"),
+        }}
       />
 
       <section className="px-6 pt-28 pb-20">

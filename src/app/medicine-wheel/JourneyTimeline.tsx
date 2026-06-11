@@ -26,6 +26,11 @@ type Step = {
   barTone: "soft" | "mid" | "deep";
 };
 
+/** grid-row を明示し、auto-placement に依存しない（行=巡る順番） */
+function cell(colStart: number, colEnd: number, row: number) {
+  return { gridColumn: `${colStart} / ${colEnd}`, gridRow: row };
+}
+
 const STEPS: Step[] = [
   {
     index: "01",
@@ -89,7 +94,7 @@ const STEPS: Step[] = [
     role: "最深部の旅",
     phaseLabel: "最深部",
     barStart: 19,
-    barEnd: 24,
+    barEnd: 25,
     barTone: "deep",
   },
 ];
@@ -120,10 +125,6 @@ const TONE_CLASS: Record<Step["barTone"], string> = {
   deep: "bg-accent",
 };
 
-function col(start: number, end: number) {
-  return { gridColumn: `${start} / ${end}` };
-}
-
 export default function JourneyTimeline() {
   return (
     <section className="px-6 py-20 border-t border-border" aria-labelledby="journey-heading">
@@ -146,21 +147,21 @@ export default function JourneyTimeline() {
           </p>
         </div>
 
-        {/* ——— 帯チャート: 重なりながら進む五つの実践 ——— */}
-        <p className="serif-jp text-[11px] tracking-[0.25em] text-mute-soft mt-14 sm:hidden">
+        {/* ——— 帯チャート: 重なりながら進む五つの実践（視覚表現。本文は下の <ol>） ——— */}
+        <p aria-hidden className="serif-jp text-[11px] tracking-[0.25em] text-mute-soft mt-14 sm:hidden">
           横にスクロールして、旅の全体を見る →
         </p>
-        <div className="mt-4 sm:mt-16 overflow-x-auto pb-2" role="img" aria-label="五つのメディスンを重ねながら、カンボ、イボガへと進むタイムライン図">
+        <div aria-hidden className="mt-4 sm:mt-16 overflow-x-auto pb-2">
           <div className="min-w-[680px]">
             {/* フェーズ帯 */}
             <div
-              className="grid gap-y-3"
+              className="grid"
               style={{ gridTemplateColumns: `repeat(${GRID_COLS}, minmax(0, 1fr))` }}
             >
               {PHASES.map((phase) => (
                 <div
                   key={phase.num}
-                  style={col(phase.start, phase.end)}
+                  style={cell(phase.start, phase.end, 1)}
                   className="border-l border-border-soft pl-3 pb-4"
                 >
                   <p className="serif-en text-[10px] tracking-[0.3em] text-accent">
@@ -176,13 +177,13 @@ export default function JourneyTimeline() {
               ))}
             </div>
 
-            {/* メディスン帯 */}
+            {/* メディスン帯（行=巡る順番） */}
             <div
               className="grid gap-y-2 mt-2"
               style={{ gridTemplateColumns: `repeat(${GRID_COLS}, minmax(0, 1fr))` }}
             >
-              {STEPS.map((step) => (
-                <div key={step.en} style={col(step.barStart, step.barEnd)}>
+              {STEPS.map((step, i) => (
+                <div key={step.en} style={cell(step.barStart, step.barEnd, i + 1)}>
                   <div
                     className={`${TONE_CLASS[step.barTone]} h-9 flex items-center px-3`}
                   >
@@ -194,7 +195,10 @@ export default function JourneyTimeline() {
               ))}
 
               {/* その先へ */}
-              <div style={col(12, 25)} className="pt-3 text-right">
+              <div
+                style={cell(12, GRID_COLS + 1, STEPS.length + 1)}
+                className="pt-3 text-right"
+              >
                 <p className="serif-jp text-[11px] tracking-[0.15em] text-muted leading-[1.9] whitespace-nowrap">
                   → 内省 → フルリペア → <span className="text-accent">アダムカドモン</span>
                 </p>
