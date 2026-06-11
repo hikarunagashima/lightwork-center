@@ -1,64 +1,80 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TELEGRAM_URL, absoluteUrl } from "@/lib/site";
+import JourneyTimeline from "./JourneyTimeline";
 
 export const metadata: Metadata = {
   title: "Medicine Wheel",
   description:
-    "メディスンホイールプログラム。サナンガ、ハペ、カンボ、イボガ系の伝統的実践を、事前対話と安全確認のもとで組み合わせる中核プログラム。",
+    "メディスンホイールプログラム。サナンガ、ハペ、シリアンルー、カンボ、イボガの伝統的実践を、事前対話と安全確認のもとで巡らせる中核プログラム。",
   alternates: {
     canonical: "/medicine-wheel",
   },
   openGraph: {
     title: "Medicine Wheel | LIGHTWORK CENTER",
     description:
-      "記事で扱う思想を実践の場へ移すための中核プログラム。",
+      "五つのメディスンを巡り、神人合一へ向かうための地図。",
     url: absoluteUrl("/medicine-wheel"),
     type: "website",
   },
 };
 
+/** タイムライン（JourneyTimeline）のフェーズとの対応を phase に持つ */
 const PROGRAMS = [
   {
     num: "I.",
     en: "Ceremony",
     jp: "セレモニー",
+    medicines: ["サナンガ", "ハペ"],
+    phase: "日々の実践",
     body: "サナンガとハペを中心に、短時間の祈りと集中の場を作る入口プログラム。",
   },
   {
     num: "II.",
     en: "Lifestyle",
     jp: "生活習慣の見直し",
+    medicines: ["イボガチップ ディエタ30日"],
+    phase: "日々の実践",
     body: "イボガチップのディエタを含む30日間の実践。瞑想の習慣化と、日々の選択を見つめ直す時間。",
   },
   {
     num: "III.",
     en: "Cleansing",
     jp: "伝統的な浄化",
+    medicines: ["カンボ"],
+    phase: "浄化の節目",
     body: "カンボを含むセレモニー。アマゾンの先住民の伝統では「地球最強の解毒剤」とも称されてきた。実施可否は事前確認を前提にする。",
   },
   {
     num: "IV.",
     en: "Retreat",
     jp: "リトリート",
+    medicines: ["カンボ", "イボガ フラッドドーズ"],
+    phase: "最深部",
     body: "カンボリトリート、イボガフラッドドーズを含む集中的な場。実施可否は事前の安全確認を前提にする。",
   },
   {
     num: "V.",
     en: "Microdosing",
     jp: "21日間プログラム",
+    medicines: ["サナンガ", "ハペ", "ノーマルイボガ", "シリアンルー"],
+    phase: "日々の実践",
     body: "サナンガ、ハペ、ノーマルイボガ、シリアンルーなどを、意図と状態に合わせて21日単位で組み立てる。",
   },
   {
     num: "VI.",
     en: "Power Up",
     jp: "パワーアップ",
+    medicines: ["イボガ ワイルドバッチ等"],
+    phase: "最深部のその先",
     body: "ワイルドバッチ等を含む短期集中プログラム。天才性・天職・表現の軸を見つめるための設計。",
   },
   {
     num: "VII.",
     en: "Support System",
     jp: "継続サポート",
+    medicines: [],
+    phase: "全段階",
     body: "毎月のアップデート説明会、毎週土曜の相談会、新月・満月の評価ワーク、24時間メールサポート。",
   },
 ];
@@ -119,13 +135,15 @@ export default function MedicineWheelPage() {
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 mt-16">
             <div>
-              <p className="serif-en text-xs tracking-[0.32em] text-accent">
-                SANANGA → HAPÉ → KAMBÔ → IBOGA
+              <p className="serif-en text-xs tracking-[0.32em] text-accent leading-[2.2]">
+                SANANGA · HAPÉ · SYRIAN RUE
+                <br />
+                → KAMBÔ → IBOGA
               </p>
             </div>
             <div>
               <p className="serif-jp text-base sm:text-lg leading-[2.15] text-muted">
-                メディスンホイールは、サナンガ、ハペ、カンボ、イボガ系の実践を、
+                メディスンホイールは、サナンガ、ハペ、シリアンルー、カンボ、イボガの実践を、
                 受け取る方の意図と状態に合わせて編む中核プログラムです。
                 目的は効果の約束ではなく、魂の軸を見つめ直すための場を設計すること。
               </p>
@@ -139,10 +157,16 @@ export default function MedicineWheelPage() {
         </div>
       </section>
 
+      <JourneyTimeline />
+
       <section className="px-6 py-20 border-t border-border">
         <div className="max-w-[1180px] mx-auto">
           <p className="serif-en text-xs tracking-[0.45em] text-muted">
             ⊙ &nbsp; SEVEN PROGRAMMES
+          </p>
+          <p className="serif-jp text-sm leading-[2] text-muted mt-6 max-w-2xl">
+            旅の地図を、実際の場に落としたのが七つのプログラムです。
+            それぞれがタイムラインのどの段階にあたるかを添えています。
           </p>
           <div className="mt-12 space-y-0 border-t border-border">
             {PROGRAMS.map((program) => (
@@ -160,10 +184,27 @@ export default function MedicineWheelPage() {
                   <p className="serif-jp text-sm tracking-[0.16em] text-muted mt-2">
                     {program.jp}
                   </p>
+                  <p className="serif-jp text-[11px] tracking-[0.2em] text-accent mt-4">
+                    ⊙ {program.phase}
+                  </p>
                 </div>
-                <p className="serif-jp text-sm sm:text-base leading-[2] text-muted">
-                  {program.body}
-                </p>
+                <div>
+                  <p className="serif-jp text-sm sm:text-base leading-[2] text-muted">
+                    {program.body}
+                  </p>
+                  {program.medicines.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-5">
+                      {program.medicines.map((medicine) => (
+                        <span
+                          key={medicine}
+                          className="serif-jp text-[11px] tracking-[0.15em] text-muted border border-border px-3 py-1"
+                        >
+                          {medicine}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </article>
             ))}
           </div>
