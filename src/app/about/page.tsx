@@ -100,7 +100,7 @@ export default function AboutPage() {
             </p>
             <p className="mt-8">
               現代の神経科学・量子意識のワークと伝統の儀式を統合した実践として、
-              依存症からの回復、トラウマの解放、実存的危機への伴走、
+              依存との関係を見つめ直す時間、トラウマと向き合う実践、実存的危機への伴走、
               そして自身の天命に戻る一連の手続きを提供しています。
             </p>
           </div>
@@ -206,10 +206,10 @@ export default function AboutPage() {
               Apply
             </Link>
             <Link
-              href="/sessions"
+              href="/medicine-wheel"
               className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground transition-colors py-4 border-b border-mute-soft hover:border-foreground"
             >
-              View&nbsp;Sessions
+              Medicine&nbsp;Wheel
             </Link>
           </div>
         </div>
