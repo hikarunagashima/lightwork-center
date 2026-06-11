@@ -166,10 +166,10 @@ export default function VoicesPage() {
               Apply
             </Link>
             <Link
-              href="/sessions"
+              href="/medicine-wheel"
               className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground transition-colors py-4 border-b border-mute-soft hover:border-foreground"
             >
-              View&nbsp;Sessions
+              Medicine&nbsp;Wheel
             </Link>
           </div>
         </div>

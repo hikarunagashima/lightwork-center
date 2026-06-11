@@ -211,7 +211,7 @@ export default function MedicinesPage() {
 
           <div className="serif-jp text-base text-foreground leading-[2.1] space-y-8">
             <p>
-              これらのメディスンは、長い伝統と現代の科学的検証に支えられた一方で、
+              これらのメディスンは、長い伝統に根ざし、現代でも研究が続けられている一方で、
               固有の<strong className="font-medium">リスク</strong>を伴います。
             </p>
             <p>
