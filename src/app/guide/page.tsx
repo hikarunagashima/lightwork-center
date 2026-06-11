@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ArticleCard from "@/components/media/ArticleCard";
-import { getAllArticles, type Article } from "@/lib/content";
+import { getAllArticles, type Article, articleKicker } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Reading Guide — 連載の歩き方",
@@ -105,7 +105,7 @@ export default function GuidePage() {
                           className="group flex items-baseline gap-3"
                         >
                           <span className="serif-en text-[11px] tracking-[0.25em] text-accent shrink-0">
-                            VOL.{String(article.volume).padStart(2, "0")}
+                            {articleKicker(article)}
                           </span>
                           <span className="serif-jp text-sm leading-[1.8] border-b border-transparent group-hover:border-foreground group-hover:text-accent transition-colors">
                             {article.title}

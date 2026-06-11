@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getAllArticles } from "@/lib/content";
 
 /**
  * The Journey — メディスンホイールのタイムライン
@@ -20,6 +21,8 @@ type Step = {
   body: string;
   role: string;
   phaseLabel: string;
+  /** 解説記事の規約slug（{medicine}-what-is）。published になると自動でリンク化 */
+  articleSlug: string;
   /** 帯チャートの位置（1〜24グリッド） */
   barStart: number;
   barEnd: number; // exclusive
@@ -41,6 +44,7 @@ const STEPS: Step[] = [
     body: "アマゾン先住民の点眼のメディスン。数分の強い灼熱感とともに、長く言えなかった感情が声になる——悲しみが浄化されていくと、シャーマニズムの伝承で語られてきました。丁寧に進めるなら、ホイールはここから始まります。",
     role: "感情の入口",
     phaseLabel: "日々の実践",
+    articleSlug: "sananga-what-is",
     barStart: 1,
     barEnd: 14,
     barTone: "soft",
@@ -54,6 +58,7 @@ const STEPS: Step[] = [
     body: "神聖タバコと薬草の灰をブレンドした嗅ぎ薬。思考のざわめきから離れ、瞑想状態へ入る扉と伝統の中で語られてきました。物質だけでは半分——祈りと儀式が乗って、はじめて全体になります。",
     role: "瞑想の扉",
     phaseLabel: "日々の実践",
+    articleSlug: "hape-what-is",
     barStart: 3,
     barEnd: 14,
     barTone: "soft",
@@ -67,6 +72,7 @@ const STEPS: Step[] = [
     body: "「テレパシン」と名づけられた成分（ハルミン）を含む、古代から伝わる薬用植物。深く潜る前に、心臓が自分の固有のリズムへ還っていく時間——イボガへの地ならしとして、伝承は位置づけてきました。",
     role: "深部への地ならし",
     phaseLabel: "日々の実践 → 地ならし",
+    articleSlug: "syrian-rue-what-is",
     barStart: 5,
     barEnd: 19,
     barTone: "mid",
@@ -80,6 +86,7 @@ const STEPS: Step[] = [
     body: "アマゾン先住民の伝統で「地球最強の解毒剤」と称されてきた、大型アオガエルの分泌物のメディスン。先住民が「パネマ」と呼ぶ淀みを払う浄化の節目です。実施可否は事前の安全確認を前提にします。",
     role: "浄化の節目",
     phaseLabel: "浄化",
+    articleSlug: "kambo-what-is",
     barStart: 14,
     barEnd: 19,
     barTone: "mid",
@@ -93,6 +100,7 @@ const STEPS: Step[] = [
     body: "中央アフリカ・ブウィティ伝統の中心。メディスンホイールの予言では、全地球のメディスンに司令を出す「指揮者」と語り継がれてきました。心電図検査を含む事前の安全確認を必須とする、最深部の旅です。",
     role: "最深部の旅",
     phaseLabel: "最深部",
+    articleSlug: "iboga-what-is",
     barStart: 19,
     barEnd: 25,
     barTone: "deep",
@@ -126,6 +134,9 @@ const TONE_CLASS: Record<Step["barTone"], string> = {
 };
 
 export default function JourneyTimeline() {
+  // 解説記事が published になった車輪から順に、自動で実リンクが立つ
+  const publishedSlugs = new Set(getAllArticles().map((article) => article.slug));
+
   return (
     <section className="px-6 py-20 border-t border-border" aria-labelledby="journey-heading">
       <div className="max-w-[1180px] mx-auto">
@@ -254,9 +265,18 @@ export default function JourneyTimeline() {
                       <span className="serif-jp text-[11px] tracking-[0.2em] text-accent border border-border px-3 py-1">
                         {step.role}
                       </span>
-                      <span className="serif-jp text-[11px] tracking-[0.15em] text-mute-soft">
-                        解説記事 — 準備中
-                      </span>
+                      {publishedSlugs.has(step.articleSlug) ? (
+                        <Link
+                          href={`/articles/${step.articleSlug}`}
+                          className="serif-jp text-[11px] tracking-[0.2em] text-foreground border-b border-foreground pb-0.5 hover:text-accent hover:border-accent transition-colors"
+                        >
+                          解説記事を読む →
+                        </Link>
+                      ) : (
+                        <span className="serif-jp text-[11px] tracking-[0.15em] text-mute-soft">
+                          解説記事 — 準備中
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Article } from "@/lib/content";
-import { SERIES_NAME } from "@/lib/content";
+import { SERIES_NAME, articleKicker } from "@/lib/content";
 
 type SeriesNavProps = {
   /** ページ側で計算済みの前後の回（getSeriesNeighbors の結果）を受け取る */
@@ -42,7 +42,7 @@ export default function SeriesNav({ neighbors }: SeriesNavProps) {
             className="group bg-background p-6 sm:p-7 hover:bg-paper-deep transition-colors"
           >
             <p className="serif-en text-[11px] tracking-[0.3em] text-muted">
-              ← PREV / VOL.{String(prev.volume).padStart(2, "0")}
+              ← PREV / {articleKicker(prev)}
             </p>
             <p className="serif-jp text-base leading-[1.8] mt-3 group-hover:text-accent transition-colors">
               {prev.title}
@@ -65,7 +65,7 @@ export default function SeriesNav({ neighbors }: SeriesNavProps) {
             className="group bg-background p-6 sm:p-7 hover:bg-paper-deep transition-colors sm:text-right"
           >
             <p className="serif-en text-[11px] tracking-[0.3em] text-accent">
-              NEXT / VOL.{String(next.volume).padStart(2, "0")} →
+              NEXT / {articleKicker(next)} →
             </p>
             <p className="serif-jp text-base leading-[1.8] mt-3 group-hover:text-accent transition-colors">
               {next.title}
