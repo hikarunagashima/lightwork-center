@@ -4,11 +4,16 @@ import { notFound } from "next/navigation";
 import MarkdownContent from "@/components/media/MarkdownContent";
 import ArticleCard from "@/components/media/ArticleCard";
 import ArticleVisual from "@/components/media/ArticleVisual";
+import FollowCta from "@/components/media/FollowCta";
+import NextReadBar from "@/components/media/NextReadBar";
+import SeriesNav from "@/components/media/SeriesNav";
+import ShareButtons from "@/components/media/ShareButtons";
 import {
   getAllArticles,
   getArticleBySlug,
   getCategoryLabel,
   getRelatedArticles,
+  getSeriesNeighbors,
 } from "@/lib/content";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
@@ -78,6 +83,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   const related = getRelatedArticles(article);
+  const { next: nextInSeries } = getSeriesNeighbors(article);
   const articleUrl = absoluteUrl(`/articles/${article.slug}`);
   const jsonLd = {
     "@context": "https://schema.org",
@@ -163,7 +169,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <h1 className="serif-jp text-4xl sm:text-6xl font-light leading-[1.45] mt-8">
               {article.title}
             </h1>
-            <p className="serif-jp text-base leading-[2.1] text-muted mt-10 max-w-3xl">
+            <Link href="/about" className="group inline-block mt-7">
+              <p className="serif-jp text-sm tracking-[0.1em] text-muted group-hover:text-foreground transition-colors">
+                文・長島 光
+                <span className="text-mute-soft"> — 国際認定イボガシャーマン</span>
+              </p>
+            </Link>
+            <p className="serif-jp text-base leading-[2.1] text-muted mt-8 max-w-3xl">
               {article.description}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-muted">
@@ -180,6 +192,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 SOURCE AUDIO
               </a>
             </div>
+            {article.tags.length > 0 ? (
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                {article.tags.map((tag) => (
+                  <Link
+                    key={tag}
+                    href={`/tag/${encodeURIComponent(tag)}`}
+                    className="sans-jp text-[11px] tracking-[0.12em] text-muted border border-border-soft px-3 py-1.5 hover:text-foreground hover:border-foreground transition-colors"
+                  >
+                    #{tag}
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+            <div className="mt-9">
+              <ShareButtons url={articleUrl} title={article.title} />
+            </div>
           </div>
         </header>
 
@@ -193,7 +221,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <div className="max-w-[760px] mx-auto">
             <MarkdownContent markdown={article.body} />
 
-            <aside className="mt-20 border border-border p-6 sm:p-8 bg-paper-deep">
+            <div className="mt-14 border-t border-border-soft pt-8">
+              <ShareButtons url={articleUrl} title={article.title} />
+            </div>
+
+            <aside className="mt-12 border border-border p-6 sm:p-8 bg-paper-deep">
               <p className="serif-en text-xs tracking-[0.35em] text-muted">
                 MEDICAL NOTICE
               </p>
@@ -225,6 +257,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
             </aside>
 
+            <SeriesNav article={article} />
+
             <aside className="mt-12 border-y border-border py-10">
               <p className="serif-en text-xs tracking-[0.35em] text-accent">
                 NEXT STEP
@@ -244,6 +278,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 Medicine Wheel
               </Link>
             </aside>
+
+            <div className="mt-12">
+              <FollowCta />
+            </div>
           </div>
         </div>
       </article>
@@ -260,6 +298,20 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </div>
         </div>
       </section>
+
+      {nextInSeries ? (
+        <NextReadBar
+          href={`/articles/${nextInSeries.slug}`}
+          kicker={`NEXT / VOL.${String(nextInSeries.volume).padStart(2, "0")}`}
+          label={nextInSeries.title}
+        />
+      ) : (
+        <NextReadBar
+          href="/medicine-wheel"
+          kicker="PROGRAMME"
+          label="読み物を、実践の場へ — メディスンホイール"
+        />
+      )}
     </>
   );
 }

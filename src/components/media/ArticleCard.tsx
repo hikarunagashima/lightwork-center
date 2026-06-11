@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Article } from "@/lib/content";
-import { getCategoryLabel } from "@/lib/content";
+import { getCategoryLabel, isNewArticle } from "@/lib/content";
 import ArticleVisual from "./ArticleVisual";
 
 type ArticleCardProps = {
@@ -8,8 +8,18 @@ type ArticleCardProps = {
   featured?: boolean;
 };
 
+/** 再訪者が「新しい回」を一目で見つけるための印（黄金律: 新着シグナル） */
+function NewBadge() {
+  return (
+    <span className="serif-en text-[10px] tracking-[0.3em] text-background bg-accent px-2 py-0.5 select-none">
+      NEW
+    </span>
+  );
+}
+
 export default function ArticleCard({ article, featured = false }: ArticleCardProps) {
   const label = `VOL.${String(article.volume).padStart(2, "0")} / ${getCategoryLabel(article.category)}`;
+  const isNew = isNewArticle(article);
 
   if (featured) {
     return (
@@ -19,7 +29,10 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
         </Link>
         <div className="bg-background p-8 sm:p-12 flex flex-col justify-between">
           <div>
-            <p className="serif-en text-xs tracking-[0.35em] text-accent">{label}</p>
+            <p className="serif-en text-xs tracking-[0.35em] text-accent flex items-center gap-3">
+              <span>{label}</span>
+              {isNew ? <NewBadge /> : null}
+            </p>
             <Link href={`/articles/${article.slug}`} className="group">
               <h2 className="serif-jp text-3xl sm:text-4xl leading-[1.5] font-light mt-6 group-hover:text-accent transition-colors">
                 {article.title}
@@ -49,7 +62,10 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
     <article className="group">
       <Link href={`/articles/${article.slug}`} className="block">
         <ArticleVisual article={article} variant="card" />
-        <p className="serif-en text-[11px] tracking-[0.35em] text-accent mt-5">{label}</p>
+        <p className="serif-en text-[11px] tracking-[0.35em] text-accent mt-5 flex items-center gap-3">
+          <span>{label}</span>
+          {isNew ? <NewBadge /> : null}
+        </p>
         <h2 className="serif-jp text-xl sm:text-2xl leading-[1.6] font-light mt-3 group-hover:text-accent transition-colors">
           {article.title}
         </h2>

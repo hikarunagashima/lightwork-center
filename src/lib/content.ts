@@ -1,13 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
+import type { Category, CategoryId } from "./categories";
+import { CATEGORIES, getCategoryById, getCategoryLabel } from "./categories";
 
-export type CategoryId =
-  | "neo-shamanism"
-  | "quantum-consciousness"
-  | "resonance"
-  | "practice"
-  | "kotodama"
-  | "self-transcendence";
+// 既存importの互換のため、カテゴリ定義（fs非依存・./categories）をここから再エクスポートする
+export type { Category, CategoryId };
+export { CATEGORIES, getCategoryById, getCategoryLabel };
 
 export type FunnelStage = "TOFU" | "MOFU" | "BOFU";
 
@@ -29,52 +27,6 @@ export type Article = {
   /** Note転用サムネ（/thumbnails/volNN.jpg）。無い場合は空文字で ArticleVisual にフォールバック */
   thumbnail: string;
 };
-
-export type Category = {
-  id: CategoryId;
-  label: string;
-  en: string;
-  description: string;
-};
-
-export const CATEGORIES: Category[] = [
-  {
-    id: "neo-shamanism",
-    label: "ネオシャーマニズム",
-    en: "Neo Shamanism",
-    description: "古代シャーマニズム、量子意識、AIを同じ地平で読み直す総論。",
-  },
-  {
-    id: "quantum-consciousness",
-    label: "量子意識",
-    en: "Quantum Consciousness",
-    description: "空、間、直感、神人合一を、意識の構造として扱う記事群。",
-  },
-  {
-    id: "resonance",
-    label: "共鳴と関係性",
-    en: "Resonance",
-    description: "推し活、人間関係、相性、モーフィックフィールドを読む。",
-  },
-  {
-    id: "practice",
-    label: "実践と瞑想",
-    en: "Practice",
-    description: "眠り、瞑想、セレモニー、日常への統合を扱う実装領域。",
-  },
-  {
-    id: "kotodama",
-    label: "言霊と声",
-    en: "Kotodama",
-    description: "声、タマ体系、霊主体従をめぐる光さんの核領域。",
-  },
-  {
-    id: "self-transcendence",
-    label: "自己超越",
-    en: "Self Transcendence",
-    description: "強さ、祈り、守る力、アダムカドモンへ向かう軸。",
-  },
-];
 
 const SOURCE_DIR = path.join(
   process.cwd(),
@@ -393,16 +345,13 @@ export function getArticleBySlug(slug: string) {
   return getAllArticles().find((article) => article.slug === slug);
 }
 
-export function getCategoryById(id: string) {
-  return CATEGORIES.find((category) => category.id === id);
-}
-
 export function getArticlesByCategory(id: string) {
   return getAllArticles().filter((article) => article.category === id);
 }
 
+/** メディアの顔は最新記事（黄金律 B-1: 新しさの露出が再訪の体験を作る） */
 export function getFeaturedArticle() {
-  return getAllArticles().find((article) => article.volume === 5) || getAllArticles()[0];
+  return getAllArticles()[0];
 }
 
 export function getRelatedArticles(article: Article, limit = 3) {
@@ -420,6 +369,80 @@ export function getRelatedArticles(article: Article, limit = 3) {
     .slice(0, limit);
 }
 
-export function getCategoryLabel(id: CategoryId) {
-  return getCategoryById(id)?.label || id;
+/** 連載名（volume を持つ記事はすべてこの連載に属する） */
+export const SERIES_NAME = "ネオシャーマニズム講座";
+
+/** 公開からこの日数以内を「新着」と扱う（SSGビルド時点基準。公開のたびに再デプロイされる運用前提） */
+const NEW_BADGE_DAYS = 14;
+
+export function isNewArticle(article: Article): boolean {
+  const published = new Date(`${article.publishedAt}T00:00:00+09:00`).getTime();
+  if (Number.isNaN(published)) return false;
+  const ageDays = (Date.now() - published) / (1000 * 60 * 60 * 24);
+  return ageDays >= 0 && ageDays <= NEW_BADGE_DAYS;
+}
+
+export function getLatestArticles(limit: number, excludeSlug?: string) {
+  return getAllArticles()
+    .filter((article) => article.slug !== excludeSlug)
+    .slice(0, limit);
+}
+
+/** 連載の前後の回。volume を持つ記事（連載本体）のみ対象 */
+export function getSeriesNeighbors(article: Article): {
+  prev: Article | null;
+  next: Article | null;
+} {
+  if (!article.volume) {
+    return { prev: null, next: null };
+  }
+  const series = getAllArticles()
+    .filter((candidate) => candidate.volume > 0)
+    .sort((a, b) => a.volume - b.volume);
+  const index = series.findIndex((candidate) => candidate.slug === article.slug);
+  if (index === -1) {
+    return { prev: null, next: null };
+  }
+  return {
+    prev: index > 0 ? series[index - 1] : null,
+    next: index < series.length - 1 ? series[index + 1] : null,
+  };
+}
+
+export type TagSummary = {
+  tag: string;
+  count: number;
+};
+
+export function getAllTags(): TagSummary[] {
+  const counts = new Map<string, number>();
+  for (const article of getAllArticles()) {
+    for (const tag of article.tags) {
+      counts.set(tag, (counts.get(tag) || 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, "ja"));
+}
+
+export function getArticlesByTag(tag: string) {
+  return getAllArticles().filter((article) => article.tags.includes(tag));
+}
+
+/**
+ * はじめての読者向け編集部ピック。計測データが貯まるまでは編集部選定を正とする。
+ * TOFU（入口）→ MOFU（実践）→ BOFU（中核）の順に並べる。
+ */
+const START_HERE_SLUGS = [
+  "hero-as-soul-role",
+  "sleep-and-meditation-gate",
+  "iboga-conducts-the-orchestra",
+] as const;
+
+export function getStartHereArticles(): Article[] {
+  const all = getAllArticles();
+  return START_HERE_SLUGS.map((slug) => all.find((article) => article.slug === slug)).filter(
+    (article): article is Article => Boolean(article),
+  );
 }

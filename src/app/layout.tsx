@@ -2,7 +2,16 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import Link from "next/link";
 import Header from "@/components/Header";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
+import { CATEGORIES } from "@/lib/content";
+import {
+  INSTAGRAM_URL,
+  NOTE_URL,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+  TELEGRAM_URL,
+} from "@/lib/site";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -63,11 +72,28 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const FOOTER_READ_LINKS = [
+  { href: "/articles", label: "Articles" },
+  { href: "/guide", label: "Reading Guide" },
+  { href: "/manifesto", label: "Manifesto" },
+  { href: "/medicine-wheel", label: "Medicine Wheel" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+] as const;
+
+const FOOTER_FOLLOW_LINKS = [
+  { href: NOTE_URL, label: "Note", external: true },
+  { href: INSTAGRAM_URL, label: "Instagram", external: true },
+  { href: TELEGRAM_URL, label: "Telegram", external: true },
+  { href: "/feed.xml", label: "RSS", external: false },
+] as const;
+
 function Footer() {
   return (
     <footer className="border-t border-border mt-32">
-      <div className="max-w-[1200px] mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="max-w-[1320px] mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr_1fr_0.8fr] gap-12 md:gap-10">
           <div>
             <p className="serif-en text-2xl sm:text-3xl tracking-[0.15em] font-light">
               LIGHTWORK&nbsp;CENTER
@@ -79,34 +105,57 @@ function Footer() {
               国際認定イボガシャーマンの一次体験と専門編集で、
               古代の祈りをAI時代の言葉へ翻訳するメディア。
             </p>
-            <p className="serif-en text-[10px] tracking-[0.35em] text-muted mt-2">
-              2025&nbsp;OSAKA-KANSAI&nbsp;EXPO &nbsp;·&nbsp; SPEAKER
-            </p>
-            <div className="mt-10 flex gap-8">
-              <a
-                href="https://www.instagram.com/hikaru_asobi/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="serif-en text-xs tracking-[0.3em] text-muted hover:text-foreground transition-colors"
-              >
-                Instagram
-              </a>
-              <a
-                href="https://note.com/hikaruuaa"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="serif-en text-xs tracking-[0.3em] text-muted hover:text-foreground transition-colors"
-              >
-                Note
-              </a>
-            </div>
           </div>
-          <nav className="flex flex-wrap gap-x-12 gap-y-4 md:justify-end content-start">
-            <Link href="/articles" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Articles</Link>
-            <Link href="/category/neo-shamanism" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Shelves</Link>
-            <Link href="/medicine-wheel" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Medicine Wheel</Link>
-            <Link href="/about" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">About</Link>
-            <Link href="/contact" className="serif-en text-sm tracking-[0.2em] text-muted hover:text-foreground transition-colors">Contact</Link>
+
+          <nav aria-label="読む">
+            <p className="serif-en text-[11px] tracking-[0.35em] text-mute-soft">READ</p>
+            <ul className="mt-5 space-y-3">
+              {FOOTER_READ_LINKS.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="serif-en text-sm tracking-[0.18em] text-muted hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="棚から探す">
+            <p className="serif-en text-[11px] tracking-[0.35em] text-mute-soft">SHELVES</p>
+            <ul className="mt-5 space-y-3">
+              {CATEGORIES.map((category) => (
+                <li key={category.id}>
+                  <Link
+                    href={`/category/${category.id}`}
+                    className="serif-jp text-sm tracking-[0.1em] text-muted hover:text-foreground transition-colors"
+                  >
+                    {category.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="更新を受け取る">
+            <p className="serif-en text-[11px] tracking-[0.35em] text-mute-soft">FOLLOW</p>
+            <ul className="mt-5 space-y-3">
+              {FOOTER_FOLLOW_LINKS.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    {...(item.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="serif-en text-sm tracking-[0.18em] text-muted hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </nav>
         </div>
         <div className="mt-16 pt-8 border-t border-border flex flex-col sm:flex-row sm:justify-between gap-3 text-xs text-muted">

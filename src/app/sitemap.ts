@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { CATEGORIES, getAllArticles } from "@/lib/content";
+import { CATEGORIES, getAllArticles, getAllTags } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -7,8 +7,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/articles",
+    "/guide",
     "/medicine-wheel",
     "/about",
+    "/faq",
+    "/manifesto",
     "/contact",
   ].map((route) => ({
     url: `${SITE_URL}${route}`,
@@ -31,5 +34,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: article.funnelStage === "MOFU" ? 0.85 : 0.75,
   }));
 
-  return [...staticRoutes, ...categoryRoutes, ...articleRoutes];
+  // 記事が2本以上あるタグのみ登録（薄いページで評価を割らない）
+  const tagRoutes: MetadataRoute.Sitemap = getAllTags()
+    .filter(({ count }) => count >= 2)
+    .map(({ tag }) => ({
+      url: `${SITE_URL}/tag/${encodeURIComponent(tag)}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    }));
+
+  return [...staticRoutes, ...categoryRoutes, ...articleRoutes, ...tagRoutes];
 }
