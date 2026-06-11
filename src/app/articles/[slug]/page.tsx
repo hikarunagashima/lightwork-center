@@ -164,8 +164,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </Link>
             </nav>
             <p className="serif-en text-xs tracking-[0.42em] text-accent mt-14">
-              NEO SHAMANISM LECTURE / VOL.
-              {String(article.volume).padStart(2, "0")}
+              {article.volume > 0
+                ? `NEO SHAMANISM LECTURE / VOL.${String(article.volume).padStart(2, "0")}`
+                : "LIGHTWORK GUIDE"}
             </p>
             <h1 className="serif-jp text-4xl sm:text-6xl font-light leading-[1.45] mt-8">
               {article.title}
@@ -179,18 +180,32 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               {article.description}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-muted">
-              <span className="serif-en tracking-[0.24em]">{article.publishedAt}</span>
+              <span className="serif-jp tracking-[0.1em]">
+                公開 <time dateTime={article.publishedAt} className="serif-en tracking-[0.18em]">{formatDate(article.publishedAt)}</time>
+              </span>
+              {article.updatedAt && article.updatedAt !== article.publishedAt ? (
+                <>
+                  <span className="text-accent" aria-hidden>⊙</span>
+                  <span className="serif-jp tracking-[0.1em]">
+                    更新 <time dateTime={article.updatedAt} className="serif-en tracking-[0.18em]">{formatDate(article.updatedAt)}</time>
+                  </span>
+                </>
+              ) : null}
               <span className="text-accent" aria-hidden>⊙</span>
               <span className="serif-jp tracking-[0.1em]">{article.readingMinutes}分で読む</span>
-              <span className="text-accent" aria-hidden>⊙</span>
-              <a
-                href={article.youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="serif-en tracking-[0.24em] border-b border-mute-soft hover:text-foreground hover:border-foreground transition-colors"
-              >
-                SOURCE AUDIO
-              </a>
+              {article.youtubeUrl ? (
+                <>
+                  <span className="text-accent" aria-hidden>⊙</span>
+                  <a
+                    href={article.youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="serif-en tracking-[0.24em] border-b border-mute-soft hover:text-foreground hover:border-foreground transition-colors"
+                  >
+                    SOURCE AUDIO
+                  </a>
+                </>
+              ) : null}
             </div>
             {article.tags.length > 0 ? (
               <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -319,4 +334,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
 function articleJsonLdSafe<T>(value: T) {
   return value;
+}
+
+/** "2026-06-11" → "2026.06.11"（エディトリアル表記） */
+function formatDate(date: string) {
+  return date.replaceAll("-", ".");
 }

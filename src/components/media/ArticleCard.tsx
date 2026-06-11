@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Article } from "@/lib/content";
-import { getCategoryLabel, isNewArticle } from "@/lib/content";
+import { articleKicker, getCategoryLabel, isNewArticle } from "@/lib/content";
 import ArticleVisual from "./ArticleVisual";
 import NewBadge from "./NewBadge";
 
@@ -10,7 +10,7 @@ type ArticleCardProps = {
 };
 
 export default function ArticleCard({ article, featured = false }: ArticleCardProps) {
-  const label = `VOL.${String(article.volume).padStart(2, "0")} / ${getCategoryLabel(article.category)}`;
+  const label = `${articleKicker(article)} / ${getCategoryLabel(article.category)}`;
   const isNew = isNewArticle(article);
 
   if (featured) {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Article, CategoryId } from "@/lib/content";
-import { getCategoryLabel } from "@/lib/content";
+import { getCategoryLabel, articleKicker } from "@/lib/content";
 
 // カテゴリごとに生成り×墨×金の範囲で微差をつけ、識別性とブランド統一を両立する
 const TINTS: Record<CategoryId, { base: string; glow: string }> = {
@@ -64,7 +64,7 @@ export default function ArticleVisual({ article, variant = "card" }: ArticleVisu
         <p
           className={`serif-en tracking-[0.32em] text-foreground/75 ${big ? "text-sm" : "text-xs"}`}
         >
-          VOL.{String(article.volume).padStart(2, "0")}
+          {articleKicker(article)}
         </p>
         <p
           className={`serif-jp tracking-[0.16em] text-muted mt-1.5 ${big ? "text-sm" : "text-[11px]"}`}

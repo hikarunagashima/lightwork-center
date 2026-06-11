@@ -337,6 +337,10 @@ export function getAllArticles(): Article[] {
     if (a.publishedAt !== b.publishedAt) {
       return a.publishedAt < b.publishedAt ? 1 : -1;
     }
+    // 同日掲載では書き下ろし記事（volume 0）を連載アーカイブより先頭に出す
+    if ((a.volume === 0) !== (b.volume === 0)) {
+      return a.volume === 0 ? -1 : 1;
+    }
     return b.volume - a.volume;
   });
 }
@@ -371,6 +375,13 @@ export function getRelatedArticles(article: Article, limit = 3) {
 
 /** 連載名（volume を持つ記事はすべてこの連載に属する） */
 export const SERIES_NAME = "ネオシャーマニズム講座";
+
+/** カード・リストの左肩ラベル。連載は VOL.XX、書き下ろし（volume 0）は GUIDE */
+export function articleKicker(article: Pick<Article, "volume">): string {
+  return article.volume > 0
+    ? `VOL.${String(article.volume).padStart(2, "0")}`
+    : "GUIDE";
+}
 
 /** 公開からこの日数以内を「新着」と扱う（SSGビルド時点基準。公開のたびに再デプロイされる運用前提） */
 const NEW_BADGE_DAYS = 14;
@@ -414,6 +425,16 @@ export type TagSummary = {
   count: number;
 };
 
+/** メディスン名タグはメディアの中核導線。記事数に関わらずタグ一覧の先頭に出す（実在するタグのみ） */
+const PRIORITY_TAGS = [
+  "メディスンホイール",
+  "イボガ",
+  "ハペ",
+  "サナンガ",
+  "カンボ",
+  "シリアンルー",
+];
+
 export function getAllTags(): TagSummary[] {
   const counts = new Map<string, number>();
   for (const article of getAllArticles()) {
@@ -423,7 +444,13 @@ export function getAllTags(): TagSummary[] {
   }
   return [...counts.entries()]
     .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, "ja"));
+    .sort((a, b) => {
+      const pa = PRIORITY_TAGS.indexOf(a.tag);
+      const pb = PRIORITY_TAGS.indexOf(b.tag);
+      if ((pa !== -1) !== (pb !== -1)) return pa !== -1 ? -1 : 1;
+      if (pa !== -1 && pb !== -1) return pa - pb;
+      return b.count - a.count || a.tag.localeCompare(b.tag, "ja");
+    });
 }
 
 export function getArticlesByTag(tag: string) {

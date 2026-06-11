@@ -9,6 +9,7 @@ import {
   getFeaturedArticle,
   getStartHereArticles,
   isNewArticle,
+  articleKicker,
 } from "@/lib/content";
 import { SITE_DESCRIPTION, SITE_TITLE, absoluteUrl } from "@/lib/site";
 
@@ -106,7 +107,7 @@ export default function Home() {
                       className="group flex items-baseline gap-5 py-5"
                     >
                       <span className="serif-en text-xs tracking-[0.25em] text-muted shrink-0">
-                        VOL.{String(article.volume).padStart(2, "0")}
+                        {articleKicker(article)}
                       </span>
                       <span className="min-w-0">
                         <span className="serif-jp text-base sm:text-lg leading-[1.7] font-light group-hover:text-accent transition-colors line-clamp-2">
