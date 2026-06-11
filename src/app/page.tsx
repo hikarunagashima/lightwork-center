@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ArticleCard from "@/components/media/ArticleCard";
 import FollowCta from "@/components/media/FollowCta";
+import NewBadge from "@/components/media/NewBadge";
 import {
   CATEGORIES,
   getAllArticles,
@@ -111,11 +112,9 @@ export default function Home() {
                         <span className="serif-jp text-base sm:text-lg leading-[1.7] font-light group-hover:text-accent transition-colors line-clamp-2">
                           {article.title}
                         </span>
-                        <span className="serif-en block text-[10px] tracking-[0.25em] text-mute-soft mt-1.5">
-                          {article.readingMinutes} MIN READ
-                          {isNewArticle(article) ? (
-                            <span className="text-accent"> &nbsp;· NEW</span>
-                          ) : null}
+                        <span className="serif-en flex items-center gap-3 text-[10px] tracking-[0.25em] text-mute-soft mt-1.5">
+                          <span>{article.readingMinutes} MIN READ</span>
+                          {isNewArticle(article) ? <NewBadge /> : null}
                         </span>
                       </span>
                     </Link>

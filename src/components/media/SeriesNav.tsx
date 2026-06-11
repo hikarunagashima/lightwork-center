@@ -1,9 +1,13 @@
 import Link from "next/link";
 import type { Article } from "@/lib/content";
-import { SERIES_NAME, getSeriesNeighbors } from "@/lib/content";
+import { SERIES_NAME } from "@/lib/content";
 
 type SeriesNavProps = {
-  article: Article;
+  /** ページ側で計算済みの前後の回（getSeriesNeighbors の結果）を受け取る */
+  neighbors: {
+    prev: Article | null;
+    next: Article | null;
+  };
 };
 
 /**
@@ -11,8 +15,8 @@ type SeriesNavProps = {
  * 黄金律 A-2/C-3（連載・シリーズ構造が回遊と再訪の根幹）に基づく。
  * 読了直後に「次の回」をいちばん近い場所へ置く。
  */
-export default function SeriesNav({ article }: SeriesNavProps) {
-  const { prev, next } = getSeriesNeighbors(article);
+export default function SeriesNav({ neighbors }: SeriesNavProps) {
+  const { prev, next } = neighbors;
 
   if (!prev && !next) {
     return null;

@@ -83,7 +83,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   const related = getRelatedArticles(article);
-  const { next: nextInSeries } = getSeriesNeighbors(article);
+  const seriesNeighbors = getSeriesNeighbors(article);
+  const nextInSeries = seriesNeighbors.next;
   const articleUrl = absoluteUrl(`/articles/${article.slug}`);
   const jsonLd = {
     "@context": "https://schema.org",
@@ -171,8 +172,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </h1>
             <Link href="/about" className="group inline-block mt-7">
               <p className="serif-jp text-sm tracking-[0.1em] text-muted group-hover:text-foreground transition-colors">
-                文・長島 光
-                <span className="text-mute-soft"> — 国際認定イボガシャーマン</span>
+                文・長島 光 — 国際認定イボガシャーマン
               </p>
             </Link>
             <p className="serif-jp text-base leading-[2.1] text-muted mt-8 max-w-3xl">
@@ -198,7 +198,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   <Link
                     key={tag}
                     href={`/tag/${encodeURIComponent(tag)}`}
-                    className="sans-jp text-[11px] tracking-[0.12em] text-muted border border-border-soft px-3 py-1.5 hover:text-foreground hover:border-foreground transition-colors"
+                    className="sans-jp text-[11px] tracking-[0.12em] text-muted border border-border-soft px-3.5 py-2.5 hover:text-foreground hover:border-foreground transition-colors"
                   >
                     #{tag}
                   </Link>
@@ -257,7 +257,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
             </aside>
 
-            <SeriesNav article={article} />
+            <SeriesNav neighbors={seriesNeighbors} />
 
             <aside className="mt-12 border-y border-border py-10">
               <p className="serif-en text-xs tracking-[0.35em] text-accent">
@@ -299,6 +299,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </section>
 
+      {/* 非連載記事はBOFU直行でなく読み方ガイドへ（段階設計 — review指摘3） */}
       {nextInSeries ? (
         <NextReadBar
           href={`/articles/${nextInSeries.slug}`}
@@ -307,9 +308,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         />
       ) : (
         <NextReadBar
-          href="/medicine-wheel"
-          kicker="PROGRAMME"
-          label="読み物を、実践の場へ — メディスンホイール"
+          href="/guide"
+          kicker="READING GUIDE"
+          label="連載の歩き方 — いまの気分に合う入口から"
         />
       )}
     </>

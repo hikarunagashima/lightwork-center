@@ -2,20 +2,12 @@ import Link from "next/link";
 import type { Article } from "@/lib/content";
 import { getCategoryLabel, isNewArticle } from "@/lib/content";
 import ArticleVisual from "./ArticleVisual";
+import NewBadge from "./NewBadge";
 
 type ArticleCardProps = {
   article: Article;
   featured?: boolean;
 };
-
-/** 再訪者が「新しい回」を一目で見つけるための印（黄金律: 新着シグナル） */
-function NewBadge() {
-  return (
-    <span className="serif-en text-[10px] tracking-[0.3em] text-background bg-accent px-2 py-0.5 select-none">
-      NEW
-    </span>
-  );
-}
 
 export default function ArticleCard({ article, featured = false }: ArticleCardProps) {
   const label = `VOL.${String(article.volume).padStart(2, "0")} / ${getCategoryLabel(article.category)}`;

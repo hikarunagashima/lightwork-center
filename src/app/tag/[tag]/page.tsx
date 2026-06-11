@@ -103,7 +103,7 @@ export default async function TagPage({ params }: TagPageProps) {
                   <Link
                     key={entry.tag}
                     href={`/tag/${encodeURIComponent(entry.tag)}`}
-                    className="sans-jp text-xs tracking-[0.12em] text-muted border border-border-soft px-4 py-2 hover:text-foreground hover:border-foreground transition-colors"
+                    className="sans-jp text-xs tracking-[0.12em] text-muted border border-border-soft px-4 py-2.5 hover:text-foreground hover:border-foreground transition-colors"
                   >
                     #{entry.tag}
                   </Link>
