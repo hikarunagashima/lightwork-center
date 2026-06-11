@@ -9,6 +9,7 @@ import NextReadBar from "@/components/media/NextReadBar";
 import SeriesNav from "@/components/media/SeriesNav";
 import ShareButtons from "@/components/media/ShareButtons";
 import {
+  articleKicker,
   getAllArticles,
   getArticleBySlug,
   getCategoryLabel,
@@ -318,7 +319,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {nextInSeries ? (
         <NextReadBar
           href={`/articles/${nextInSeries.slug}`}
-          kicker={`NEXT / VOL.${String(nextInSeries.volume).padStart(2, "0")}`}
+          kicker={`NEXT / ${articleKicker(nextInSeries)}`}
           label={nextInSeries.title}
         />
       ) : (
