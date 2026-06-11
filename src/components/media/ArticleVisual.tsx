@@ -24,14 +24,12 @@ export default function ArticleVisual({ article, variant = "card" }: ArticleVisu
   const gy = 28 + ((article.volume * 13) % 38);
   const big = variant === "featured";
 
-  // Note転用サムネがあれば画像、なければ従来の⊙生成ビジュアル
+  // Note転用サムネがあれば画像、なければ従来の⊙生成ビジュアル。
+  // サムネはNote標準の1280×670。枠をネイティブ比率に合わせ、見切れさせない。
+  // 号数・タイトルは画像内に焼き込まれているため、オーバーレイは重ねない。
   if (article.thumbnail) {
     return (
-      <div
-        className={`relative w-full overflow-hidden border border-border-soft ${
-          big ? "aspect-[16/11] min-h-[320px]" : "aspect-[3/2]"
-        }`}
-      >
+      <div className="relative w-full overflow-hidden border border-border-soft aspect-[1280/670]">
         <Image
           src={article.thumbnail}
           alt={article.title}
@@ -40,14 +38,6 @@ export default function ArticleVisual({ article, variant = "card" }: ArticleVisu
           className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
           priority={big}
         />
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-4 sm:p-6">
-          <p className={`serif-en tracking-[0.32em] text-white/90 ${big ? "text-sm" : "text-xs"}`}>
-            VOL.{String(article.volume).padStart(2, "0")}
-          </p>
-          <p className={`serif-jp tracking-[0.16em] text-white/75 mt-1.5 ${big ? "text-sm" : "text-[11px]"}`}>
-            {getCategoryLabel(article.category)}
-          </p>
-        </div>
       </div>
     );
   }
