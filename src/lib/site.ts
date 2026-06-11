@@ -7,6 +7,8 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://lightworkcenter.com";
 
 export const TELEGRAM_URL = "https://t.me/shamanhikaru";
+export const NOTE_URL = "https://note.com/hikaruuaa";
+export const INSTAGRAM_URL = "https://www.instagram.com/hikaru_asobi/";
 
 export function absoluteUrl(path: string) {
   if (path.startsWith("http://") || path.startsWith("https://")) {
