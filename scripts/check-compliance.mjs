@@ -2,12 +2,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+// md: "suffix" = -article.md のみ（_source のINDEX等メタを除外） / "all" = 全mdが検査対象
 const targets = [
-  "src/app",
-  "src/components",
-  "src/lib",
-  "content/_source/neoshamanism",
-  "content/articles",
+  { dir: "src/app", md: "all" },
+  { dir: "src/components", md: "all" },
+  { dir: "src/lib", md: "all" },
+  { dir: "content/_source/neoshamanism", md: "suffix" },
+  { dir: "content/articles", md: "all" },
 ];
 
 // 効果の断定 — 伝承の形でも常にNG
@@ -34,6 +35,10 @@ const forbiddenAlways = [
   "大阪万博2025登壇",
   "大阪万博登壇",
 ];
+
+// 公開記事（content/articles/）の地の文に出してはいけない固有名
+// 引用ブロック（"> "行）に元々含まれる場合のみ許容（2026-06-11 光さん指示）
+const forbiddenOutsideQuote = ["朝陽"];
 
 // 文化的・伝承的な表現 — 「伝承マーカー」を同じ行に伴う場合のみ許容
 // （例: 「アマゾン先住民の伝統では地球最強の解毒剤と称されてきた」はOK／
@@ -74,18 +79,23 @@ const allowedFiles = new Set([
   "knowledge/medicine-wheel.md",
 ]);
 
-function walk(dir) {
+function walk(dir, md) {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) return walk(full);
+    if (entry.isDirectory()) return walk(full, md);
     if (!/\.(tsx?|md|mdx)$/.test(entry.name)) return [];
-    if (entry.name.endsWith(".md") && !entry.name.endsWith("-article.md")) return [];
+    if (
+      entry.name.endsWith(".md") &&
+      md === "suffix" &&
+      !entry.name.endsWith("-article.md")
+    )
+      return [];
     return [full];
   });
 }
 
-const files = targets.flatMap((target) => walk(path.join(root, target)));
+const files = targets.flatMap((target) => walk(path.join(root, target.dir), target.md));
 const violations = [];
 
 for (const file of files) {
@@ -113,6 +123,20 @@ for (const file of files) {
         });
       }
     });
+
+    // 公開記事の地の文に固有名を出さない（引用ブロック行のみ可・2026-06-11 光さん指示）
+    if (rel.startsWith("content/articles/") && !/^\s*>/.test(line)) {
+      forbiddenOutsideQuote.forEach((word) => {
+        if (line.includes(word)) {
+          violations.push({
+            file: rel,
+            line: index + 1,
+            word: `${word}（地の文NG・引用ブロックのみ可）`,
+            text: line.trim(),
+          });
+        }
+      });
+    }
   });
 }
 
