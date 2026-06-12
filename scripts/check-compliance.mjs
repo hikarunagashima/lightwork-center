@@ -9,6 +9,9 @@ const targets = [
   { dir: "src/lib", md: "all" },
   { dir: "content/_source/neoshamanism", md: "suffix" },
   { dir: "content/articles", md: "all" },
+  // 体験談 — 本人の記述でも媒体掲載時の表現責任は媒体側にあるため本文ごと検査する。
+  // 検出された場合は機械的に書き換えず、掲載可否を光さんに確認する
+  { dir: "content/voices", md: "all" },
 ];
 
 // 効果の断定 — 伝承の形でも常にNG

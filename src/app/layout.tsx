@@ -77,6 +77,7 @@ const FOOTER_READ_LINKS = [
   { href: "/guide", label: "Reading Guide" },
   { href: "/manifesto", label: "Manifesto" },
   { href: "/medicine-wheel", label: "Medicine Wheel" },
+  { href: "/voices", label: "Voices" },
   { href: "/faq", label: "FAQ" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
