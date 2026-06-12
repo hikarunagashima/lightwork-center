@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Article, CategoryId } from "@/lib/content";
-import { getCategoryLabel, articleKicker } from "@/lib/content";
+import { articleKicker, articleShelfLabel } from "@/lib/content";
 
 // カテゴリごとに生成り×墨×金の範囲で微差をつけ、識別性とブランド統一を両立する
 const TINTS: Record<CategoryId, { base: string; glow: string }> = {
@@ -12,13 +12,18 @@ const TINTS: Record<CategoryId, { base: string; glow: string }> = {
   "self-transcendence": { base: "#F2EADC", glow: "#CBA85F" },
 };
 
+// カテゴリ（テーマの棚）に属さないコンテンツ（体験談など）の色。帰還の声＝あたたかい金
+const SHELFLESS_TINT = { base: "#F3ECDF", glow: "#C9A35B" };
+
 type ArticleVisualProps = {
   article: Article;
   variant?: "card" | "featured";
 };
 
 export default function ArticleVisual({ article, variant = "card" }: ArticleVisualProps) {
-  const tint = TINTS[article.category] ?? TINTS["neo-shamanism"];
+  const tint = article.category
+    ? (TINTS[article.category] ?? TINTS["neo-shamanism"])
+    : SHELFLESS_TINT;
   // ⊙ の光の位置を volume でシードし、各記事で異なる表情にする
   const gx = 26 + ((article.volume * 17) % 50);
   const gy = 28 + ((article.volume * 13) % 38);
@@ -69,7 +74,7 @@ export default function ArticleVisual({ article, variant = "card" }: ArticleVisu
         <p
           className={`serif-jp tracking-[0.16em] text-muted mt-1.5 ${big ? "text-sm" : "text-[11px]"}`}
         >
-          {getCategoryLabel(article.category)}
+          {articleShelfLabel(article)}
         </p>
       </div>
     </div>

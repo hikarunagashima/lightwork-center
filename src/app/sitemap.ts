@@ -29,12 +29,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  const articleRoutes: MetadataRoute.Sitemap = getAllArticles().map((article) => ({
-    url: `${SITE_URL}/articles/${article.slug}`,
-    lastModified: new Date(article.updatedAt),
-    changeFrequency: "monthly" as const,
-    priority: article.funnelStage === "MOFU" ? 0.85 : 0.75,
-  }));
+  // 体験談（voice）の正規URLは /voices/ 配下（voiceRoutes が担う）。ここでは重複登録しない
+  const articleRoutes: MetadataRoute.Sitemap = getAllArticles()
+    .filter((article) => article.contentType !== "voice")
+    .map((article) => ({
+      url: `${SITE_URL}/articles/${article.slug}`,
+      lastModified: new Date(article.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: article.funnelStage === "MOFU" ? 0.85 : 0.75,
+    }));
 
   // 記事が2本以上あるタグのみ登録（薄いページで評価を割らない）
   const tagRoutes: MetadataRoute.Sitemap = getAllTags()

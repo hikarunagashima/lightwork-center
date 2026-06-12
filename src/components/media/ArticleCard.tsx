@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Article } from "@/lib/content";
-import { articleKicker, getCategoryLabel, isNewArticle } from "@/lib/content";
+import { articleKicker, articleShelfLabel, isNewArticle } from "@/lib/content";
 import ArticleVisual from "./ArticleVisual";
 import NewBadge from "./NewBadge";
 
@@ -10,13 +10,13 @@ type ArticleCardProps = {
 };
 
 export default function ArticleCard({ article, featured = false }: ArticleCardProps) {
-  const label = `${articleKicker(article)} / ${getCategoryLabel(article.category)}`;
+  const label = `${articleKicker(article)} / ${articleShelfLabel(article)}`;
   const isNew = isNewArticle(article);
 
   if (featured) {
     return (
       <article className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-px bg-border border-y border-border">
-        <Link href={`/articles/${article.slug}`} className="block bg-background">
+        <Link href={article.href} className="block bg-background">
           <ArticleVisual article={article} variant="featured" />
         </Link>
         <div className="bg-background p-8 sm:p-12 flex flex-col justify-between">
@@ -25,7 +25,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
               <span>{label}</span>
               {isNew ? <NewBadge /> : null}
             </p>
-            <Link href={`/articles/${article.slug}`} className="group">
+            <Link href={article.href} className="group">
               <h2 className="serif-jp text-3xl sm:text-4xl leading-[1.5] font-light mt-6 group-hover:text-accent transition-colors">
                 {article.title}
               </h2>
@@ -39,7 +39,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
               {article.readingMinutes} MIN READ
             </span>
             <Link
-              href={`/articles/${article.slug}`}
+              href={article.href}
               className="serif-en text-xs tracking-[0.25em] border-b border-foreground pb-1 hover:text-accent hover:border-accent transition-colors"
             >
               Read Article
@@ -52,7 +52,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
 
   return (
     <article className="group">
-      <Link href={`/articles/${article.slug}`} className="block">
+      <Link href={article.href} className="block">
         <ArticleVisual article={article} variant="card" />
         <p className="serif-en text-[11px] tracking-[0.35em] text-accent mt-5 flex items-center gap-3">
           <span>{label}</span>

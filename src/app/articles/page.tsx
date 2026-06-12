@@ -2,19 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ArticleCard from "@/components/media/ArticleCard";
 import { CATEGORIES, getAllArticles, getAllTags } from "@/lib/content";
+import { CONTENT_TYPES, contentTypeIndexHref } from "@/lib/content-types";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Articles",
   description:
-    "ネオシャーマニズム講座を中心に、シャーマニズム・量子意識・AI・植物メディスンを読み解く記事一覧。",
+    "ネオシャーマニズム講座・ガイド・体験談。シャーマニズム・量子意識・AI・植物メディスンを読み解く記事一覧。",
   alternates: {
     canonical: "/articles",
   },
   openGraph: {
     title: "Articles | LIGHTWORK CENTER",
     description:
-      "シャーマニズム・量子意識・AI・植物メディスンを読み解く記事一覧。",
+      "講座・ガイド・体験談。シャーマニズム・量子意識・AI・植物メディスンを読み解く記事一覧。",
     url: absoluteUrl("/articles"),
     type: "website",
   },
@@ -41,24 +42,47 @@ export default function ArticlesPage() {
             シャーマニズム、量子意識、AI、メディスンホイールへ橋を架ける読み物です。
           </p>
 
-          {/* 棚への横移動（黄金律 D-1: カテゴリへの常時導線） */}
-          <nav aria-label="カテゴリで絞り込む" className="mt-12 flex flex-wrap gap-3">
-            <span
-              aria-current="page"
-              className="serif-jp text-xs tracking-[0.12em] border border-foreground bg-foreground text-background px-4 py-2 select-none"
-            >
-              すべて
-            </span>
-            {CATEGORIES.map((category) => (
-              <Link
-                key={category.id}
-                href={`/category/${category.id}`}
-                className="serif-jp text-xs tracking-[0.12em] text-muted border border-border-soft px-4 py-2 hover:text-foreground hover:border-foreground transition-colors"
+          {/* 種別での絞り込み（CMS: すべての記事の中に講座・ガイド・体験談がある） */}
+          <div className="mt-12">
+            <p className="serif-en text-[10px] tracking-[0.35em] text-mute-soft">
+              BY TYPE
+            </p>
+            <nav aria-label="種別で絞り込む" className="mt-4 flex flex-wrap gap-3">
+              <span
+                aria-current="page"
+                className="serif-jp text-xs tracking-[0.12em] border border-foreground bg-foreground text-background px-4 py-2 select-none"
               >
-                {category.label}
-              </Link>
-            ))}
-          </nav>
+                すべて
+              </span>
+              {CONTENT_TYPES.map((type) => (
+                <Link
+                  key={type.id}
+                  href={contentTypeIndexHref(type.id)}
+                  className="serif-jp text-xs tracking-[0.12em] text-muted border border-border-soft px-4 py-2 hover:text-foreground hover:border-foreground transition-colors"
+                >
+                  {type.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* 棚への横移動（黄金律 D-1: カテゴリへの常時導線） */}
+          <div className="mt-8">
+            <p className="serif-en text-[10px] tracking-[0.35em] text-mute-soft">
+              BY SHELF
+            </p>
+            <nav aria-label="カテゴリで絞り込む" className="mt-4 flex flex-wrap gap-3">
+              {CATEGORIES.map((category) => (
+                <Link
+                  key={category.id}
+                  href={`/category/${category.id}`}
+                  className="serif-jp text-xs tracking-[0.12em] text-muted border border-border-soft px-4 py-2 hover:text-foreground hover:border-foreground transition-colors"
+                >
+                  {category.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
       </section>
 
