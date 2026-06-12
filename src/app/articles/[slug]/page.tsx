@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import MarkdownContent from "@/components/media/MarkdownContent";
 import ArticleCard from "@/components/media/ArticleCard";
 import ArticleVisual from "@/components/media/ArticleVisual";
@@ -25,9 +25,12 @@ type ArticlePageProps = {
 };
 
 export function generateStaticParams() {
-  return getAllArticles().map((article) => ({
-    slug: article.slug,
-  }));
+  // 体験談（voice）の正規URLは /voices/[slug]。記事ページとしては生成しない
+  return getAllArticles()
+    .filter((article) => article.contentType !== "voice")
+    .map((article) => ({
+      slug: article.slug,
+    }));
 }
 
 export async function generateMetadata({
@@ -81,6 +84,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   if (!article) {
     notFound();
+  }
+
+  // 体験談はこのレイアウトでは読ませない。正規の /voices/ へ送る
+  if (article.contentType === "voice") {
+    redirect(article.href);
   }
 
   const related = getRelatedArticles(article);
@@ -156,13 +164,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <Link href="/articles" className="hover:text-foreground transition-colors">
                 Articles
               </Link>
-              <span>/</span>
-              <Link
-                href={`/category/${article.category}`}
-                className="hover:text-foreground transition-colors"
-              >
-                {getCategoryLabel(article.category)}
-              </Link>
+              {article.category ? (
+                <>
+                  <span>/</span>
+                  <Link
+                    href={`/category/${article.category}`}
+                    className="hover:text-foreground transition-colors"
+                  >
+                    {getCategoryLabel(article.category)}
+                  </Link>
+                </>
+              ) : null}
             </nav>
             <p className="serif-en text-xs tracking-[0.42em] text-accent mt-14">
               {article.volume > 0

@@ -101,7 +101,7 @@ export default function GuidePage() {
                     return (
                       <li key={slug}>
                         <Link
-                          href={`/articles/${article.slug}`}
+                          href={article.href}
                           className="group flex items-baseline gap-3"
                         >
                           <span className="serif-en text-[11px] tracking-[0.25em] text-accent shrink-0">

@@ -5,7 +5,7 @@ import FollowCta from "@/components/media/FollowCta";
 import NewBadge from "@/components/media/NewBadge";
 import {
   CATEGORIES,
-  getAllArticles,
+  getEditorialArticles,
   getFeaturedArticle,
   getStartHereArticles,
   isNewArticle,
@@ -36,7 +36,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const articles = getAllArticles();
+  // ヒーロー・LATEST は編集記事のみ（体験談は /voices と Articles 一覧で読む — 配信ポリシー）
+  const articles = getEditorialArticles();
   const featured = getFeaturedArticle();
   const heroList = articles.slice(0, 3);
   const latest = articles.filter((article) => article.slug !== featured.slug).slice(0, 6);
@@ -103,7 +104,7 @@ export default function Home() {
                 {heroList.map((article) => (
                   <li key={article.slug} className="border-b border-border">
                     <Link
-                      href={`/articles/${article.slug}`}
+                      href={article.href}
                       className="group flex items-baseline gap-5 py-5"
                     >
                       <span className="serif-en text-xs tracking-[0.25em] text-muted shrink-0">
@@ -190,7 +191,7 @@ export default function Home() {
               {startHere.map((article, index) => (
                 <li key={article.slug} className="border-b border-border">
                   <Link
-                    href={`/articles/${article.slug}`}
+                    href={article.href}
                     className="group grid grid-cols-[auto_1fr] gap-6 sm:gap-10 py-8 items-baseline"
                   >
                     <span className="serif-en text-2xl sm:text-3xl font-light text-mute-soft group-hover:text-accent transition-colors">

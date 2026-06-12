@@ -1,4 +1,4 @@
-import { getAllArticles } from "@/lib/content";
+import { getEditorialArticles } from "@/lib/content";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -13,10 +13,11 @@ function escapeXml(value: string) {
 }
 
 export function GET() {
-  const articles = getAllArticles();
+  // 体験談はRSSに流さない（フィードは編集記事の更新チャネル — 配信ポリシー）
+  const articles = getEditorialArticles();
   const items = articles
     .map((article) => {
-      const url = absoluteUrl(`/articles/${article.slug}`);
+      const url = absoluteUrl(article.href);
       return `
         <item>
           <title>${escapeXml(article.title)}</title>

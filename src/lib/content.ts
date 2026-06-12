@@ -2,6 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Category, CategoryId } from "./categories";
 import { CATEGORIES, getCategoryById, getCategoryLabel } from "./categories";
+import type { ContentType } from "./content-types";
+import { getContentTypeLabel } from "./content-types";
+import { getAllVoices, type Voice } from "./voices";
 
 // 既存importの互換のため、カテゴリ定義（fs非依存・./categories）をここから再エクスポートする
 export type { Category, CategoryId };
@@ -9,13 +12,19 @@ export { CATEGORIES, getCategoryById, getCategoryLabel };
 
 export type FunnelStage = "TOFU" | "MOFU" | "BOFU";
 
+// CMS的な構造: すべてのコンテンツは「記事」。contentType（講座/ガイド/体験談）はその種別。
 export type Article = {
   slug: string;
   sourceFile: string;
   volume: number;
+  /** コンテンツ種別。lecture=連載講座 / guide=書き下ろし解説 / voice=体験談 */
+  contentType: ContentType;
+  /** 正規のリンク先。体験談は /voices/ 配下で読む */
+  href: string;
   title: string;
   description: string;
-  category: CategoryId;
+  /** テーマの棚。体験談など棚に属さないコンテンツは null */
+  category: CategoryId | null;
   tags: string[];
   publishedAt: string;
   updatedAt: string;
@@ -35,7 +44,10 @@ const SOURCE_DIR = path.join(
   "neoshamanism",
 );
 
-const ARTICLE_INDEX: Omit<Article, "body" | "readingMinutes" | "title" | "thumbnail">[] = [
+const ARTICLE_INDEX: Omit<
+  Article,
+  "body" | "readingMinutes" | "title" | "thumbnail" | "contentType" | "href"
+>[] = [
   {
     slug: "hero-as-soul-role",
     sourceFile: "vol01-article.md",
@@ -237,6 +249,16 @@ function fmValue(frontmatter: string, key: string): string {
   return bare ? bare[1].trim() : "";
 }
 
+/** frontmatter の contentType を検証。未知値・未指定は guide に倒す（書き下ろしの既定） */
+function resolveContentType(raw: string): ContentType {
+  return raw === "lecture" || raw === "voice" ? raw : "guide";
+}
+
+/** frontmatter の category を検証。未知・空は null（棚なし）に倒す */
+function resolveCategory(raw: string): CategoryId | null {
+  return getCategoryById(raw) ? (raw as CategoryId) : null;
+}
+
 function parseTags(frontmatter: string): string[] {
   const inline = frontmatter.match(/^tags:\s*\[(.*)\]\s*$/m);
   if (inline) {
@@ -268,13 +290,18 @@ function readArticleFiles(): Article[] {
     const body = m[2].trim();
     if (fmValue(fm, "status") !== "published") continue;
     const volumeRaw = fmValue(fm, "volume");
+    const slug = fmValue(fm, "slug") || file.replace(/\.md$/, "");
     out.push({
-      slug: fmValue(fm, "slug") || file.replace(/\.md$/, ""),
+      slug,
       sourceFile: `articles/${file}`,
       volume: volumeRaw ? Number(volumeRaw) : 0,
+      // 書き下ろし解説はデフォルトでガイド。frontmatter の contentType で上書き可（未知値は guide に倒す）
+      contentType: resolveContentType(fmValue(fm, "contentType")),
+      href: `/articles/${slug}`,
       title: fmValue(fm, "title"),
       description: fmValue(fm, "description"),
-      category: fmValue(fm, "category") as CategoryId,
+      // 未知・空のカテゴリは null（棚なし）に倒し、表示は種別ラベルにフォールバックさせる
+      category: resolveCategory(fmValue(fm, "category")),
       tags: parseTags(fm),
       publishedAt: fmValue(fm, "publishedAt"),
       updatedAt: fmValue(fm, "updatedAt") || fmValue(fm, "publishedAt"),
@@ -310,12 +337,38 @@ function estimateReadingMinutes(body: string) {
   return Math.max(3, Math.ceil(compact.length / 850));
 }
 
+/** 体験談を記事ビューへ写像する（CMS: 体験談も「記事」の一種。読む場所は /voices/ 配下） */
+function voiceToArticle(voice: Voice): Article {
+  return {
+    slug: voice.slug,
+    sourceFile: `voices/${voice.slug}.md`,
+    volume: 0,
+    contentType: "voice",
+    href: `/voices/${voice.slug}`,
+    title: voice.title,
+    description: voice.excerpt,
+    category: null,
+    // プログラム分類は /voices/program/ の責務。タグの棚を汚さない
+    tags: [],
+    publishedAt: voice.publishedAt,
+    updatedAt: voice.updatedAt,
+    youtubeUrl: "",
+    funnelStage: "BOFU",
+    primaryKeyword: "",
+    body: voice.sections.flat().join("\n\n"),
+    readingMinutes: voice.readingMinutes,
+    thumbnail: "",
+  };
+}
+
 export function getAllArticles(): Article[] {
   // 既存7記事（_source + ARTICLE_INDEX）。常に published 扱い。
   const indexed: Article[] = ARTICLE_INDEX.map((meta) => {
     const { title, body } = splitTitleAndBody(readSource(meta.sourceFile));
     return {
       ...meta,
+      contentType: "lecture" as const,
+      href: `/articles/${meta.slug}`,
       title,
       body,
       readingMinutes: estimateReadingMinutes(body),
@@ -323,10 +376,10 @@ export function getAllArticles(): Article[] {
     };
   });
 
-  // content/articles/*.md（frontmatter・status:published のみ）をマージ。slug重複は既存優先。
+  // content/articles/*.md（frontmatter・status:published のみ）と体験談をマージ。slug重複は既存優先。
   const seen = new Set(indexed.map((a) => a.slug));
   const merged = [...indexed];
-  for (const article of readArticleFiles()) {
+  for (const article of [...readArticleFiles(), ...getAllVoices().map(voiceToArticle)]) {
     if (!seen.has(article.slug)) {
       merged.push(article);
       seen.add(article.slug);
@@ -345,6 +398,21 @@ export function getAllArticles(): Article[] {
   });
 }
 
+/** 種別で絞り込む（CMS: /articles/type/[type] の正） */
+export function getArticlesByType(type: ContentType): Article[] {
+  return getAllArticles().filter((article) => article.contentType === type);
+}
+
+/**
+ * 編集コンテンツ（講座・ガイド）のみ。
+ * 配信ポリシー: 体験談は「記事の一種」として一覧・種別ナビに載るが、
+ * ヒーロー・LATEST・関連記事・RSSといった「編集が選んだ顔」には出さない
+ * （薬機法: 掲載位置による効能示唆を避ける。体験談の正規の読み場は /voices）
+ */
+export function getEditorialArticles(): Article[] {
+  return getAllArticles().filter((article) => article.contentType !== "voice");
+}
+
 export function getArticleBySlug(slug: string) {
   return getAllArticles().find((article) => article.slug === slug);
 }
@@ -353,17 +421,20 @@ export function getArticlesByCategory(id: string) {
   return getAllArticles().filter((article) => article.category === id);
 }
 
-/** メディアの顔は最新記事（黄金律 B-1: 新しさの露出が再訪の体験を作る） */
+/** メディアの顔は最新の編集記事（黄金律 B-1: 新しさの露出が再訪の体験を作る） */
 export function getFeaturedArticle() {
-  return getAllArticles()[0];
+  return getEditorialArticles()[0];
 }
 
 export function getRelatedArticles(article: Article, limit = 3) {
-  const sameCategory = getAllArticles().filter(
-    (candidate) =>
-      candidate.slug !== article.slug && candidate.category === article.category,
+  // 関連は編集記事同士で完結させる。体験談への導線は NEXT STEP と /voices が担う
+  const pool = getEditorialArticles().filter(
+    (candidate) => candidate.slug !== article.slug,
   );
-  const fallback = getAllArticles().filter((candidate) => candidate.slug !== article.slug);
+  const sameCategory = pool.filter(
+    (candidate) => candidate.category === article.category,
+  );
+  const fallback = pool;
 
   return [...sameCategory, ...fallback]
     .filter(
@@ -376,11 +447,23 @@ export function getRelatedArticles(article: Article, limit = 3) {
 /** 連載名（volume を持つ記事はすべてこの連載に属する） */
 export const SERIES_NAME = "ネオシャーマニズム講座";
 
-/** カード・リストの左肩ラベル。連載は VOL.XX、書き下ろし（volume 0）は GUIDE */
-export function articleKicker(article: Pick<Article, "volume">): string {
+/** カード・リストの左肩ラベル。連載は VOL.XX、ガイドは GUIDE、体験談は VOICE */
+export function articleKicker(
+  article: Pick<Article, "volume" | "contentType">,
+): string {
+  if (article.contentType === "voice") return "VOICE";
   return article.volume > 0
     ? `VOL.${String(article.volume).padStart(2, "0")}`
     : "GUIDE";
+}
+
+/** カードの右側ラベル。テーマの棚（カテゴリ）に属さないコンテンツは種別名を出す */
+export function articleShelfLabel(
+  article: Pick<Article, "category" | "contentType">,
+): string {
+  return article.category
+    ? getCategoryLabel(article.category)
+    : getContentTypeLabel(article.contentType);
 }
 
 /** 公開からこの日数以内を「新着」と扱う（SSGビルド時点基準。公開のたびに再デプロイされる運用前提） */
@@ -394,7 +477,7 @@ export function isNewArticle(article: Article): boolean {
 }
 
 export function getLatestArticles(limit: number, excludeSlug?: string) {
-  return getAllArticles()
+  return getEditorialArticles()
     .filter((article) => article.slug !== excludeSlug)
     .slice(0, limit);
 }
