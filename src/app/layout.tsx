@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Cormorant_Garamond, Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -183,6 +184,10 @@ export default function RootLayout({
         <main className="flex-1 pt-16">{children}</main>
         <Footer />
       </body>
+      {/* GA4 計測は本番デプロイのみ（ローカル・プレビューの数字を混ぜない）。測定IDは公開情報 */}
+      {process.env.VERCEL_ENV === "production" && (
+        <GoogleAnalytics gaId="G-H4YLQFC2L9" />
+      )}
     </html>
   );
 }

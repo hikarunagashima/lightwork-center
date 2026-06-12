@@ -15,6 +15,7 @@
     "content:batch-briefs": "node scripts/content-pipeline/batch-briefs.mjs"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.9",
     "@vercel/og": "^0.11.1",
     "next": "16.2.1",
     "react": "19.2.4",
