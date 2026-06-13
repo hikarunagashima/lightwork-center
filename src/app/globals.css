@@ -108,6 +108,66 @@ html {
   100% { transform: scaleY(1) translateY(18px); opacity: 0; }
 }
 
+/* ============================================================
+   創世の5秒 — 初回ロードアニメーション
+   ============================================================ */
+
+.genesis {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #06080e;
+  cursor: pointer;
+}
+
+.genesis-leave {
+  opacity: 0;
+  transition: opacity 0.95s ease;
+  pointer-events: none;
+}
+
+.genesis-logo {
+  position: absolute;
+  bottom: 16vh;
+  left: 50%;
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  color: #f4f0e6;
+  opacity: 0;
+  animation: genesis-logo-in 1.3s cubic-bezier(0.16, 1, 0.3, 1) 4.05s both;
+  pointer-events: none;
+}
+
+@keyframes genesis-logo-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(14px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%);
+    filter: none;
+  }
+}
+
+.genesis-skip {
+  position: absolute;
+  bottom: 5vh;
+  right: 6vw;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: rgba(168, 155, 137, 0.75);
+  border-bottom: 1px solid rgba(168, 155, 137, 0.3);
+  padding-bottom: 3px;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+
+.genesis-skip:hover {
+  color: #f4f0e6;
+  border-color: rgba(244, 240, 230, 0.7);
+}
+
 /* 見出しの言霊 — 一文字ずつ、水面から浮かび上がる */
 .char-rise {
   display: inline-block;

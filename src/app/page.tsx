@@ -3,6 +3,7 @@ import Link from "next/link";
 import ArticleCard from "@/components/media/ArticleCard";
 import Reveal from "@/components/effects/Reveal";
 import CosmicHero from "@/components/home/CosmicHero";
+import GenesisLoader from "@/components/home/GenesisLoader";
 import FollowCta from "@/components/media/FollowCta";
 import NewBadge from "@/components/media/NewBadge";
 import {
@@ -65,6 +66,9 @@ export default function Home() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* 創世の5秒 — 初回訪問のみ */}
+      <GenesisLoader />
 
       {/* Hero — 夜の宇宙。古代の祈りを、AI時代の言葉へ、をそのまま画面にする */}
       <CosmicHero />
