@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ArticleCard from "@/components/media/ArticleCard";
 import Reveal from "@/components/effects/Reveal";
-import HeroLight from "@/components/home/HeroLight";
+import CosmicHero from "@/components/home/CosmicHero";
 import FollowCta from "@/components/media/FollowCta";
 import NewBadge from "@/components/media/NewBadge";
 import {
@@ -66,42 +66,14 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero — 世界観と最新記事を同じ視界に置く（黄金律 B-1: FVで複数記事を露出） */}
-      <section className="relative px-6 pt-20 pb-16 sm:pt-28 sm:pb-20 border-b border-border">
-        <HeroLight />
-        <div className="relative max-w-[1320px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-24">
-            <div>
-              <p className="serif-en text-xs sm:text-sm tracking-[0.42em] text-muted editorial-in">
-                ⊙ &nbsp; NEO SHAMANISM JOURNAL
-              </p>
-              <h1 className="serif-jp text-4xl sm:text-6xl lg:text-7xl font-light leading-[1.25] mt-8 editorial-in-delay-1">
-                古代の祈りを、
-                <br />
-                AI時代の言葉へ。
-              </h1>
-              <p className="serif-jp text-base sm:text-lg leading-[2.1] text-muted mt-10 editorial-in-delay-2">
-                ここは、何かになるための場所じゃない。
-                <br />
-                すでに、そうだったことを、思い出す場所だ。
-              </p>
-              <div className="mt-12 flex flex-wrap gap-x-8 gap-y-4 editorial-in-delay-3">
-                <Link
-                  href="/articles"
-                  className="serif-en text-sm tracking-[0.25em] border border-foreground px-7 py-3 hover:bg-foreground hover:text-background transition-colors"
-                >
-                  Read Articles
-                </Link>
-                <Link
-                  href="/manifesto"
-                  className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground border-b border-mute-soft hover:border-foreground py-3 transition-colors"
-                >
-                  Read the Letter
-                </Link>
-              </div>
-            </div>
+      {/* Hero — 夜の宇宙。古代の祈りを、AI時代の言葉へ、をそのまま画面にする */}
+      <CosmicHero />
 
-            <nav aria-label="最新の記事" className="editorial-in-delay-2">
+      {/* 夜明け直後 — 最新記事（黄金律 B-1: FV直下で複数記事を露出） */}
+      <section className="px-6 pt-14 pb-16 sm:pb-20 border-b border-border">
+        <div className="relative max-w-[1320px] mx-auto">
+          <div>
+            <nav aria-label="最新の記事">
               <p className="serif-en text-xs tracking-[0.45em] text-accent">LATEST</p>
               <ol className="mt-6 border-t border-border">
                 {heroList.map((article) => (

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { CATEGORIES } from "@/lib/categories";
 
 const NAV_ITEMS = [
@@ -15,9 +16,36 @@ const NAV_ITEMS = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [overDark, setOverDark] = useState(false);
+  const pathname = usePathname();
+
+  // トップの没入ヒーロー（夜の宇宙）の上では、ヘッダーも夜に溶ける
+  useEffect(() => {
+    if (pathname !== "/") {
+      setOverDark(false);
+      return;
+    }
+    const hero = document.querySelector(".cosmic-hero");
+    if (!hero) {
+      setOverDark(false);
+      return;
+    }
+    setOverDark(true);
+    const onScroll = () => {
+      const bottom = hero.getBoundingClientRect().bottom;
+      setOverDark(bottom > 72);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-border-soft">
+    <header
+      className={`site-header fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-border-soft ${
+        overDark ? "over-dark" : ""
+      }`}
+    >
       <nav className="flex items-center justify-between px-6 py-4 max-w-[1400px] mx-auto">
         <Link
           href="/"
@@ -43,7 +71,7 @@ export default function Header() {
           ))}
           <Link
             href="/medicine-wheel"
-            className="serif-en text-xs tracking-[0.25em] border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors"
+            className="header-apply serif-en text-xs tracking-[0.25em] border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors"
           >
             Apply
           </Link>
@@ -56,12 +84,12 @@ export default function Header() {
           aria-label="Menu"
         >
           <span
-            className={`block w-5 h-[1px] bg-foreground transition-all duration-300 ${
+            className={`hamburger-line block w-5 h-[1px] bg-foreground transition-all duration-300 ${
               isOpen ? "rotate-45 translate-y-[3px]" : ""
             }`}
           />
           <span
-            className={`block w-5 h-[1px] bg-foreground transition-all duration-300 ${
+            className={`hamburger-line block w-5 h-[1px] bg-foreground transition-all duration-300 ${
               isOpen ? "-rotate-45 -translate-y-[3px]" : ""
             }`}
           />

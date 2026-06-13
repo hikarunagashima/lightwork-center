@@ -87,6 +87,50 @@ html {
    ヒーローの光・紙の質感・スクロールの呼吸・金のヘアライン。
    ============================================================ */
 
+/* 没入ヒーロー — 夜の宇宙。深い藍黒に金の銀河が浮かぶ */
+.cosmic-hero {
+  background:
+    radial-gradient(ellipse 120% 90% at 50% 30%, #161a26 0%, #0e111a 55%, #0b0d14 100%);
+}
+
+/* スクロールの誘い — 細い金の縦線が流れ落ちる */
+.scroll-beam {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(180deg, rgba(200, 169, 110, 0.9), transparent);
+  animation: beam-fall 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  transform-origin: top;
+}
+
+@keyframes beam-fall {
+  0% { transform: scaleY(0); opacity: 0; }
+  35% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1) translateY(18px); opacity: 0; }
+}
+
+/* ヘッダー — 宇宙の上では夜に溶け、生成りの世界では紙に戻る */
+header.site-header {
+  transition: background-color 0.6s ease, border-color 0.6s ease;
+}
+
+header.site-header.over-dark {
+  background-color: rgba(14, 17, 26, 0.55) !important;
+  border-color: rgba(244, 240, 230, 0.12) !important;
+}
+
+header.site-header.over-dark a,
+header.site-header.over-dark span:not(.text-accent) {
+  color: #f4f0e6;
+}
+
+header.site-header.over-dark .header-apply {
+  border-color: rgba(244, 240, 230, 0.7);
+}
+
+header.site-header.over-dark .hamburger-line {
+  background-color: #f4f0e6;
+}
+
 /* ヒーローの夜明け: ⊙の側から朝の光が差し、ゆっくり満ちる */
 .hero-dawn {
   background:
