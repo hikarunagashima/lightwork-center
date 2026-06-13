@@ -15,7 +15,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
 
   if (featured) {
     return (
-      <article className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-px bg-border border-y border-border">
+      <article className="card-lift grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-px bg-border border-y border-border">
         <Link href={article.href} className="block bg-background">
           <ArticleVisual article={article} variant="featured" />
         </Link>
@@ -51,7 +51,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
   }
 
   return (
-    <article className="group">
+    <article className="group card-lift">
       <Link href={article.href} className="block">
         <ArticleVisual article={article} variant="card" />
         <p className="serif-en text-[11px] tracking-[0.35em] text-accent mt-5 flex items-center gap-3">

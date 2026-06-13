@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ArticleCard from "@/components/media/ArticleCard";
+import Reveal from "@/components/effects/Reveal";
+import CosmicHero from "@/components/home/CosmicHero";
+import GenesisLoader from "@/components/home/GenesisLoader";
 import FollowCta from "@/components/media/FollowCta";
 import NewBadge from "@/components/media/NewBadge";
 import {
@@ -64,41 +67,17 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero — 世界観と最新記事を同じ視界に置く（黄金律 B-1: FVで複数記事を露出） */}
-      <section className="px-6 pt-20 pb-16 sm:pt-28 sm:pb-20 border-b border-border">
-        <div className="max-w-[1320px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-24">
-            <div>
-              <p className="serif-en text-xs sm:text-sm tracking-[0.42em] text-muted editorial-in">
-                ⊙ &nbsp; NEO SHAMANISM JOURNAL
-              </p>
-              <h1 className="serif-jp text-4xl sm:text-6xl lg:text-7xl font-light leading-[1.25] mt-8 editorial-in-delay-1">
-                古代の祈りを、
-                <br />
-                AI時代の言葉へ。
-              </h1>
-              <p className="serif-jp text-base sm:text-lg leading-[2.1] text-muted mt-10 editorial-in-delay-2">
-                ここは、何かになるための場所じゃない。
-                <br />
-                すでに、そうだったことを、思い出す場所だ。
-              </p>
-              <div className="mt-12 flex flex-wrap gap-x-8 gap-y-4 editorial-in-delay-3">
-                <Link
-                  href="/articles"
-                  className="serif-en text-sm tracking-[0.25em] border border-foreground px-7 py-3 hover:bg-foreground hover:text-background transition-colors"
-                >
-                  Read Articles
-                </Link>
-                <Link
-                  href="/manifesto"
-                  className="serif-en text-sm tracking-[0.25em] text-muted hover:text-foreground border-b border-mute-soft hover:border-foreground py-3 transition-colors"
-                >
-                  Read the Letter
-                </Link>
-              </div>
-            </div>
+      {/* 創世の5秒 — 初回訪問のみ */}
+      <GenesisLoader />
 
-            <nav aria-label="最新の記事" className="editorial-in-delay-2">
+      {/* Hero — 夜の宇宙。古代の祈りを、AI時代の言葉へ、をそのまま画面にする */}
+      <CosmicHero />
+
+      {/* 夜明け直後 — 最新記事（黄金律 B-1: FV直下で複数記事を露出） */}
+      <section className="px-6 pt-14 pb-16 sm:pb-20 border-b border-border">
+        <div className="relative max-w-[1320px] mx-auto">
+          <div>
+            <nav aria-label="最新の記事">
               <p className="serif-en text-xs tracking-[0.45em] text-accent">LATEST</p>
               <ol className="mt-6 border-t border-border">
                 {heroList.map((article) => (
@@ -140,7 +119,7 @@ export default function Home() {
 
       {/* 新着ゾーン（黄金律 B-5: 新着・入口・棚の3ゾーン分離） */}
       <section className="px-6 py-24">
-        <div className="max-w-[1320px] mx-auto">
+        <Reveal className="max-w-[1320px] mx-auto">
           <div className="flex items-baseline justify-between gap-6">
             <p className="serif-en text-xs tracking-[0.45em] text-muted">
               ⊙ &nbsp; NEW ARRIVALS
@@ -155,16 +134,17 @@ export default function Home() {
           <h2 className="serif-jp text-3xl font-light leading-[1.6] mt-8">
             連載を、読み物として編む。
           </h2>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-14">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-14 reveal-stagger">
             {latest.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* はじめての方の入口（編集部ピック） */}
-      <section className="px-6 py-24 border-t border-border">
+      <Reveal className="gold-hairline">
+      <section className="px-6 py-24">
         <div className="max-w-[1320px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20">
             <div>
@@ -187,7 +167,7 @@ export default function Home() {
                 Reading Guide →
               </Link>
             </div>
-            <ol className="border-t border-border">
+            <ol className="border-t border-border reveal-stagger">
               {startHere.map((article, index) => (
                 <li key={article.slug} className="border-b border-border">
                   <Link
@@ -212,14 +192,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* カテゴリの棚 */}
-      <section className="px-6 py-24 border-t border-border">
+      <Reveal className="gold-hairline">
+      <section className="px-6 py-24">
         <div className="max-w-[1320px] mx-auto">
           <p className="serif-en text-xs tracking-[0.45em] text-muted">
             ⊙ &nbsp; CURATION SHELVES
           </p>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-border">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-border reveal-stagger">
             {CATEGORIES.map((category) => (
               <Link
                 key={category.id}
@@ -242,9 +224,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* プログラム導線 */}
-      <section className="px-6 py-24 border-t border-border">
+      <Reveal className="gold-hairline">
+      <section className="px-6 py-24">
         <div className="max-w-[980px] mx-auto text-center">
           <p className="serif-en text-xs tracking-[0.45em] text-muted">
             ⊙ &nbsp; PROGRAMME
@@ -265,6 +249,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      </Reveal>
 
       {/* 再訪導線 */}
       <section className="px-6 pb-24">

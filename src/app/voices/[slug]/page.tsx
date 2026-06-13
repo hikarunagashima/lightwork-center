@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReadingProgress from "@/components/effects/ReadingProgress";
 import VoiceCard from "@/components/media/VoiceCard";
 import { jsonLdString } from "@/lib/jsonld";
 import { getProgramLabel } from "@/lib/programs";
@@ -128,6 +129,8 @@ export default async function VoicePage({ params }: VoicePageProps) {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: jsonLdString(breadcrumbJsonLd) }}
       />
+
+      <ReadingProgress />
 
       <article>
         <header className="px-6 pt-24 pb-16 border-b border-border">

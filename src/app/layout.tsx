@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Cormorant_Garamond, Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import Link from "next/link";
+import PageTurn from "@/components/effects/PageTurn";
 import Header from "@/components/Header";
 import { CATEGORIES } from "@/lib/content";
 import {
@@ -179,7 +180,8 @@ export default function RootLayout({
       lang="ja"
       className={`${cormorant.variable} ${notoSerifJp.variable} ${notoSansJp.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col paper-grain">
+        <PageTurn />
         <Header />
         <main className="flex-1 pt-16">{children}</main>
         <Footer />
