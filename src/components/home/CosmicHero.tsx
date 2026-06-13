@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 /**
@@ -52,8 +52,8 @@ function starColor(tone: number): { r: number; g: number; b: number } {
   return tone === 0 ? GOLD : tone === 1 ? PAPER : MIST;
 }
 
-/** 見出しの言霊デコード — ランダムな文字から、左から順に確定していく */
-function DecodeText({
+/** 見出しの言霊 — 一文字ずつ、水面から浮かび上がる */
+function CharRise({
   text,
   startDelay = 0,
   className = "",
@@ -62,47 +62,20 @@ function DecodeText({
   startDelay?: number;
   className?: string;
 }) {
-  const [display, setDisplay] = useState<string>(() => text);
-  const [started, setStarted] = useState(false);
-  const POOL = "アイウエオカキクケコサシスセソタチツテトナニヌネノ⊙◯△□〆※";
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplay(text);
-      setStarted(true);
-      return;
-    }
-    setDisplay(" ".repeat(text.length));
-    const start = setTimeout(() => setStarted(true), startDelay);
-    return () => clearTimeout(start);
-  }, [text, startDelay]);
-
-  useEffect(() => {
-    if (!started) return;
-    const chars = [...text];
-    const settleAt = chars.map((_, i) => 350 + i * 75 + Math.random() * 120);
-    const t0 = performance.now();
-    let raf = 0;
-    const tick = () => {
-      const elapsed = performance.now() - t0;
-      let done = true;
-      const next = chars
-        .map((ch, i) => {
-          if (ch === "、" || ch === "。" || ch === " ") return ch;
-          if (elapsed >= settleAt[i]) return ch;
-          done = false;
-          return POOL[Math.floor(Math.random() * POOL.length)];
-        })
-        .join("");
-      setDisplay(next);
-      if (!done) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [started, text]);
-
-  return <span className={className}>{display}</span>;
+  return (
+    <span className={className} aria-label={text} role="text">
+      {[...text].map((ch, i) => (
+        <span
+          key={i}
+          aria-hidden
+          className="char-rise"
+          style={{ animationDelay: `${startDelay + i * 110}ms` }}
+        >
+          {ch}
+        </span>
+      ))}
+    </span>
+  );
 }
 
 function GalaxyCanvas() {
@@ -313,8 +286,8 @@ export default function CosmicHero() {
           ⊙ &nbsp;NEO SHAMANISM JOURNAL
         </p>
         <h1 className="serif-jp font-light leading-[1.4] mt-10 text-[#F4F0E6] text-4xl sm:text-6xl lg:text-7xl">
-          <DecodeText text="古代の祈りを、" startDelay={500} className="block" />
-          <DecodeText text="AI時代の言葉へ。" startDelay={1300} className="block mt-2" />
+          <CharRise text="古代の祈りを、" startDelay={400} className="block" />
+          <CharRise text="AI時代の言葉へ。" startDelay={1300} className="block mt-2" />
         </h1>
         <p className="serif-jp text-sm sm:text-lg leading-[2.2] text-[#A89B89] mt-10 editorial-in-delay-3 max-w-xl">
           ここは、何かになるための場所じゃない。
