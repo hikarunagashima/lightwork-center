@@ -90,8 +90,8 @@ html {
 /* ヒーローの夜明け: ⊙の側から朝の光が差し、ゆっくり満ちる */
 .hero-dawn {
   background:
-    radial-gradient(ellipse 90% 70% at 18% 22%, rgba(200, 169, 110, 0.13), transparent 62%),
-    radial-gradient(ellipse 70% 55% at 85% 88%, rgba(200, 169, 110, 0.05), transparent 70%);
+    radial-gradient(ellipse 90% 70% at 18% 22%, rgba(200, 169, 110, 0.2), transparent 62%),
+    radial-gradient(ellipse 70% 55% at 85% 88%, rgba(200, 169, 110, 0.09), transparent 70%);
   opacity: 0;
   animation: dawn-fill 3.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
 }
@@ -113,6 +113,48 @@ html {
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='lwc-grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23lwc-grain)' opacity='0.55'/%3E%3C/svg%3E");
 }
+
+/* スクロールで目を覚ますブロック — 滲みから像を結ぶ */
+.reveal-rise {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(8px);
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-rise.is-inview,
+.is-inview .reveal-rise {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* 子要素が順々に像を結ぶ（カードグリッド・リスト用） */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(8px);
+  transition:
+    opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.is-inview .reveal-stagger > *,
+.reveal-stagger.is-inview > * {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.reveal-stagger > *:nth-child(2) { transition-delay: 0.1s; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 0.2s; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 0.3s; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 0.4s; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 0.5s; }
 
 /* セクションの境界 — 金のヘアラインが中央から灯る */
 .gold-hairline {
@@ -148,7 +190,7 @@ html {
 }
 
 .card-lift:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -163,6 +205,13 @@ html {
 
   .gold-hairline::before {
     transform: scaleX(1);
+  }
+
+  .reveal-rise,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }
 

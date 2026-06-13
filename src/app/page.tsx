@@ -143,7 +143,7 @@ export default function Home() {
 
       {/* 新着ゾーン（黄金律 B-5: 新着・入口・棚の3ゾーン分離） */}
       <section className="px-6 py-24">
-        <div className="max-w-[1320px] mx-auto">
+        <Reveal className="max-w-[1320px] mx-auto">
           <div className="flex items-baseline justify-between gap-6">
             <p className="serif-en text-xs tracking-[0.45em] text-muted">
               ⊙ &nbsp; NEW ARRIVALS
@@ -158,12 +158,12 @@ export default function Home() {
           <h2 className="serif-jp text-3xl font-light leading-[1.6] mt-8">
             連載を、読み物として編む。
           </h2>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-14">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-14 reveal-stagger">
             {latest.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* はじめての方の入口（編集部ピック） */}
@@ -191,7 +191,7 @@ export default function Home() {
                 Reading Guide →
               </Link>
             </div>
-            <ol className="border-t border-border">
+            <ol className="border-t border-border reveal-stagger">
               {startHere.map((article, index) => (
                 <li key={article.slug} className="border-b border-border">
                   <Link
@@ -225,7 +225,7 @@ export default function Home() {
           <p className="serif-en text-xs tracking-[0.45em] text-muted">
             ⊙ &nbsp; CURATION SHELVES
           </p>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-border">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-border reveal-stagger">
             {CATEGORIES.map((category) => (
               <Link
                 key={category.id}

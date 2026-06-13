@@ -30,11 +30,11 @@ function makeParticle(w: number, h: number, seedY?: boolean): Particle {
   return {
     x: Math.random() * w,
     y: seedY ? Math.random() * h : h + Math.random() * 40,
-    r: 0.6 + Math.random() * 1.7,
-    vy: 0.1 + Math.random() * 0.28,
+    r: 0.8 + Math.random() * 2.4,
+    vy: 0.12 + Math.random() * 0.34,
     driftAmp: 8 + Math.random() * 22,
     driftFreq: 0.0004 + Math.random() * 0.0007,
-    baseAlpha: 0.08 + Math.random() * 0.3,
+    baseAlpha: 0.16 + Math.random() * 0.42,
     phase: Math.random() * Math.PI * 2,
   };
 }
@@ -90,7 +90,7 @@ export default function HeroLight() {
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.min(64, Math.max(18, Math.floor(width / 22)));
+      const count = Math.min(90, Math.max(24, Math.floor(width / 15)));
       particles = Array.from({ length: count }, () => makeParticle(width, height, true));
     };
 
@@ -100,6 +100,17 @@ export default function HeroLight() {
       // 全体の呼吸（±18%）
       const breath = 0.82 + 0.18 * Math.sin(t * 0.00028);
 
+      // ⊙の光源 — 左上で大きくゆっくり脈動する太陽。このヒーローの心臓
+      const sunX = width * 0.16;
+      const sunY = height * 0.2;
+      const sunR = Math.min(width, height) * (0.34 + 0.05 * Math.sin(t * 0.0004));
+      const sun = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunR);
+      sun.addColorStop(0, `rgba(${GOLD.r},${GOLD.g},${GOLD.b},${0.16 * breath})`);
+      sun.addColorStop(0.5, `rgba(${GOLD.r},${GOLD.g},${GOLD.b},${0.07 * breath})`);
+      sun.addColorStop(1, `rgba(${GOLD.r},${GOLD.g},${GOLD.b},0)`);
+      ctx.fillStyle = sun;
+      ctx.fillRect(0, 0, width, height);
+
       // カーソルの光暈（遅延追従・デスクトップのみ）
       if (fine && cursor.active) {
         cursor.x += (cursor.tx - cursor.x) * 0.05;
@@ -108,7 +119,7 @@ export default function HeroLight() {
           cursor.x, cursor.y, 0,
           cursor.x, cursor.y, 180,
         );
-        halo.addColorStop(0, `rgba(${GOLD.r},${GOLD.g},${GOLD.b},0.05)`);
+        halo.addColorStop(0, `rgba(${GOLD.r},${GOLD.g},${GOLD.b},0.09)`);
         halo.addColorStop(1, `rgba(${GOLD.r},${GOLD.g},${GOLD.b},0)`);
         ctx.fillStyle = halo;
         ctx.fillRect(0, 0, width, height);
