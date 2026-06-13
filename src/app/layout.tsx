@@ -178,7 +178,7 @@ export default function RootLayout({
       lang="ja"
       className={`${cormorant.variable} ${notoSerifJp.variable} ${notoSansJp.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col paper-grain">
         <Header />
         <main className="flex-1 pt-16">{children}</main>
         <Footer />

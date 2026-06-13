@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ArticleCard from "@/components/media/ArticleCard";
+import Reveal from "@/components/effects/Reveal";
+import HeroLight from "@/components/home/HeroLight";
 import FollowCta from "@/components/media/FollowCta";
 import NewBadge from "@/components/media/NewBadge";
 import {
@@ -65,8 +67,9 @@ export default function Home() {
       />
 
       {/* Hero — 世界観と最新記事を同じ視界に置く（黄金律 B-1: FVで複数記事を露出） */}
-      <section className="px-6 pt-20 pb-16 sm:pt-28 sm:pb-20 border-b border-border">
-        <div className="max-w-[1320px] mx-auto">
+      <section className="relative px-6 pt-20 pb-16 sm:pt-28 sm:pb-20 border-b border-border">
+        <HeroLight />
+        <div className="relative max-w-[1320px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-24">
             <div>
               <p className="serif-en text-xs sm:text-sm tracking-[0.42em] text-muted editorial-in">
@@ -164,7 +167,8 @@ export default function Home() {
       </section>
 
       {/* はじめての方の入口（編集部ピック） */}
-      <section className="px-6 py-24 border-t border-border">
+      <Reveal className="gold-hairline">
+      <section className="px-6 py-24">
         <div className="max-w-[1320px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20">
             <div>
@@ -212,9 +216,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* カテゴリの棚 */}
-      <section className="px-6 py-24 border-t border-border">
+      <Reveal className="gold-hairline">
+      <section className="px-6 py-24">
         <div className="max-w-[1320px] mx-auto">
           <p className="serif-en text-xs tracking-[0.45em] text-muted">
             ⊙ &nbsp; CURATION SHELVES
@@ -242,9 +248,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* プログラム導線 */}
-      <section className="px-6 py-24 border-t border-border">
+      <Reveal className="gold-hairline">
+      <section className="px-6 py-24">
         <div className="max-w-[980px] mx-auto text-center">
           <p className="serif-en text-xs tracking-[0.45em] text-muted">
             ⊙ &nbsp; PROGRAMME
@@ -265,6 +273,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      </Reveal>
 
       {/* 再訪導線 */}
       <section className="px-6 pb-24">
