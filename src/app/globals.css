@@ -168,6 +168,26 @@ html {
   border-color: rgba(244, 240, 230, 0.7);
 }
 
+/* 創世が再生中は、ヒーローの演出を待機させる（終了と同時に走り出す） */
+html.genesis-active .editorial-in,
+html.genesis-active .editorial-in-delay-1,
+html.genesis-active .editorial-in-delay-2,
+html.genesis-active .editorial-in-delay-3,
+html.genesis-active .char-rise,
+html.genesis-active .hero-dawn,
+html.genesis-active .scroll-beam {
+  animation-play-state: paused !important;
+}
+
+/* 創世中はヒーローの銀河を伏せておき、終了で創世の渦とクロスフェードさせる */
+.cosmic-hero canvas {
+  transition: opacity 1.6s ease;
+}
+
+html.genesis-active .cosmic-hero canvas {
+  opacity: 0;
+}
+
 /* 見出しの言霊 — 一文字ずつ、水面から浮かび上がる */
 .char-rise {
   display: inline-block;

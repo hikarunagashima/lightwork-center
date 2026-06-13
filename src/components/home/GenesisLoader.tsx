@@ -30,8 +30,10 @@ const MIST = { r: 143, g: 166, b: 172 };
 type Spark = {
   x: number;
   y: number;
+  z: number;
   vx: number;
   vy: number;
+  vz: number;
   size: number;
   heat: number; // 1=白熱 → 0=冷えて金
   alive: boolean;
@@ -87,6 +89,8 @@ export default function GenesisLoader() {
     const force = new URLSearchParams(window.location.search).has("genesis");
     if (!force && sessionStorage.getItem(SEEN_KEY)) return;
     sessionStorage.setItem(SEEN_KEY, "1");
+    // ヒーローの演出（文字・夜明け・銀河）を創世の終わりまで待機させる
+    document.documentElement.classList.add("genesis-active");
     setShow(true);
   }, []);
 
@@ -129,18 +133,20 @@ export default function GenesisLoader() {
     const explode = () => {
       if (exploded) return;
       exploded = true;
-      const n = width < 640 ? 1100 : 2400;
+      const n = width < 640 ? 1200 : 2600;
       sparks = Array.from({ length: n }, () => {
-        // 球面方向 + ランダム初速（中心からの放射）
+        // 3D球面方向（円盤寄りの分布 = 生まれる前の銀河）+ ランダム初速
         const a = Math.random() * Math.PI * 2;
-        const tilt = (Math.random() - 0.5) * 0.9; // 楕円気味=銀河の円盤
-        const speed = 2.2 + Math.random() * 9.5;
+        const elev = (Math.random() - 0.5) * (Math.random() < 0.78 ? 0.5 : 1.6);
+        const speed = 2.4 + Math.random() * 10.5;
         return {
-          x: cx(),
-          y: cy(),
-          vx: Math.cos(a) * speed,
-          vy: Math.sin(a) * speed * (0.55 + Math.abs(tilt)),
-          size: 0.5 + Math.random() * 1.9,
+          x: 0,
+          y: 0,
+          z: 0,
+          vx: Math.cos(a) * Math.cos(elev) * speed,
+          vy: Math.sin(elev) * speed * 0.8,
+          vz: Math.sin(a) * Math.cos(elev) * speed,
+          size: 0.6 + Math.random() * 2.1,
           heat: 0.6 + Math.random() * 0.4,
           alive: true,
         };
@@ -150,6 +156,8 @@ export default function GenesisLoader() {
     const finish = () => {
       if (done) return;
       done = true;
+      // ヒーローの演出を解き放つ — 創世の渦と銀河がクロスフェードし、文字が浮かび始める
+      document.documentElement.classList.remove("genesis-active");
       setLeaving(true);
       window.setTimeout(() => setShow(false), 950);
     };
@@ -208,38 +216,58 @@ export default function GenesisLoader() {
         ctx.fillRect(X - r * 9, Y - r * 9, r * 18, r * 18);
       }
 
+      // ---- 空間の傾き（カメラ）: 曼荼羅は正面 → 描き終わりに宇宙の盤面へ倒れ込む ----
+      // tiltK: 0=正面(scaleY 1) → 1=銀河の盤面(scaleY 0.45)
+      const tiltK =
+        t < T_BANG * 0.62 ? 0
+        : Math.min(1, (t - T_BANG * 0.62) / (T_BANG * 0.38));
+      const planeY = 1 - tiltK * 0.55;
+
       // ---- 神聖幾何学 — フラワーオブライフの一筆書き ----
       if (t > T_GEOMETRY && t < T_BANG + 180) {
         const prog = Math.min(1, (t - T_GEOMETRY) / (T_BANG - T_GEOMETRY));
         const cs = circles();
         const per = 1 / cs.length;
         ctx.lineWidth = 1;
+        ctx.save();
+        ctx.translate(X, Y);
+        ctx.scale(1, planeY); // 盤面へ倒れていく
         cs.forEach((c, i) => {
           const local = Math.max(0, Math.min(1, (prog - i * per * 0.72) / (per * 3)));
           if (local <= 0) return;
           const fade = t > T_BANG ? 1 - (t - T_BANG) / 180 : 1;
           ctx.strokeStyle = `rgba(${GOLD.r},${GOLD.g},${GOLD.b},${(0.25 + 0.45 * local) * fade})`;
           ctx.beginPath();
-          ctx.arc(X + c.x, Y + c.y, c.r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * local);
+          ctx.arc(c.x, c.y, c.r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * local);
           ctx.stroke();
         });
+        ctx.restore();
       }
 
       // ---- ビッグバン ----
       if (t >= T_BANG) {
         explode();
 
-        // 衝撃波リング
-        for (const [delay, speed, alpha] of [[0, 0.9, 0.5], [120, 0.62, 0.3]] as const) {
+        // カメラのドリーアウト: 爆発の規模を見せるため、焦点距離をゆっくり引く
+        const R0 = Math.min(width, height);
+        const dolly = 1 + Math.min(0.5, (t - T_BANG) / 1600) * 0.5;
+        const focal = R0 * 1.5 * dolly;
+
+        // 衝撃波リング — 銀河の盤面に沿って傾いた楕円で走る
+        for (const [delay, speed, alpha] of [[0, 1.05, 0.5], [130, 0.7, 0.3]] as const) {
           const wt = t - T_BANG - delay;
           if (wt > 0 && wt < 1300) {
             const wr = wt * speed;
             const wa = alpha * (1 - wt / 1300);
+            ctx.save();
+            ctx.translate(X, Y);
+            ctx.scale(1, planeY);
             ctx.strokeStyle = `rgba(244,240,230,${wa})`;
             ctx.lineWidth = 1.5;
             ctx.beginPath();
-            ctx.arc(X, Y, wr, 0, Math.PI * 2);
+            ctx.arc(0, 0, wr, 0, Math.PI * 2);
             ctx.stroke();
+            ctx.restore();
           }
         }
 
@@ -250,39 +278,49 @@ export default function GenesisLoader() {
           ctx.fillRect(0, 0, width, height);
         }
 
-        // 粒子 — 放射 → 渦への収束
+        // 粒子 — 3D空間で放射 → 渦の円盤へ収束（銀河形成）
         const vortex = t > T_VORTEX;
         for (const s of sparks) {
           if (!s.alive) continue;
           if (vortex) {
-            // 中心への重力 + 接線力 = 渦
-            const dx = X - s.x;
-            const dy = Y - s.y;
-            const d = Math.sqrt(dx * dx + dy * dy) || 1;
-            const g = Math.min(0.5, 46 / d);
-            s.vx += (dx / d) * g + (-dy / d) * g * 0.85;
-            s.vy += (dy / d) * g + (dx / d) * g * 0.85;
+            // 中心への重力（3D）+ XZ平面の接線力 + 盤面への沈降 = 銀河の物理
+            const d = Math.sqrt(s.x * s.x + s.y * s.y + s.z * s.z) || 1;
+            const g = Math.min(0.55, 52 / d);
+            s.vx += (-s.x / d) * g + (-s.z / d) * g * 0.85;
+            s.vz += (-s.z / d) * g + (s.x / d) * g * 0.85;
+            s.vy += (-s.y / d) * g - s.y * 0.012; // 円盤面へ潰れていく
             s.vx *= 0.965;
-            s.vy *= 0.965;
-            if (d < 14) s.alive = false; // ⊙ に還る
+            s.vy *= 0.955;
+            s.vz *= 0.965;
+            if (d < 16) s.alive = false; // ⊙ に還る
           } else {
             s.vx *= 0.988;
             s.vy *= 0.988;
+            s.vz *= 0.988;
           }
           s.x += s.vx;
           s.y += s.vy;
+          s.z += s.vz;
           s.heat = Math.max(0, s.heat - 0.004);
 
-          // 白熱 → 金 → 青の余熱
+          // 透視投影（手前に飛ぶ粒子は大きく・速く見える）
+          const persp = focal / (focal + s.z + R0 * 0.6);
+          if (persp <= 0) continue;
+          const sx = X + s.x * persp;
+          const sy = Y + (s.y * 0.75 + s.z * 0.22) * persp; // わずかな俯角
+          if (sx < -30 || sx > width + 30 || sy < -30 || sy > height + 30) continue;
+
+          // 白熱 → 金 → 青の余熱。奥は深度フォグで沈む
           const c =
             s.heat > 0.55
               ? { r: 255, g: 250, b: 235 }
               : s.heat > 0.25
                 ? GOLD
                 : MIST;
-          const a = Math.min(1, s.heat + 0.25);
+          const a = Math.min(1, s.heat + 0.25) * Math.min(1, persp * 1.25);
+          const sz = Math.max(0.4, s.size * persp * 1.4);
           ctx.fillStyle = `rgba(${c.r},${c.g},${c.b},${a})`;
-          ctx.fillRect(s.x, s.y, s.size, s.size);
+          ctx.fillRect(sx - sz / 2, sy - sz / 2, sz, sz);
         }
       }
 
@@ -302,17 +340,17 @@ export default function GenesisLoader() {
         ctx.globalCompositeOperation = "lighter";
       }
 
-      // ---- ⊙ が結ばれる ----
+      // ---- ⊙ が結ばれる（CosmicHeroの⊙と同じ正円 — ここで次の画面へ受け継ぐ） ----
       if (t > T_VORTEX + 500) {
         const oa = Math.min(1, (t - T_VORTEX - 500) / 700);
         ctx.strokeStyle = `rgba(${GOLD.r},${GOLD.g},${GOLD.b},${oa * 0.95})`;
         ctx.lineWidth = 1.3;
         ctx.beginPath();
-        ctx.arc(X, Y, 11, 0, Math.PI * 2);
+        ctx.arc(X, Y, 10, 0, Math.PI * 2);
         ctx.stroke();
         ctx.fillStyle = `rgba(${GOLD.r},${GOLD.g},${GOLD.b},${oa})`;
         ctx.beginPath();
-        ctx.arc(X, Y, 2.4, 0, Math.PI * 2);
+        ctx.arc(X, Y, 2.2, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -340,6 +378,7 @@ export default function GenesisLoader() {
       window.removeEventListener("keydown", onKey);
       canvas.parentElement?.removeEventListener("pointerdown", skip);
       document.body.style.overflow = prevOverflow;
+      document.documentElement.classList.remove("genesis-active");
     };
   }, [show]);
 
