@@ -13,6 +13,7 @@ publishedAt: "2026-06-14"
 updatedAt: "2026-06-14"
 funnelStage: "BOFU"
 primaryKeyword: "カンボ セレモニー"
+thumbnail: "/thumbnails/kambo-ceremony-flow.png"
 status: "published"
 ---
 
