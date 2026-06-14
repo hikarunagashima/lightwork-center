@@ -13,7 +13,7 @@ publishedAt: "2026-06-14"
 updatedAt: "2026-06-14"
 funnelStage: "BOFU"
 primaryKeyword: "カンボ セレモニー"
-status: "draft"
+status: "published"
 ---
 
 ## 精霊に任せるのではなく
