@@ -102,7 +102,7 @@ export default function Header() {
           isOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="flex flex-col px-6 pb-8 pt-2 gap-6 bg-background/95 backdrop-blur-sm border-t border-border-soft max-h-[calc(100dvh-64px)] overflow-y-auto">
+        <div className="mobile-menu-panel flex flex-col px-6 pb-8 pt-2 gap-6 bg-background/95 backdrop-blur-sm border-t border-border-soft max-h-[calc(100dvh-64px)] overflow-y-auto">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -135,7 +135,7 @@ export default function Header() {
 
           <Link
             href="/medicine-wheel"
-            className="serif-en text-sm tracking-[0.25em] border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors inline-block w-fit"
+            className="apply-mobile serif-en text-sm tracking-[0.25em] border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors inline-block w-fit"
             onClick={() => setIsOpen(false)}
           >
             Apply

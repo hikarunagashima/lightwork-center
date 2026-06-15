@@ -279,6 +279,15 @@ header.site-header.over-dark .hamburger-line {
   background-color: #f4f0e6;
 }
 
+/* モバイルメニューは不透明な紙（bg-background）の上に開くレイヤー。
+   over-dark の白文字ルールを持ち込むと白地に白文字で消えるため、紙の上の色に戻す */
+header.site-header.over-dark .mobile-menu-panel a {
+  color: var(--color-muted);
+}
+header.site-header.over-dark .mobile-menu-panel a.apply-mobile {
+  color: var(--color-foreground);
+}
+
 /* ヒーローの夜明け: ⊙の側から朝の光が差し、ゆっくり満ちる */
 .hero-dawn {
   background:
