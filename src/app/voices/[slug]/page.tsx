@@ -155,7 +155,7 @@ export default async function VoicePage({ params }: VoicePageProps) {
             </h1>
             <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-muted">
               <span className="serif-en tracking-[0.24em]">
-                {voice.age} · {voice.profession}
+                {voice.age}{voice.profession ? ` · ${voice.profession}` : ""}
               </span>
               <span className="text-accent" aria-hidden>⊙</span>
               <span className="serif-jp tracking-[0.1em]">
