@@ -15,7 +15,7 @@ export default function VoiceCard({ voice }: VoiceCardProps) {
             {voice.initial}
           </p>
           <p className="serif-en text-[11px] tracking-[0.3em] text-muted">
-            {voice.age} · {voice.profession}
+            {voice.age}{voice.profession ? ` · ${voice.profession}` : ""}
           </p>
         </div>
         <p className="serif-en text-[11px] tracking-[0.35em] text-accent mt-6">
